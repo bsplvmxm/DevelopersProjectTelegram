@@ -26,12 +26,14 @@
         {
             _questions[index] = new Question(question);
         }
+
         public abstract void AddAnswer();
         public abstract void DeleteAnswer();
         public abstract void EditAnswer();
         public abstract void Run();
         public abstract void Stop();
-
+        public abstract void SetTimeTest();
+        public abstract void Write();
 
     }
 }
