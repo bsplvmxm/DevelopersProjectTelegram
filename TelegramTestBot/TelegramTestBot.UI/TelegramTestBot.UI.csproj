@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TeleBot.Logic\TeleBot.Logic.csproj" />
+  </ItemGroup>
+
 </Project>
