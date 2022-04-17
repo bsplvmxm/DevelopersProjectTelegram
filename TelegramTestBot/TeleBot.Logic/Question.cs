@@ -6,24 +6,16 @@ using System.Threading.Tasks;
 
 namespace TeleBot.Logic
 {
-    internal class Question
+    public class Question
     {
-        public string _question_content;
+        protected string _question_content;
 
-        public List<string> answers;
+        protected List<string> _answers;
 
         public Question(string content)
         {
             _question_content = content;
         }
 
-        public void AddAnswer(string answ)
-        {
-            answers.Add(answ);
-        }
-        public void DeleteAnswer()
-        {
-
-        }
     }
 }
