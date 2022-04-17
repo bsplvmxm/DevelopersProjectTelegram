@@ -7,7 +7,6 @@ using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-
 namespace TelegramTestBot.BL
 {
     public class TelegaBot
@@ -15,11 +14,12 @@ namespace TelegramTestBot.BL
         private TelegramBotClient _client;
         private MainWindow _window;
 
-        public TelegaBot()
+        public TelegaBot(MainWindow window)
         {
             _client = new TelegramBotClient("5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s");
 
-            _client.StartReceiving(HandleUpdateAsync, );
+            _client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);
+            _window = window;
         }
 
         public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)

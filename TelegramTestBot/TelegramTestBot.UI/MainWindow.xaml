@@ -5,10 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelegramTestBot.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Initialized="Window_Initialized">
     <Grid>
-        <Button Content="TestButton" HorizontalAlignment="Left" Margin="243,68,0,0" VerticalAlignment="Top" Height="128" Width="260" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="463,275,0,0" VerticalAlignment="Top"/>
-
+        <TextBlock HorizontalAlignment="Center" Margin="0,108,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="191" Width="374"/>
     </Grid>
 </Window>

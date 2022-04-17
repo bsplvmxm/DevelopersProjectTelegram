@@ -16,12 +16,18 @@ using TelegramTestBot.BL;
 
 namespace TelegramTestBot.UI
 {
-    private TelegaBot telega;
     public partial class MainWindow : Window
     {
+        private TelegaBot telegaBot;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Initialized(object sender, EventArgs e)
+        {
+            telegaBot = new TelegaBot(this);
         }
     }
 }
