@@ -11,14 +11,24 @@
             <TabItem Header="Начало">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid/>
-                    <Label Content="Пользователи" HorizontalAlignment="Left" Margin="190,10,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16"/>
-                    <TextBox HorizontalAlignment="Left" Margin="24,61,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="437" Height="182"/>
+                    <Label Content="Пользователи" HorizontalAlignment="Left" Margin="259,18,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16"/>
+                    <Button Content="Создать группу" HorizontalAlignment="Left" Margin="42,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
+                    <Button Content="Создать тест/опрос" HorizontalAlignment="Left" Margin="295,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
+                    <Button Content="Создать отчет" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Height="47" Width="166" Grid.Column="1"/>
+                    <Button Content="Запуск теста/опроса" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="1"/>
+                    <ListView Margin="0,50,10,90" Grid.RowSpan="2">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="18*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="7*"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                 </Grid>
