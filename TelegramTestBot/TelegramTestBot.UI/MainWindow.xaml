@@ -9,14 +9,14 @@
     <Grid>
         <TabControl>
             <TabItem Header="Начало">
-                <Grid Background="#FFE5E5E5">
+                <Grid >
                     <DataGrid/>
                     <Label Content="Пользователи" HorizontalAlignment="Left" Margin="259,18,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16"/>
-                    <Button Content="Создать группу" HorizontalAlignment="Left" Margin="42,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
-                    <Button Content="Создать тест/опрос" HorizontalAlignment="Left" Margin="295,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
-                    <Button Content="Создать отчет" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Height="47" Width="166" Grid.Column="1"/>
-                    <Button Content="Запуск теста/опроса" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="1"/>
-                    <ListView Margin="0,50,10,90" Grid.RowSpan="2">
+                    <Button x:Name="ButtonCreateGroup" Content="Создать группу" HorizontalAlignment="Left" Margin="42,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
+                    <Button x:Name="ButtonCreateTest_Poll" Content="Создать тест/опрос" HorizontalAlignment="Left" Margin="295,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
+                    <Button x:Name="ButtonCreateReport" Content="Создать отчет" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Height="47" Width="166" Grid.Column="1"/>
+                    <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="1"/>
+                    <ListView x:Name="UserList" Margin="0,50,10,90" Grid.RowSpan="2">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
@@ -34,7 +34,13 @@
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="767*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
