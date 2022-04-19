@@ -10,19 +10,19 @@
         <TabControl>
             <TabItem Header="Начало">
                 <Grid >
-                    <DataGrid/>
                     <Label Content="Пользователи" HorizontalAlignment="Left" Margin="259,18,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16"/>
                     <Button x:Name="ButtonCreateGroup" Content="Создать группу" HorizontalAlignment="Left" Margin="42,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
                     <Button x:Name="ButtonCreateTest_Poll" Content="Создать тест/опрос" HorizontalAlignment="Left" Margin="295,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
                     <Button x:Name="ButtonCreateReport" Content="Создать отчет" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Height="47" Width="166" Grid.Column="1"/>
                     <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="1"/>
-                    <ListView x:Name="UserList" Margin="0,50,10,90" Grid.RowSpan="2">
+                    <ListView x:Name="UserList" Margin="477,310,-915,-170" Grid.RowSpan="2" Grid.Column="1">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    <ListBox x:Name="LB_Users" Margin="0,55,0,90" Grid.RowSpan="2"/>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="18*"/>
                         <ColumnDefinition Width="5*"/>
