@@ -118,6 +118,15 @@ namespace TelegramTestBot.BL
                 }
 
             }
+            else if (update.CallbackQuery != null)
+            {
+                await botClient.EditMessageTextAsync(
+                    update.CallbackQuery.Message.Chat.Id,
+                    update.CallbackQuery.Message.MessageId,
+                    update.CallbackQuery.Message.Text,
+                    replyMarkup: null);
+                Registration();
+            }
         }
 
         private Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)

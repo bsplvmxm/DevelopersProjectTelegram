@@ -60,7 +60,7 @@ namespace TelegramTestBot.UI
 
         private void ButtonReg_Click(object sender, RoutedEventArgs e)
         {
-            _telegaManager.Registration();
+            _telegaManager.StartingButton();
         }
     }
 }
