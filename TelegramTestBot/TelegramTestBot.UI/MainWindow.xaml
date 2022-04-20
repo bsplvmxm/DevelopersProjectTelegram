@@ -70,6 +70,23 @@
                     <Button x:Name="Button_Cancel2" Content="Отмена" HorizontalAlignment="Left" Margin="585,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Вывод готового опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid/>
+                    <TextBlock HorizontalAlignment="Left" Margin="146,0,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Center" Height="18" Width="108" Grid.Column="1" FontSize="16"/>
+                    <Label Content="Опрос:" Grid.Column="1" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Width="77" FontSize="16"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
