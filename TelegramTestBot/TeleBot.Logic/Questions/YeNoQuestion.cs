@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeleBot.Logic
+namespace TeleBot.Logic.Questions
 {
-    public class YesNoQuestion : AbstractQuestion
+    public class YeNoQuestion : AbstractQuestion
     {
-        public YesNoQuestion(string content) : base(content)
+        public YeNoQuestion(string content) : base(content)
         {
         }
-        
     }
 }

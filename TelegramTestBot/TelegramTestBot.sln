@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelegramTestBot.UI", "TelegramTestBot.UI\TelegramTestBot.UI.csproj", "{D182F116-CA24-4832-B8F4-620DA912C338}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleBot.Logic", "TeleBot.Logic\TeleBot.Logic.csproj", "{7DC8301B-7DE6-47BC-92B5-0FF6468084EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeleBot.Logic", "TeleBot.Logic\TeleBot.Logic.csproj", "{7DC8301B-7DE6-47BC-92B5-0FF6468084EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleBot.Logic.Tests", "TeleBot.Logic.Tests\TeleBot.Logic.Tests.csproj", "{10818C27-FEE9-49BB-B427-ED316956A0FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7DC8301B-7DE6-47BC-92B5-0FF6468084EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DC8301B-7DE6-47BC-92B5-0FF6468084EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DC8301B-7DE6-47BC-92B5-0FF6468084EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10818C27-FEE9-49BB-B427-ED316956A0FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10818C27-FEE9-49BB-B427-ED316956A0FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10818C27-FEE9-49BB-B427-ED316956A0FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10818C27-FEE9-49BB-B427-ED316956A0FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

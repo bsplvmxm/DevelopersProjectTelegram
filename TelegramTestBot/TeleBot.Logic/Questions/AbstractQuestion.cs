@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeleBot.Logic
+namespace TeleBot.Logic.Questions
 {
-    public abstract class AbstractQuestion
+    public class AbstractQuestion
     {
         public string _question_content;
 
