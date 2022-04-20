@@ -35,13 +35,36 @@
                     </Grid.RowDefinitions>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="Создание вопроса на опрос">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="17*"/>
-                        <ColumnDefinition Width="767*"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="7*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="TB_QuestForPoll" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="498" Height="90" Margin="0,93,0,0"/>
+                    <Label Content="Введите содержание вопроса" HorizontalAlignment="Left" Margin="208,57,0,0" VerticalAlignment="Top" Width="278" FontSize="16"/>
+                    <Button x:Name="Button_Next" Content="Дальше" HorizontalAlignment="Left" Margin="63,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
+                    <Button x:Name="Button_End" Content="Конец" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
+                    <Button x:Name="Button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="589,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Создание вопроса на тест" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="164" Margin="0,-1,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Введите вопрос" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <TextBox x:Name="TB_QuestForTest" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="498" Height="90" Margin="0,59,0,0"/>
+                    <RadioButton x:Name="RB_TextPole" Content="Текстовое поле" HorizontalAlignment="Left" Margin="92,40,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
+                    <RadioButton x:Name="RB_VarAnswer" Content="Вариант ответа" HorizontalAlignment="Left" Margin="92,64,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
+                    <Label Content="Вид ответа" HorizontalAlignment="Left" Margin="159,9,0,0" VerticalAlignment="Top" FontSize="16" Grid.Row="1" FontWeight="Bold"/>
+                    <Button x:Name="Button_Next2" Content="Дальше" HorizontalAlignment="Left" Margin="59,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
+                    <Button x:Name="Button_End2" Content="Конец" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Margin="310,0,0,0"/>
+                    <Button x:Name="Button_Cancel2" Content="Отмена" HorizontalAlignment="Left" Margin="585,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
                 </Grid>
             </TabItem>
         </TabControl>
