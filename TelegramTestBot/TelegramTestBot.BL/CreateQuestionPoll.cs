@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL
 {
-    class CreateQuestionPoll
+    class CreateQuestion
     {
-        public string NamePoll { get; set; }
+        public string NameTest { get; set; }
         public List<AbstractQuestion> AbstractQuestions { get; set; }
 
-        public CreateQuestionPoll (string namePoll)
+        public CreateQuestion (string namePoll)
         {
-            NamePoll = namePoll;
+            NameTest = namePoll;
             AbstractQuestions = new List<AbstractQuestion>();
         }
         public void AddQuestion(AbstractQuestion abstractQuestion)
@@ -33,9 +33,17 @@ namespace TelegramTestBot.BL
             AbstractQuestions.RemoveAt(index);
         }
 
+        public void StartTest()
+        {
+
+        }
+        public void FinishTest()
+        {
+
+        }
         public override string ToString()
         {
-            return NamePoll;
+            return NameTest;
         }
     }
 }
