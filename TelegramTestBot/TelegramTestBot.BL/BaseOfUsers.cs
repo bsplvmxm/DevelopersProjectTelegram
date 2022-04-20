@@ -9,6 +9,7 @@ namespace TelegramTestBot.BL
     public static class BaseOfUsers
     {
         public static Dictionary<long, UserModel> DataBase { get; set; } = new Dictionary<long, UserModel>();
-        public static Dictionary<string, UserModel> NameBase { get; set; } = new Dictionary<string, UserModel>();
+        public static Dictionary<long, UserModel> IdBase { get; set; } = new Dictionary<long, UserModel>();
+        public static Dictionary<long, UserModel> NameBase { get; set; } = new Dictionary<long, UserModel>();
     }
 }

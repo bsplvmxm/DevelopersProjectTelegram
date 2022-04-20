@@ -25,6 +25,8 @@
                     <ListBox x:Name="LB_Users" Margin="0,55,0,90" Grid.RowSpan="2"/>
                     <Button x:Name="ButtonStart" Content="Start" Grid.Column="1" HorizontalAlignment="Left" Margin="45,20,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="90" Click="ButtonStart_Click"/>
                     <Button x:Name="ButtonReg" Content="Reg" HorizontalAlignment="Left" Margin="523,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="57" Width="61" Click="ButtonReg_Click"/>
+                    <Button x:Name="EditNameButton" Content="Save" HorizontalAlignment="Left" Margin="625,225,0,0" VerticalAlignment="Top" Height="20" Width="160" Grid.ColumnSpan="2" Click="EditNameButton_Click"/>
+                    <TextBox x:Name="TB_Name" Grid.Column="1" HorizontalAlignment="Left" Margin="28,207,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="18*"/>
                         <ColumnDefinition Width="5*"/>

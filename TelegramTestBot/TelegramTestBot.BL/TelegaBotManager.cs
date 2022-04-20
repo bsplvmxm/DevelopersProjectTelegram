@@ -73,6 +73,7 @@ namespace TelegramTestBot.BL
 
                 await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu", replyMarkup: inlineKeyboard);
             }
+
         }
 
         public async void Registration()
@@ -85,15 +86,15 @@ namespace TelegramTestBot.BL
                 });
 
                 keyboard.OneTimeKeyboard = true;
-                await _client.SendTextMessageAsync(new ChatId(id), "Please choose the button" , replyMarkup: keyboard);
+                await _client.SendTextMessageAsync(new ChatId(id), "Please choose the button", replyMarkup: keyboard);
             }
         }
 
         private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
+            int index = 0;
            
-           
-            if (update.Message != null && update.Message.Text != null)
+            if (update.Message != null && update.Message.Text != null && !_ids.Contains(update.Message.Chat.Id))
             {
                 //if (update.CallbackQuery.Data == "startReg")
                 //{
@@ -102,25 +103,22 @@ namespace TelegramTestBot.BL
                 //    return;
                 //}
 
-                //if (!_ids.Contains(update.Message.Chat.Id))
+                
+                _ids.Add(update.Message.Chat.Id);
+
+                StartingButton();
+                
+
+
+                //if (update.Message.Text == "Registration")
                 //{
-                //    _ids.Add(update.Message.Chat.Id);
+                //    string s = BaseOfUsers.NameBase;
+                //    _onMessage(s);
+
+                //    await _client.SendTextMessageAsync(update.Message.Chat, "Registration successfull!");
+
+                //    return;
                 //}
-                if (!BaseOfUsers.DataBase.ContainsKey(update.Message.Chat.Id))
-                {
-                    BaseOfUsers.DataBase.Add(update.Message.Chat.Id, new UserModel() { Chat = update.Message.Chat });
-                    BaseOfUsers.NameBase.Add(update.Message.Chat.Username, new UserModel() { Name = update.Message.Chat.Username });
-                }
-
-                if (update.Message.Text == "Registration")
-                {
-                    string s = update.Message.Chat.Username;
-                    _onMessage(s);
-
-                    await _client.SendTextMessageAsync(update.Message.Chat, "Registration successfull!");
-
-                    return;
-                }
 
             }
             else if (update.CallbackQuery != null)
@@ -130,7 +128,19 @@ namespace TelegramTestBot.BL
                     update.CallbackQuery.Message.MessageId,
                     update.CallbackQuery.Message.Text,
                     replyMarkup: null);
+
                 Registration();
+            }
+            else if (!BaseOfUsers.DataBase.ContainsKey(update.Message.Chat.Id) && update.Message.Text == "Registration")
+            {
+                BaseOfUsers.DataBase.Add(update.Message.Chat.Id, new UserModel() { Chat = update.Message.Chat });
+                BaseOfUsers.NameBase.Add(update.Message.Chat.Id, new UserModel() { Name = update.Message.Chat.Username });
+
+                string s = update.Message.Chat.Username;
+                _onMessage(s);
+
+                await _client.SendTextMessageAsync(update.Message.Chat, "Registration successfull!");
+                return;
             }
         }
 

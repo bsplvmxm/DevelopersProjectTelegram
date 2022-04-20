@@ -60,7 +60,16 @@ namespace TelegramTestBot.UI
 
         private void ButtonReg_Click(object sender, RoutedEventArgs e)
         {
-            _telegaManager.StartingButton();
+            
+        }
+
+        private void EditNameButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<UserModel> data;
+
+            string oldName = LB_Users.SelectedItem.ToString();
+            string realName = TB_Name.Text;
+          
         }
     }
 }
