@@ -102,9 +102,14 @@ namespace TelegramTestBot.BL
                 //    return;
                 //}
 
-                if (!_ids.Contains(update.Message.Chat.Id))
+                //if (!_ids.Contains(update.Message.Chat.Id))
+                //{
+                //    _ids.Add(update.Message.Chat.Id);
+                //}
+                if (!BaseOfUsers.DataBase.ContainsKey(update.Message.Chat.Id))
                 {
-                    _ids.Add(update.Message.Chat.Id);
+                    BaseOfUsers.DataBase.Add(update.Message.Chat.Id, new UserModel() { Chat = update.Message.Chat });
+                    BaseOfUsers.NameBase.Add(update.Message.Chat.Username, new UserModel() { Name = update.Message.Chat.Username });
                 }
 
                 if (update.Message.Text == "Registration")
