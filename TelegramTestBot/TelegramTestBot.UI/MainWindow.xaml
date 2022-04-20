@@ -7,9 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="284,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="26" FontSize="20"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="18*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="53*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox HorizontalAlignment="Left" Margin="14,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="26" FontSize="20" Grid.Column="1"/>
         <Label Content="Введите название&#xD;&#xA;" HorizontalAlignment="Left" Margin="79,95,0,0" VerticalAlignment="Top" Height="35" FontSize="20"/>
-        <Button Content="Тест" HorizontalAlignment="Left" Margin="526,217,0,0" VerticalAlignment="Top" Height="29" Width="134"/>
-        <Button Content="Опрос" HorizontalAlignment="Left" Margin="284,217,0,0" VerticalAlignment="Top" Height="29" Width="134" Click="Button_Click"/>
+        <Button Content="Тест" HorizontalAlignment="Left" Margin="256,52,0,0" VerticalAlignment="Top" Height="29" Width="134" Grid.Column="1" Grid.Row="1"/>
+        <Button Content="Опрос" HorizontalAlignment="Left" Margin="14,52,0,0" VerticalAlignment="Top" Height="29" Width="134" Click="Button_Click" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>
