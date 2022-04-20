@@ -7,8 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="TestButton" HorizontalAlignment="Left" Margin="243,68,0,0" VerticalAlignment="Top" Height="128" Width="260" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="463,275,0,0" VerticalAlignment="Top"/>
-
+        <ListBox Margin="91,138,57,81">
+            <TextBox HorizontalAlignment="Left" Margin="17,34,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="466" Height="40"/>
+            <Button Content="Удалить" Margin="517,-48,0,0" Height="40" Width="90"/>
+        </ListBox>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="119,90,0,0" VerticalAlignment="Top"/>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="117,358,0,0" VerticalAlignment="Top" Height="35" Width="107"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Margin="448,358,0,0" VerticalAlignment="Top" Height="35" Width="107"/>
+        <Button Content="Готово" HorizontalAlignment="Left" Margin="600,358,0,0" VerticalAlignment="Top" Height="35" Width="107"/>
     </Grid>
 </Window>
