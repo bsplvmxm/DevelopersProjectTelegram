@@ -12,17 +12,55 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using TelegramTestBot.BL;
 
 namespace TelegramTestBot.UI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private TelegaBotManager _telegaManager;
+        private const string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
+        private List<string> _labels;
+        private DispatcherTimer _timer;  //счетчик времени
+
         public MainWindow()
         {
+            _telegaManager = new TelegaBotManager(_token, OnMessage);
+            _labels = new List<string>();
             InitializeComponent();
+
+            LB_Users.ItemsSource = _labels;
+
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += OnTimerTick;
+            _timer.Start();
+        }
+
+        public void OnMessage(string s)
+        {
+            _labels.Add(s);
+        }
+        private void Window_Initialized(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            LB_Users.Items.Refresh();
+        }
+
+        private void ButtonStart_Click(object sender, RoutedEventArgs e)
+        {
+            _telegaManager.StartBot();           
+        }
+
+        private void ButtonReg_Click(object sender, RoutedEventArgs e)
+        {
+            _telegaManager.StartingButton();
         }
     }
 }
