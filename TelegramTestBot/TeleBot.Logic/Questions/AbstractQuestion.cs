@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace TeleBot.Logic.Questions
 {
-    public class AbstractQuestion
+    public abstract class AbstractQuestion
     {
         public string _question_content;
 
-        public string UserAnswer { get; set; }
+        public int UserAnswer { get; set; }
 
-        public int _correct_answer;
+        public int CorrectAnswer { get; set; }
 
-        public List<string> _answers;
+        public List<string> Answers { get; set; }
 
         public AbstractQuestion(string content)
         {
@@ -25,31 +25,43 @@ namespace TeleBot.Logic.Questions
         {
             if (answer == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Gotta write something");
             }
-            _answers.Add(answer);
+            Answers.Add(answer);
         }
         public void EditAnswer(int index, string answer)
         {
-            if (index< 0 || index >= _answers.Count)
+            if (Answers.Count == 0)
+            {
+                throw new Exception("Answers does not exist now");
+            }
+            if (index< 0 || index >= Answers.Count)
             {
                 throw new ArgumentOutOfRangeException();
             }
-            _answers[index] = answer;
+            Answers[index] = answer;
         }
 
         public void DeleteAnswer(int index)
         {
-            if (_answers.Count == 0)
+            if (Answers.Count == 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new Exception("Answers does not exist now");
             }
-            _answers.RemoveAt(index);
+            if (index < 0 || index > Answers.Count)
+            {
+                throw new IndexOutOfRangeException("Wrong index");
+            }
+            Answers.RemoveAt(index);
         }
 
         public void ChooseCorrect(int index)
         {
-            _correct_answer = index;
+            if (index <0 || index > Answers.Count)
+            {
+                throw new ArgumentException("This answer does not exist");
+            }
+            CorrectAnswer = index;
         }
 
 

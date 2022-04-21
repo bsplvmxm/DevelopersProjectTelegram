@@ -8,8 +8,10 @@ namespace TeleBot.Logic.Questions
 {
     public class YeNoQuestion : AbstractQuestion
     {
-        public YeNoQuestion(string content) : base(content)
+        public YeNoQuestion(string content, int index) : base(content)
         {
+            Answers = new List<string>() { "No", "Yes" };
+            this.ChooseCorrect(index);
         }
     }
 }

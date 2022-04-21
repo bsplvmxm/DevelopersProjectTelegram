@@ -9,7 +9,7 @@ namespace TeleBot.Logic.Tests
     public class Tests
     {
         [TestCaseSource(typeof(AddAnswerTestSource))]
-        public void AddAnswerTest(string answer)
+        public void AddAnswerTest(string answer )
         {
 
         }

@@ -8,8 +8,10 @@ namespace TeleBot.Logic.Questions
 {
     internal class PollQuestion : AbstractQuestion
     {
+        public string UserPollAnswer { get; set; }
         public PollQuestion(string content) : base(content)
         {
         }
+
     }
 }
