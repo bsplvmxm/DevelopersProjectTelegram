@@ -8,10 +8,10 @@ namespace TelegramTestBot.BL
 {
     public class UserName
     {
-        public static string Name { get; private set; }
+        public string Name { get; set; }
         public long ChatId { get; private set; }
 
-        public static void ChangeName(string realName)
+        public void ChangeName(string realName)
         {
             if (realName == null)
             {

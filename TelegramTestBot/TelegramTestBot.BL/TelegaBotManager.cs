@@ -39,7 +39,7 @@ namespace TelegramTestBot.BL
 
         public async void StartingButton(long id)
         {
-            if (BaseOfUsers.NameBase.ContainsKey(id) != null)
+            if (BaseOfUsers.NameBase.ContainsKey(id))
             {
                 var inlineKeyboard = new InlineKeyboardMarkup(new[]
                 {
@@ -50,9 +50,26 @@ namespace TelegramTestBot.BL
             }
         }
 
+        public void EditUserName(string username)
+        {
+            
+        }
+
+        public void OutputUser()
+        {           
+            foreach (KeyValuePair<long, string> regs in BaseOfUsers.NameBase)
+            {
+                if (BaseOfUsers.RegBase.ContainsKey(regs.Key))
+                {
+                    string regUsers = regs.Value;
+                    _onMessage(regUsers);
+                }
+            }
+        }
+
         public async void Registration(long id)
         {
-            if (BaseOfUsers.RegBase.ContainsValue(false))
+            if (!BaseOfUsers.RegBase.ContainsKey(id))
             {
                 var keyboard = new ReplyKeyboardMarkup(new[]
                 {

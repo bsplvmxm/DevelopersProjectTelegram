@@ -55,13 +55,22 @@ namespace TelegramTestBot.UI
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
-            _telegaManager.StartBot();           
+            _telegaManager.StartBot();
         }
 
         private void EditNameButton_Click(object sender, RoutedEventArgs e)
         {
+            string value = (string)LB_Users.SelectedItem;
+            foreach (KeyValuePair<long, string> users in BaseOfUsers.NameBase)
+            {
+                if (value == users.Value)
+                {
+                    BaseOfUsers.NameBase[users.Key] = TB_Name.Text;
+                }
+            }
+            LB_Users.Items.Refresh();
+            TB_Name.Clear();
             
-          
         }
     }
 }
