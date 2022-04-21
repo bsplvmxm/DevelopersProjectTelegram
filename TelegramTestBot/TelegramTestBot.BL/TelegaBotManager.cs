@@ -29,8 +29,7 @@ namespace TelegramTestBot.BL
 
         public void StartBot()
         {
-            _client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);
-            
+            _client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);        
         }
 
         public void StopBot()
@@ -38,47 +37,22 @@ namespace TelegramTestBot.BL
             
         }
 
-        //public void Send(string s)
-        //{
-        //    foreach (var id in _ids)
-        //    {
-        //        InlineKeyboardMarkup inlineKeyboard = new( //кнопочки под сообщением от бота
-        //            new[]
-        //            {
-        //                new []
-        //                {
-        //                    InlineKeyboardButton.WithCallbackData("1","privet"),
-        //                    InlineKeyboardButton.WithCallbackData("2","poka"),
-        //                    InlineKeyboardButton.WithCallbackData("3","textttt"),
-        //                },
-        //                new[]
-        //                {
-        //                    InlineKeyboardButton.WithCallbackData("4","qgqg"),
-        //                    InlineKeyboardButton.WithCallbackData("5","ggggg"),
-        //                },
-        //            });
-
-        //        _client.SendTextMessageAsync(new ChatId(id), s, replyMarkup: inlineKeyboard);
-        //    }
-        //}
-
-        public async void StartingButton()
+        public async void StartingButton(long id)
         {
-            foreach (var id in _ids)
+            if (BaseOfUsers.NameBase.ContainsKey(id) != null)
             {
                 var inlineKeyboard = new InlineKeyboardMarkup(new[]
                 {
-                    InlineKeyboardButton.WithCallbackData("/start","startReg"),
+                InlineKeyboardButton.WithCallbackData("/start","startReg"),
                 });
 
                 await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu", replyMarkup: inlineKeyboard);
             }
-
         }
 
-        public async void Registration()
+        public async void Registration(long id)
         {
-            foreach (var id in _ids)
+            if (BaseOfUsers.RegBase.ContainsValue(false))
             {
                 var keyboard = new ReplyKeyboardMarkup(new[]
                 {
@@ -86,40 +60,22 @@ namespace TelegramTestBot.BL
                 });
 
                 keyboard.OneTimeKeyboard = true;
+                BaseOfUsers.RegBase.Add(id, true);
                 await _client.SendTextMessageAsync(new ChatId(id), "Please choose the button", replyMarkup: keyboard);
+            }
+            else
+            {
+                await _client.SendTextMessageAsync(new ChatId(id), "Sorry, bro, u already saved in reg list");
             }
         }
 
         private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-        {
-            int index = 0;
-           
-            if (update.Message != null && update.Message.Text != null && !_ids.Contains(update.Message.Chat.Id))
-            {
-                //if (update.CallbackQuery.Data == "startReg")
-                //{
-                //    await _client.SendTextMessageAsync(update.Message.Chat, "Please choose the button");
-                //    Registration();
-                //    return;
-                //}
+        {          
+            if (update.Message != null && update.Message.Text != null && !BaseOfUsers.NameBase.ContainsKey(update.Message.Chat.Id))
+            {              
+                BaseOfUsers.NameBase.Add(update.Message.Chat.Id, update.Message.Chat.Username);
 
-                
-                _ids.Add(update.Message.Chat.Id);
-
-                StartingButton();
-                
-
-
-                //if (update.Message.Text == "Registration")
-                //{
-                //    string s = BaseOfUsers.NameBase;
-                //    _onMessage(s);
-
-                //    await _client.SendTextMessageAsync(update.Message.Chat, "Registration successfull!");
-
-                //    return;
-                //}
-
+                StartingButton(update.Message.Chat.Id);               
             }
             else if (update.CallbackQuery != null)
             {
@@ -129,13 +85,10 @@ namespace TelegramTestBot.BL
                     update.CallbackQuery.Message.Text,
                     replyMarkup: null);
 
-                Registration();
+                Registration(update.CallbackQuery.Message.Chat.Id);
             }
-            else if (!BaseOfUsers.DataBase.ContainsKey(update.Message.Chat.Id) && update.Message.Text == "Registration")
-            {
-                BaseOfUsers.DataBase.Add(update.Message.Chat.Id, new UserModel() { Chat = update.Message.Chat });
-                BaseOfUsers.NameBase.Add(update.Message.Chat.Id, new UserModel() { Name = update.Message.Chat.Username });
-
+            else if (BaseOfUsers.RegBase.ContainsValue(true))
+            {                                
                 string s = update.Message.Chat.Username;
                 _onMessage(s);
 

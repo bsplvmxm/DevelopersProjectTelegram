@@ -10,6 +10,7 @@ namespace TelegramTestBot.BL
     {
         public static Dictionary<long, UserModel> DataBase { get; set; } = new Dictionary<long, UserModel>();
         public static Dictionary<long, UserModel> IdBase { get; set; } = new Dictionary<long, UserModel>();
-        public static Dictionary<long, UserModel> NameBase { get; set; } = new Dictionary<long, UserModel>();
+        public static Dictionary<long, string> NameBase { get; set; } = new Dictionary<long, string>();
+        public static Dictionary<long, bool> RegBase { get; set; } = new Dictionary<long, bool>();
     }
 }
