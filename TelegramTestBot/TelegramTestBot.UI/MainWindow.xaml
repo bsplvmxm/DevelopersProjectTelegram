@@ -5,10 +5,89 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelegramTestBot.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="TelegramBot For DevEdu" Height="450" Width="800">
     <Grid>
-        <Button Content="TestButton" HorizontalAlignment="Left" Margin="243,68,0,0" VerticalAlignment="Top" Height="128" Width="260" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="463,275,0,0" VerticalAlignment="Top"/>
-
+        <TabControl>
+            <TabItem x:Name="MainMenu" Header="Главное меню">
+                <Grid >
+                    <Label Content="Пользователи " HorizontalAlignment="Left" Margin="259,18,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16"/>
+                    <Button x:Name="ButtonCreateGroup" Content="Создать группу" HorizontalAlignment="Left" Margin="42,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
+                    <Button x:Name="ButtonCreateTest_Poll" Content="Создать тест/опрос" HorizontalAlignment="Left" Margin="295,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166"/>
+                    <Button x:Name="ButtonCreateReport" Content="Создать отчет" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Height="47" Width="166" Grid.Column="1"/>
+                    <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="1"/>
+                    <ListView x:Name="UserList" Margin="477,310,-915,-170" Grid.RowSpan="2" Grid.Column="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListBox x:Name="LB_Users" Margin="0,55,0,90" Grid.RowSpan="2"/>
+                    <Button x:Name="ButtonStart" Content="Start" Grid.Column="1" HorizontalAlignment="Left" Margin="45,20,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="90" Click="ButtonStart_Click"/>
+                    <Button x:Name="ButtonReg" Content="Reg" HorizontalAlignment="Left" Margin="523,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="57" Width="61" Click="ButtonReg_Click"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="7*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="CreateQuestPoll" Header="Создание вопроса на опрос">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="TB_QuestForPoll" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="498" Height="90" Margin="0,51,0,0" Grid.Row="1"/>
+                    <Label Content="Введите содержание вопроса" HorizontalAlignment="Left" Margin="197,12,0,0" VerticalAlignment="Top" Width="278" FontSize="16" Grid.Row="1"/>
+                    <Button x:Name="Button_Next" Content="Дальше" HorizontalAlignment="Left" Margin="52,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
+                    <Button x:Name="Button_End" Content="Конец" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Margin="293,0,0,0"/>
+                    <Button x:Name="Button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="567,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
+                    <TextBox x:Name="TB_NameOfPoll" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="498" Height="40" Margin="0,51,0,0"/>
+                    <Label Content="Введите название опроса" HorizontalAlignment="Left" Margin="197,10,0,0" VerticalAlignment="Top" Width="278" FontSize="16"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="CreateQuestTest" Header="Создание вопроса на тест" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="164" Margin="0,-1,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Введите вопрос" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <TextBox x:Name="TB_QuestForTest" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="498" Height="90" Margin="0,59,0,0"/>
+                    <RadioButton x:Name="RB_TextPole" Content="Текстовое поле" HorizontalAlignment="Left" Margin="92,40,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
+                    <RadioButton x:Name="RB_VarAnswer" Content="Вариант ответа" HorizontalAlignment="Left" Margin="92,64,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
+                    <Label Content="Вид ответа" HorizontalAlignment="Left" Margin="159,9,0,0" VerticalAlignment="Top" FontSize="16" Grid.Row="1" FontWeight="Bold"/>
+                    <Button x:Name="Button_Next2" Content="Дальше" HorizontalAlignment="Left" Margin="59,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
+                    <Button x:Name="Button_End2" Content="Конец" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Margin="310,0,0,0"/>
+                    <Button x:Name="Button_Cancel2" Content="Отмена" HorizontalAlignment="Left" Margin="585,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Вывод готового опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid/>
+                    <TextBlock HorizontalAlignment="Left" Margin="122,50,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="108" Grid.Column="1" FontSize="16"/>
+                    <Label Content="Опрос:" Grid.Column="1" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Width="77" FontSize="16"/>
+                    <ListBox Grid.Row="1" Grid.ColumnSpan="3" Margin="-13,0,0,81" Grid.RowSpan="2"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
