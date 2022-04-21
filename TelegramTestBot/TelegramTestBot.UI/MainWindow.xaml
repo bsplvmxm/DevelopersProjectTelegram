@@ -83,8 +83,9 @@
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <Grid/>
-                    <TextBlock HorizontalAlignment="Left" Margin="146,0,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Center" Height="18" Width="108" Grid.Column="1" FontSize="16"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="122,50,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="108" Grid.Column="1" FontSize="16"/>
                     <Label Content="Опрос:" Grid.Column="1" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Width="77" FontSize="16"/>
+                    <ListBox Grid.Row="1" Grid.ColumnSpan="3" Margin="-13,0,0,81" Grid.RowSpan="2"/>
                 </Grid>
             </TabItem>
         </TabControl>
