@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL
 {
-    class CreateQuestion
+    class Test
     {
         public string NameTest { get; set; }
         public List<AbstractQuestion> AbstractQuestions { get; set; }
 
-        public CreateQuestion (string namePoll)
+        public Test(string nameTest)
         {
-            NameTest = namePoll;
+            NameTest = nameTest;
             AbstractQuestions = new List<AbstractQuestion>();
         }
         public void AddQuestion(AbstractQuestion abstractQuestion)
