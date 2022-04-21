@@ -3,34 +3,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TelegramTestBot.BL.Questions;
 
 namespace TelegramTestBot.BL
 {
     class Test
     {
         public string NameTest { get; set; }
-        public List<AbstractQuestion> AbstractQuestions { get; set; }
+        public List<AbstractQuestion> Questions { get; set; }
 
         public Test(string nameTest)
         {
             NameTest = nameTest;
-            AbstractQuestions = new List<AbstractQuestion>();
+            Questions = new List<AbstractQuestion>();
         }
-        public void AddQuestion(AbstractQuestion abstractQuestion)
+        public void AddChooseAnyQuestion(string question)
         {
-            if (abstractQuestion == null)
+            if (question == "")
             {
                 throw new NullReferenceException();
             }
-            AbstractQuestions.Add(abstractQuestion);
+            Questions.Add(new ChooseAnyQuestion(question));
         }
+        public void AddChooseOneQuestion(string question)
+        {
+            if (question == "")
+            {
+                throw new NullReferenceException();
+            }
+            Questions.Add(new ChooseOneQuestion(question));
+        }
+
+        public void AddCourseQuestion(string question)
+        {
+            if (question == "")
+            {
+                throw new NullReferenceException();
+            }
+            Questions.Add(new CourseQuestion(question));
+        }
+
+        public void AddPollQuestion(string question)
+        {
+            if (question == "")
+            {
+                throw new NullReferenceException();
+            }
+            Questions.Add(new PollQuestion(question));
+        }
+
+        public void AddYeNoQuestion(string question)
+        {
+            if (question == "")
+            {
+                throw new NullReferenceException();
+            }
+            Questions.Add(new YeNoQuestion(question));
+        }
+
+
         public void DeleteQuestionPoll(int index)
         {
-            if (AbstractQuestions.Count < 1)
+            if (Questions.Count < 1)
             {
                 throw new Exception("List is Empty");
             }
-            AbstractQuestions.RemoveAt(index);
+            Questions.RemoveAt(index);
         }
 
         public void StartTest()
