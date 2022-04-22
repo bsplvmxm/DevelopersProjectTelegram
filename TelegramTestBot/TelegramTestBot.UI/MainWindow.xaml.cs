@@ -64,14 +64,15 @@ namespace TelegramTestBot.UI
             LabelError.Visibility = Visibility.Hidden;
             string oldName = (string)LB_Users.SelectedItem;
             string newName = TB_Name.Text;
-            if (TB_Name.Text != "")
+            if (TB_Name.Text != "" && LB_Users.SelectedItem != null)
             {
                 foreach (KeyValuePair<long, string> users in BaseOfUsers.NameBase)
                 {
                     if (oldName == users.Value)
                     {
-                        BaseOfUsers.NameBase[users.Key] = newName;
+                        long id = users.Key;
                         int index = _labels.IndexOf(users.Value);
+                        BaseOfUsers.NameBase[id] = newName;
                         _labels[index] = newName;
                     }
                 }
@@ -84,6 +85,19 @@ namespace TelegramTestBot.UI
 
             LB_Users.Items.Refresh();
             TB_Name.Clear();           
+        }
+
+        private void TestButOut_Click(object sender, RoutedEventArgs e)
+        {
+            _telegaManager.OutputUser();
+        }
+
+        private void AddGroupButt_Click(object sender, RoutedEventArgs e)
+        {
+            
+            string name = TB_Name.Text;
+            _telegaManager.CreateGroup(name);
+            
         }
     }
 }

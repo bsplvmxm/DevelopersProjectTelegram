@@ -67,6 +67,34 @@ namespace TelegramTestBot.BL
             }
         }
 
+        public void AddUserInGroup(string nameOfGroup, string nameOfUser)
+        {       
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            {
+                BaseOfUsers.GroupBase.Add(nameOfGroup, new List<string>{ nameOfUser });
+            }           
+        }
+
+        public void CreateGroup(string nameOfGroup)
+        {
+            BaseOfUsers.GroupBase.Add(nameOfGroup, null);
+        }
+
+        public void OutputUsersInGroup(string nameOfGroup)
+        {
+            foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
+            {
+                if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+                {
+                    for (int i = 0; i<users.Value.Count; i++)
+                    {
+                        string outputUsers = users.Value.ToString();
+                        _onMessage(outputUsers);
+                    }
+                }
+            }
+        }
+
         public async void Registration(long id)
         {
             if (!BaseOfUsers.RegBase.ContainsKey(id))
@@ -78,6 +106,7 @@ namespace TelegramTestBot.BL
 
                 keyboard.OneTimeKeyboard = true;
                 BaseOfUsers.RegBase.Add(id, true);
+                
                 await _client.SendTextMessageAsync(new ChatId(id), "Please choose the button", replyMarkup: keyboard);
             }
             else
@@ -91,7 +120,7 @@ namespace TelegramTestBot.BL
             if (update.Message != null && update.Message.Text != null && !BaseOfUsers.NameBase.ContainsKey(update.Message.Chat.Id))
             {              
                 BaseOfUsers.NameBase.Add(update.Message.Chat.Id, update.Message.Chat.Username);
-
+                BaseOfUsers.GroupBase.Add("Others", new List<string>{ update.Message.Chat.Username });
                 StartingButton(update.Message.Chat.Id);               
             }
             else if (update.CallbackQuery != null)
