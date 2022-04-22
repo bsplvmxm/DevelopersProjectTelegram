@@ -70,9 +70,9 @@ namespace TelegramTestBot.UI
                 {
                     if (oldName == users.Value)
                     {
-                        long id = users.Key;
+                        long idUser = users.Key;
                         int index = _labels.IndexOf(users.Value);
-                        BaseOfUsers.NameBase[id] = newName;
+                        BaseOfUsers.NameBase[idUser] = newName;
                         _labels[index] = newName;
                     }
                 }
@@ -89,15 +89,40 @@ namespace TelegramTestBot.UI
 
         private void TestButOut_Click(object sender, RoutedEventArgs e)
         {
-            _telegaManager.OutputUser();
+            string userName = (string)LB_Users.SelectedItem;
+            string groupName = TB_GroupName.Text;
+
+            if (LB_Users.SelectedItem != null && groupName != "")
+            {
+                _telegaManager.AddUserInGroup(groupName, userName);
+            }
+
+            LB_Users.Items.Refresh();
+            TB_GroupName.Clear();
         }
 
         private void AddGroupButt_Click(object sender, RoutedEventArgs e)
         {
-            
-            string name = TB_Name.Text;
-            _telegaManager.CreateGroup(name);
-            
+            string groupName = TB_GroupName.Text;
+            if (groupName != "")
+            {
+                _telegaManager.CreateGroup(groupName);
+                CB_groups.Items.Add(groupName);
+            }
+
+            CB_groups.Items.Refresh();
+            TB_GroupName.Clear();
+        }
+
+        private void CB_groups_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string nameGroup = (string)CB_groups.SelectedItem;
+            if (CB_groups.SelectedItem != null)
+            {                
+                _telegaManager.OutputUsersInGroup(nameGroup);
+            }
+
+            LB_Users.Items.Refresh();
         }
     }
 }
