@@ -31,6 +31,7 @@ namespace TelegramTestBot.UI
             InitializeComponent();
 
             LB_Users.ItemsSource = _labels;
+            LabelError.Visibility = Visibility.Hidden;
 
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
@@ -60,17 +61,29 @@ namespace TelegramTestBot.UI
 
         private void EditNameButton_Click(object sender, RoutedEventArgs e)
         {
-            string value = (string)LB_Users.SelectedItem;
-            foreach (KeyValuePair<long, string> users in BaseOfUsers.NameBase)
+            LabelError.Visibility = Visibility.Hidden;
+            string oldName = (string)LB_Users.SelectedItem;
+            string newName = TB_Name.Text;
+            if (TB_Name.Text != "")
             {
-                if (value == users.Value)
+                foreach (KeyValuePair<long, string> users in BaseOfUsers.NameBase)
                 {
-                    BaseOfUsers.NameBase[users.Key] = TB_Name.Text;
+                    if (oldName == users.Value)
+                    {
+                        BaseOfUsers.NameBase[users.Key] = newName;
+                        int index = _labels.IndexOf(users.Value);
+                        _labels[index] = newName;
+                    }
                 }
             }
+            else
+            {
+                LabelError.Visibility = Visibility.Visible;
+                LabelError.Content = "Ты что дурачок?";
+            }
+
             LB_Users.Items.Refresh();
-            TB_Name.Clear();
-            
+            TB_Name.Clear();           
         }
     }
 }
