@@ -49,17 +49,31 @@
                     </Grid.RowDefinitions>
                     <Label Content="Введите название теста" HorizontalAlignment="Left" Margin="82,10,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="182"/>
                     <TextBox x:Name="TB_NameOfTest" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="439" Margin="72,41,0,6" FontSize="16" Grid.ColumnSpan="2"/>
-                    <RadioButton x:Name="RB_YeNo" Content="Да/Нет" HorizontalAlignment="Left" Margin="92,34,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Height="20" Width="71"/>
-                    <RadioButton x:Name="RB_Course" Content="Сортировка" HorizontalAlignment="Left" Margin="92,54,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Height="20" Width="107"/>
-                    <RadioButton x:Name="RB_ChooseOne" Content="Один вариант" HorizontalAlignment="Left" Margin="92,93,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Height="20" Width="122"/>
-                    <RadioButton x:Name="RB_ChooseAny" Content="Несколько вариантов" HorizontalAlignment="Left" Margin="92,74,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Height="20" Width="179"/>
-                    <RadioButton x:Name="RB_Poll" Content="Ввод ответа" HorizontalAlignment="Left" Margin="92,109,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Height="20" Width="179"/>
-                    <Label Content="Вид вопроса" HorizontalAlignment="Left" Margin="119,2,0,0" VerticalAlignment="Top" FontSize="16" Grid.Row="1" FontWeight="Bold" Height="31" Width="109"/>
+                    <Label Content="Вид вопроса" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="31" Width="110" Grid.Column="2"/>
+                    <ComboBox x:Name="CB_TypeQuestion" Height="30" VerticalAlignment="Top" Grid.Column="2" Margin="10,41,116,0">
+                        <TextBlock x:Name="Quest_YeNo">Да/Нет</TextBlock>
+                        <TextBlock x:Name="Quest_Course">Сортировка</TextBlock>
+                        <TextBlock x:Name="Quest_ChooseOne">Один вариант</TextBlock>
+                        <TextBlock x:Name="Quest_ChooseAny">Несколько вариантов</TextBlock>
+                        <TextBlock x:Name="Quest_Poll">Ввод ответа</TextBlock>
+                    </ComboBox>
                     <Button x:Name="Button_Next2" Content="Дальше" HorizontalAlignment="Left" Margin="59,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
                     <Button x:Name="Button_End2" Content="Конец" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Grid.Column="1"/>
                     <Button x:Name="Button_Cancel2" Content="Отмена" HorizontalAlignment="Left" Margin="55,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"  Grid.Column="2"/>
                     <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,54,0,0" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" Height="150"/>
                     <Label Content="Введите вопрос" HorizontalAlignment="Left" Margin="17,17,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="182" Grid.Column="1" Grid.Row="1"/>
+                    <TextBox x:Name="TB_Answer1" HorizontalAlignment="Left" Margin="55,33,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="24" Grid.Column="2"/>
+                    <TextBox x:Name="TB_Answer2" HorizontalAlignment="Left" Margin="55,62,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="24" Grid.Column="2"/>
+                    <TextBox x:Name="TB_Answer3" HorizontalAlignment="Left" Margin="55,91,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="24" Grid.Column="2"/>
+                    <TextBox x:Name="TB_Answer4" HorizontalAlignment="Left" Margin="55,120,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="24" Grid.Column="2"/>
+                    <CheckBox Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="192,38,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <CheckBox Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="192,67,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <CheckBox Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="192,96,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <CheckBox Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="192,125,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <RadioButton Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,36,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <RadioButton Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,67,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <RadioButton Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,96,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                    <RadioButton Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="36,125,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Вывод готового опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
