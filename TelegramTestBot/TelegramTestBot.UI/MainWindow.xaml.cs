@@ -24,5 +24,13 @@ namespace TelegramTestBot.UI
         {
             InitializeComponent();
         }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = new TextBox() { Width = 606, Height = 40 };
+            Button button = new Button() { Content = "Удалить", Height = 40, Width = 90 };
+            ListBoxForAdd.Items.Add(textBox);
+            ListBoxForAdd.Items.Add(button);
+        }
     }
 }

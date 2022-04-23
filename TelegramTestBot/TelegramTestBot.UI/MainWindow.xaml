@@ -7,13 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ListBox Margin="91,138,57,81">
-            <TextBox HorizontalAlignment="Left" Margin="17,34,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="466" Height="40"/>
-            <Button Content="Удалить" Margin="517,-48,0,0" Height="40" Width="90"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="367*"/>
+            <RowDefinition Height="68*"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="ListBoxForAdd" Margin="91,138,57,14">
+            <TextBox Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" Width="606" Height="40"/>
+            <Button Content="Удалить" Margin="0,0,0,0" Height="40" Width="90"/>
         </ListBox>
         <Label Content="Label" HorizontalAlignment="Left" Margin="119,90,0,0" VerticalAlignment="Top"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="117,358,0,0" VerticalAlignment="Top" Height="35" Width="107"/>
-        <Button Content="Добавить" HorizontalAlignment="Left" Margin="448,358,0,0" VerticalAlignment="Top" Height="35" Width="107"/>
-        <Button Content="Готово" HorizontalAlignment="Left" Margin="600,358,0,0" VerticalAlignment="Top" Height="35" Width="107"/>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="91,4,0,0" VerticalAlignment="Top" Height="35" Width="107" Grid.Row="1"/>
+        <Button x:Name="BtnAdd" Content="Добавить" HorizontalAlignment="Left" Margin="467,4,0,0" VerticalAlignment="Top" Height="35" Width="107" Click="BtnAdd_Click" Grid.Row="1"/>
+        <Button Content="Готово" HorizontalAlignment="Left" Margin="636,4,0,0" VerticalAlignment="Top" Height="35" Width="107" Grid.Row="1"/>
     </Grid>
 </Window>
