@@ -7,7 +7,7 @@ using TelegramTestBot.BL.Questions;
 
 namespace TelegramTestBot.BL
 {
-    class Test
+    public class Test
     {
         public string NameTest { get; set; }
         public List<AbstractQuestion> Questions { get; set; }

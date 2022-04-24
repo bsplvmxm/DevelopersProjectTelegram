@@ -23,6 +23,7 @@ namespace TelegramTestBot.UI
         private const string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
         private List<string> _labels;
         private DispatcherTimer _timer;  //счетчик времени
+        private List<Test> AllTests;
 
         public MainWindow()
         {
@@ -61,6 +62,14 @@ namespace TelegramTestBot.UI
         private void ButtonReg_Click(object sender, RoutedEventArgs e)
         {
             _telegaManager.StartingButton();
+        }
+
+           
+        private void Button_AddTest_Click(object sender, RoutedEventArgs e)
+        {
+            string nameTest = TB_NameOfTest.Text;
+            AllTests.Add(new Test(nameTest));
+            CB_AllTests.Items.Add(nameTest);
         }
     }
 }
