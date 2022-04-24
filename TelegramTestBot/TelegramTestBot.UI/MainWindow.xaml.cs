@@ -69,7 +69,7 @@ namespace TelegramTestBot.UI
         {
             string nameTest = TB_NameOfTest.Text;
             AllTests.Add(new Test(nameTest));
-            CB_AllTests.Items.Add(nameTest);
+            LB_AllTests.Items.Add(nameTest);
         }
     }
 }
