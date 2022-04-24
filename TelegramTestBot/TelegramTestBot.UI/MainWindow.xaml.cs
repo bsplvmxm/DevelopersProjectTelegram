@@ -38,6 +38,29 @@ namespace TelegramTestBot.UI
             _timer.Tick += OnTimerTick;
             _timer.Start();
             AllTests = new List<Test>();
+
+            Label_ViewQuest.IsEnabled = false;
+            CB_TypeQuestion.IsEnabled = false;
+            RB_RightAns1.IsEnabled = false;
+            RB_RightAns2.IsEnabled = false;
+            RB_RightAns3.IsEnabled = false;
+            RB_RightAns4.IsEnabled = false;
+            TB_Answer1.IsEnabled = false;
+            TB_Answer2.IsEnabled = false;
+            TB_Answer3.IsEnabled = false;
+            TB_Answer4.IsEnabled = false;
+            ChB_RightAns1.IsEnabled = false;
+            ChB_RightAns2.IsEnabled = false;
+            ChB_RightAns3.IsEnabled = false;
+            ChB_RightAns4.IsEnabled = false;
+            Label_InputQuest.IsEnabled = false;
+            TB_QuestionContent.IsEnabled = false;
+            Button_CreateQuest.IsEnabled = false;
+            Button_EditQuest.IsEnabled = false;
+            Button_DeleteQuest.IsEnabled = false;
+
+
+
         }
 
         public void OnMessage(string s)
@@ -74,7 +97,7 @@ namespace TelegramTestBot.UI
             TB_NameOfTest.Clear();
         }
 
-        private void LB_AllTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void HideAllForTest()
         {
 
         }
