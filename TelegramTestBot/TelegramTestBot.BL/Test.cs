@@ -24,7 +24,7 @@ namespace TelegramTestBot.BL
             }
             AbstractQuestions.Add(abstractQuestion);
         }
-        public void DeleteQuestionPoll(int index)
+        public void DeleteQuestion(int index)
         {
             if (AbstractQuestions.Count < 1)
             {
