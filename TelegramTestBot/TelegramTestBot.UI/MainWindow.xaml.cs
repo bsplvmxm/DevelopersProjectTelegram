@@ -96,31 +96,40 @@ namespace TelegramTestBot.UI
             AllTests.Add(new Test(nameTest));
             LB_AllTests.Items.Add(nameTest);
             TB_NameOfTest.Clear();
-          
+ 
         }
 
-        private void HideAllForTest()
+        private void LB_AllTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Label_ViewQuest.Visibility = Visibility.Hidden;
-            CB_TypeQuestion.Visibility = Visibility.Hidden;
-            RB_RightAns1.Visibility = Visibility.Hidden;
-            RB_RightAns2.Visibility = Visibility.Hidden;
-            RB_RightAns3.Visibility = Visibility.Hidden;
-            RB_RightAns4.Visibility = Visibility.Hidden;
-            TB_Answer1.Visibility = Visibility.Hidden;
-            TB_Answer2.Visibility = Visibility.Hidden;
-            TB_Answer3.Visibility = Visibility.Hidden;
-            TB_Answer4.Visibility = Visibility.Hidden;
-            ChB_RightAns1.IsEnabled = false;
-            ChB_RightAns2.IsEnabled = false;
-            ChB_RightAns3.IsEnabled = false;
-            ChB_RightAns4.IsEnabled = false;
-            Label_InputQuest.IsEnabled = false;
-            TB_QuestionContent.IsEnabled = false;
-            Button_CreateQuest.IsEnabled = false;
-            Button_EditQuest.IsEnabled = false;
-            Button_DeleteQuest.IsEnabled = false;
-            Button_RenameTest.IsEnabled = false;
+            string nameOfTest = (string)LB_AllTests.SelectedItem;
+            TextBl_NameTest.Text = (string)nameOfTest;
+
         }
+
+        //private void HideAllForTest()
+        //{
+        //    Label_ViewQuest.Visibility = Visibility.Hidden;
+        //    CB_TypeQuestion.Visibility = Visibility.Hidden;
+        //    RB_RightAns1.Visibility = Visibility.Hidden;
+        //    RB_RightAns2.Visibility = Visibility.Hidden;
+        //    RB_RightAns3.Visibility = Visibility.Hidden;
+        //    RB_RightAns4.Visibility = Visibility.Hidden;
+        //    TB_Answer1.Visibility = Visibility.Hidden;
+        //    TB_Answer2.Visibility = Visibility.Hidden;
+        //    TB_Answer3.Visibility = Visibility.Hidden;
+        //    TB_Answer4.IsEnabled = false;
+        //    ChB_RightAns1.IsEnabled = false;
+        //    ChB_RightAns2.IsEnabled = false;
+        //    ChB_RightAns3.IsEnabled = false;
+        //    ChB_RightAns4.IsEnabled = false;
+        //    Label_InputQuest.IsEnabled = false;
+        //    TB_QuestionContent.IsEnabled = false;
+        //    Button_CreateQuest.IsEnabled = false;
+        //    Button_EditQuest.IsEnabled = false;
+        //    Button_DeleteQuest.IsEnabled = false;
+        //    Button_RenameTest.IsEnabled = false;
+        //}
+
+
     }
 }

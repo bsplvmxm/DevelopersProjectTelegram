@@ -60,8 +60,8 @@
                     <Button x:Name="Button_CreateQuest" Content="Добавить вопрос" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
                     <Button x:Name="Button_EditQuest" Content="Изменить вопрос" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Grid.Column="1"/>
                     <Button x:Name="Button_DeleteQuest" Content="Удалить вопрос" HorizontalAlignment="Left" Margin="55,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"  Grid.Column="2"/>
-                    <TextBox x:Name="TB_QuestionContent" Grid.Column="1" HorizontalAlignment="Center" Margin="0,54,0,0" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" Height="150"/>
-                    <Label x:Name="Label_InputQuest" Content="Введите вопрос" HorizontalAlignment="Left" Margin="17,17,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="182" Grid.Column="1" Grid.Row="1"/>
+                    <TextBox x:Name="TB_QuestionContent" Grid.Column="1" HorizontalAlignment="Center" Margin="0,41,0,0" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="41"/>
+                    <Label x:Name="Label_InputQuest" Content="Введите вопрос" HorizontalAlignment="Left" Margin="14,10,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="182" Grid.Column="1" Grid.Row="1"/>
                     <TextBox x:Name="TB_Answer1" HorizontalAlignment="Left" Margin="55,33,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="24" Grid.Column="2"/>
                     <TextBox x:Name="TB_Answer2" HorizontalAlignment="Left" Margin="55,62,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="24" Grid.Column="2"/>
                     <TextBox x:Name="TB_Answer3" HorizontalAlignment="Left" Margin="55,91,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="24" Grid.Column="2"/>
@@ -75,8 +75,11 @@
                     <RadioButton x:Name="RB_RightAns3" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,96,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19"/>
                     <RadioButton x:Name="RB_RightAns4" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="36,125,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19"/>
                     <Button x:Name="Button_AddTest" Content="Добавить " HorizontalAlignment="Left" Margin="7,48,0,0" VerticalAlignment="Top" Click="Button_AddTest_Click" Height="20" Width="60"/>
-                    <ListBox x:Name="LB_AllTests" Margin="0,90,0,10" Grid.RowSpan="2"/>
+                    <ListBox x:Name="LB_AllTests" Margin="0,90,0,10" Grid.RowSpan="2" SelectionChanged="LB_AllTests_SelectionChanged"/>
                     <Button x:Name="Button_RenameTest" Content="Переименовать" HorizontalAlignment="Left" Margin="243,48,0,0" VerticalAlignment="Top" Height="20" Width="98" Grid.ColumnSpan="2"/>
+                    <ListBox x:Name="LB_QuestOfTest" Grid.Column="1" Grid.Row="1" Margin="0,132,0,90" Grid.RowSpan="2"/>
+                    <Label x:Name="Label_QuestOfTest" Content="Вопросы теста" HorizontalAlignment="Left" Margin="14,0,0,0" VerticalAlignment="Center" FontSize="16" Height="31" Width="116" Grid.Column="1" Grid.Row="1"/>
+                    <TextBlock x:Name="TextBl_NameTest" Grid.Column="1" HorizontalAlignment="Left" Margin="135,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="16" RenderTransformOrigin="0.432,-0.179"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Вывод готового опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
