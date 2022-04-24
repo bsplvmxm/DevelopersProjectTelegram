@@ -10,9 +10,9 @@ namespace TelegramTestBot.BL
     {
         public string _question_content;
 
-        public int UserAnswer { get; set; }
+        public string UserAnswer { get; set; }
 
-        public int CorrectAnswer { get; set; }
+        public string CorrectAnswer { get; set; }
 
         public List<string> Answers { get; set; }
 
@@ -27,6 +27,7 @@ namespace TelegramTestBot.BL
             {
                 throw new ArgumentNullException("Gotta write something");
             }
+            answer = answer.Trim();
             Answers.Add(answer);
         }
         public void EditAnswer(int index, string answer)
@@ -39,6 +40,11 @@ namespace TelegramTestBot.BL
             {
                 throw new ArgumentOutOfRangeException();
             }
+            if (answer == null)
+            {
+                throw new ArgumentNullException("Gotta write something");
+            }
+            answer = answer.Trim();
             Answers[index] = answer;
         }
 
@@ -59,10 +65,28 @@ namespace TelegramTestBot.BL
         {
             if (index < 0 || index > Answers.Count)
             {
-                throw new ArgumentException("This answer does not exist");
+                throw new IndexOutOfRangeException("Wrong index");
             }
-            CorrectAnswer = index;
+            CorrectAnswer = Answers[index];
         }
 
+        public bool CheckUserAnswer()
+        {
+            bool result = false;
+            string UserAnswerCheck = UserAnswer.Trim();
+            UserAnswerCheck = UserAnswerCheck.ToLower();
+            string CorrectAnswerCheck = CorrectAnswer.Trim();
+            CorrectAnswerCheck = CorrectAnswer.ToLower();
+            if(UserAnswerCheck == CorrectAnswerCheck)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        public void Send()
+        {
+            UserAnswer = Console.ReadLine();
+        }
     }
 }

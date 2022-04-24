@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL.Questions
 {
-    public class YeNoQuestion : AbstractQuestion
+    public class YesNoQuestion : AbstractQuestion
     {
-        public YeNoQuestion(string content, int index) : base(content)
+        public YesNoQuestion(string content) : base(content)
         {
             Answers = new List<string>() { "No", "Yes" };
-            this.ChooseCorrect(index);
         }
     }
 }
