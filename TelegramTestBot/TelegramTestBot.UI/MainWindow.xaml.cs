@@ -71,6 +71,7 @@ namespace TelegramTestBot.UI
             string nameTest = TB_NameOfTest.Text;
             AllTests.Add(new Test(nameTest));
             LB_AllTests.Items.Add(nameTest);
+            TB_NameOfTest.Clear();
         }
 
         private void LB_AllTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
