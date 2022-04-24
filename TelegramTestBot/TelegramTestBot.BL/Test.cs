@@ -17,50 +17,41 @@ namespace TelegramTestBot.BL
             NameTest = nameTest;
             Questions = new List<AbstractQuestion>();
         }
-        public void AddChooseAnyQuestion(string question)
+
+        public void AddQuestion(string question, int index)
         {
             if (question == "")
             {
                 throw new NullReferenceException();
             }
-            Questions.Add(new ChooseAnyQuestion(question));
-        }
-        public void AddChooseOneQuestion(string question)
-        {
-            if (question == "")
+            switch (index)
             {
-                throw new NullReferenceException();
+                case 0: 
+                    Questions.Add(new ChooseAnyQuestion(question));
+                    break;
+                case 1:
+                    Questions.Add(new ChooseOneQuestion(question));
+                    break;
+                case 2:
+                    Questions.Add(new CourseQuestion(question));
+                    break;
+                case 3:
+                    Questions.Add(new PollQuestion(question));
+                    break;
+                case 4:
+                    Questions.Add(new YesNoQuestion(question));
+                    break;
             }
-            Questions.Add(new ChooseOneQuestion(question));
         }
 
-        public void AddCourseQuestion(string question)
+        public void EditQuestion(int index, string question)
         {
-            if (question == "")
+            if (question == null)
             {
-                throw new NullReferenceException();
+                throw new Exception();
             }
-            Questions.Add(new CourseQuestion(question));
+            Questions[index]._question_content = question;
         }
-
-        public void AddPollQuestion(string question)
-        {
-            if (question == "")
-            {
-                throw new NullReferenceException();
-            }
-            Questions.Add(new PollQuestion(question));
-        }
-
-        public void AddYeNoQuestion(string question)
-        {
-            if (question == "")
-            {
-                throw new NullReferenceException();
-            }
-            Questions.Add(new YeNoQuestion(question));
-        }
-
 
         public void DeleteQuestionPoll(int index)
         {
@@ -71,10 +62,15 @@ namespace TelegramTestBot.BL
             Questions.RemoveAt(index);
         }
 
+
         public void StartTest()
         {
-
+            foreach (AbstractQuestion question in Questions)
+            {
+                question.Send();
+            }
         }
+
         public void FinishTest()
         {
 
