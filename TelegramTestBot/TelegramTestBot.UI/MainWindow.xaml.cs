@@ -102,7 +102,7 @@ namespace TelegramTestBot.UI
         private void LB_AllTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string nameOfTest = (string)LB_AllTests.SelectedItem;
-            TextBl_NameTest.Text = (string)nameOfTest;
+            TextBl_NameTest.Text = nameOfTest;
             TB_NameOfTest.Text = nameOfTest;
         }
 
