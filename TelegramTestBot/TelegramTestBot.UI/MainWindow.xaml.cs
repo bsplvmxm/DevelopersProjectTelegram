@@ -104,13 +104,19 @@ namespace TelegramTestBot.UI
             string nameOfTest = (string)LB_AllTests.SelectedItem;
             TextBl_NameTest.Text = nameOfTest;
             TB_NameOfTest.Text = nameOfTest;
+            for (int i = 0; i < AllTests[0].Questions.Count; i++)
+            {
+                LB_QuestOfTest.Items.Add(AllTests[0].Questions[i]._question_content);
+            }
         }
 
         private void Button_CreateQuest_Click(object sender, RoutedEventArgs e)
         {
             string nameOfTest = (string)LB_AllTests.SelectedItem;
             string newQuest = TB_QuestionContent.Text;
-            
+            //LB_QuestOfTest.Items.Add(newQuest);
+            AllTests[0].AddQuestion(newQuest,3);
+            //LB_QuestOfTest.Items.Add(newQuest);
         }
 
         //private void HideAllForTest()
