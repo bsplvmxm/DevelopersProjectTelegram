@@ -37,6 +37,7 @@ namespace TelegramTestBot.UI
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += OnTimerTick;
             _timer.Start();
+            AllTests = new List<Test>();
         }
 
         public void OnMessage(string s)
@@ -70,6 +71,11 @@ namespace TelegramTestBot.UI
             string nameTest = TB_NameOfTest.Text;
             AllTests.Add(new Test(nameTest));
             LB_AllTests.Items.Add(nameTest);
+        }
+
+        private void LB_AllTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
