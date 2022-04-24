@@ -17,6 +17,9 @@ namespace TelegramTestBot.BL
         private TelegramBotClient _client;
         private Action<string> _onMessage;
         private List<long> _ids;  //для отправки сообщений от бота человеку
+        private List<string> _users;
+        private List<Groups> _group;
+        private string _others;
         
 
 
@@ -25,6 +28,8 @@ namespace TelegramTestBot.BL
             _client = new TelegramBotClient(token);
             _onMessage = onMessage;
             _ids = new List<long>();
+            _users = new List<string>();
+            _others = "Others";
         }
 
         public void StartBot()
@@ -69,32 +74,55 @@ namespace TelegramTestBot.BL
 
         public void AddUserInGroup(string nameOfGroup, string nameOfUser)
         {
-            foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup) && !BaseOfUsers.GroupBase[nameOfGroup].Contains(nameOfUser))
             {
-                if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+                foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
                 {
-                    users.Value.Add(nameOfUser);
+                    if (users.Value.Contains(nameOfUser))
+                    {
+                        string name = users.Key;
+                        DeleteUserFromGroup(name, nameOfUser);
+                    }
                 }
+
+                BaseOfUsers.GroupBase[nameOfGroup].Add(nameOfUser);
+            }            
+        }
+
+        public void DeleteUserFromGroup(string nameOfGroup, string nameOfUser)
+        {
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup) && BaseOfUsers.GroupBase[nameOfGroup].Contains(nameOfUser))
+            {
+                BaseOfUsers.GroupBase[nameOfGroup].Remove(nameOfUser);
             }
         }
 
         public void CreateGroup(string nameOfGroup)
         {
-            BaseOfUsers.GroupBase.Add(nameOfGroup, new List<string>{ });
+            if (!BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            {
+                BaseOfUsers.GroupBase.Add(nameOfGroup, new List<string>());
+            }
         }
 
         public void OutputUsersInGroup(string nameOfGroup)
         {
-            foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
+            //foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
+            //{
+            //    if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            //    {
+            //        for (int i = 0; i < users.Value.Count; i++)
+            //        {                        
+            //            string outputUsers = users.Value[i];
+            //            _onMessage(outputUsers);
+            //        }
+            //    }
+            //}
+
+            foreach (var items in BaseOfUsers.GroupBase[nameOfGroup])
             {
-                if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
-                {
-                    for (int i = 0; i < users.Value.Count; i++)
-                    {                        
-                        string outputUsers = users.Value[i];
-                        _onMessage(outputUsers);
-                    }
-                }
+                string outputUsers = items;
+                _onMessage(outputUsers);
             }
         }
 
@@ -122,6 +150,8 @@ namespace TelegramTestBot.BL
         {          
             if (update.Message != null && update.Message.Text != null && !BaseOfUsers.NameBase.ContainsKey(update.Message.Chat.Id))
             {              
+                CreateGroup(_others);
+
                 BaseOfUsers.NameBase.Add(update.Message.Chat.Id, update.Message.Chat.Username);
                 
                 StartingButton(update.Message.Chat.Id);               
@@ -138,6 +168,7 @@ namespace TelegramTestBot.BL
             }
             else if (BaseOfUsers.RegBase.ContainsValue(false))
             {
+                BaseOfUsers.GroupBase[_others].Add(update.Message.Chat.Username);
                 BaseOfUsers.RegBase[update.Message.Chat.Id] = true;
                 string s = update.Message.Chat.Username;
                 _onMessage(s);

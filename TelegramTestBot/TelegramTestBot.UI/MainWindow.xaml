@@ -31,6 +31,8 @@
                     <Button x:Name="AddGroupButt" Content="Add group" HorizontalAlignment="Left" Margin="548,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="63" Click="AddGroupButt_Click"/>
                     <ComboBox x:Name="CB_groups" HorizontalAlignment="Left" Margin="475,33,0,0" VerticalAlignment="Top" Width="136" SelectionChanged="CB_groups_SelectionChanged"/>
                     <TextBox x:Name="TB_GroupName" Grid.Column="1" HorizontalAlignment="Center" Margin="0,250,0,0" Text="Enter group name" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
+                    <Button x:Name="DelButt" Content="del regs" HorizontalAlignment="Left" Margin="475,40,0,0" Grid.Row="1" VerticalAlignment="Top" Width="68" Click="DelButt_Click"/>
+                    <Button x:Name="DelGroupButt" Content="Del group" HorizontalAlignment="Left" Margin="548,40,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63"/>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="18*"/>
                         <ColumnDefinition Width="5*"/>

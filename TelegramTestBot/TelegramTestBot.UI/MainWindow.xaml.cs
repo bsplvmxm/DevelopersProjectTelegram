@@ -28,9 +28,12 @@ namespace TelegramTestBot.UI
         {
             _telegaManager = new TelegaBotManager(_token, OnMessage);
             _labels = new List<string>();
+            
             InitializeComponent();
 
             LB_Users.ItemsSource = _labels;
+            CB_groups.Items.Add("Others");
+            
             LabelError.Visibility = Visibility.Hidden;
 
             _timer = new DispatcherTimer();
@@ -42,7 +45,9 @@ namespace TelegramTestBot.UI
         public void OnMessage(string s)
         {
             _labels.Add(s);
+            
         }
+
         private void Window_Initialized(object sender, EventArgs e)
         {
             
@@ -66,17 +71,23 @@ namespace TelegramTestBot.UI
             string newName = TB_Name.Text;
             if (TB_Name.Text != "" && LB_Users.SelectedItem != null)
             {
-                foreach (KeyValuePair<long, string> users in BaseOfUsers.NameBase)
+                foreach (var users in BaseOfUsers.NameBase)
                 {
                     if (oldName == users.Value)
                     {
-                        long idUser = users.Key;
                         int index = _labels.IndexOf(users.Value);
-                        BaseOfUsers.NameBase[idUser] = newName;
+                        BaseOfUsers.NameBase[users.Key] = newName;
                         _labels[index] = newName;
                     }
                 }
-            }
+                
+                foreach (var user in BaseOfUsers.GroupBase)
+                {
+                    int index = user.Value.IndexOf(oldName);
+                    user.Value[index] = newName;
+                    
+                }
+            }   
             else
             {
                 LabelError.Visibility = Visibility.Visible;
@@ -110,6 +121,7 @@ namespace TelegramTestBot.UI
                 CB_groups.Items.Add(groupName);
             }
 
+            LB_Users.Items.Refresh();
             CB_groups.Items.Refresh();
             TB_GroupName.Clear();
         }
@@ -117,12 +129,28 @@ namespace TelegramTestBot.UI
         private void CB_groups_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string nameGroup = (string)CB_groups.SelectedItem;
+            _labels.Clear();
+
             if (CB_groups.SelectedItem != null)
             {                
                 _telegaManager.OutputUsersInGroup(nameGroup);
             }
 
             LB_Users.Items.Refresh();
+        }
+
+        private void DelButt_Click(object sender, RoutedEventArgs e)
+        {
+            string username = (string)LB_Users.SelectedItem;
+            string nameGroup = (string)CB_groups.SelectedItem;
+
+            if (LB_Users.SelectedItem != null && CB_groups.SelectedItem != null)
+            {
+                _telegaManager.DeleteUserFromGroup(nameGroup, username);
+            }
+
+            LB_Users.Items.Refresh();
+            CB_groups.Items.Refresh();
         }
     }
 }
