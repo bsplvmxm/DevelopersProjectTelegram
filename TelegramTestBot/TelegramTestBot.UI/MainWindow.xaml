@@ -36,7 +36,7 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="CreateQuestTest" Header="Создание и редактирование теста" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="164" Margin="0,-1,0,0">
-                <Grid>
+                <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="303*"/>
                         <ColumnDefinition Width="226*"/>
