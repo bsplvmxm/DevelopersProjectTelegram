@@ -273,8 +273,6 @@ namespace TelegramTestBot.UI
                     ChB_RightAns2.Visibility = Visibility.Hidden;
                     ChB_RightAns3.Visibility = Visibility.Hidden;
                     ChB_RightAns4.Visibility = Visibility.Hidden;
-                    TB_Answer1.Text = "Нет";
-                    TB_Answer2.Text = "Да";
                     TB_Answer1.IsEnabled = false;
                     TB_Answer2.IsEnabled = false;
                     break;
@@ -351,7 +349,6 @@ namespace TelegramTestBot.UI
             int questionIndex = LB_QuestOfTest.SelectedIndex;
             int typeOfQestion = CB_TypeQuestion.SelectedIndex;
             int rbIndex=0;
-            //определить какой радиобаттон выбран и присвоить переменной его значение
             switch(typeOfQestion)
             {
                 case 0:
@@ -378,7 +375,9 @@ namespace TelegramTestBot.UI
                 case 3:
                     break;
                 case 4:
-                    AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
+                    AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                    //AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
                     break;
             }
         }
