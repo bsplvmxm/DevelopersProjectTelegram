@@ -101,13 +101,18 @@ namespace TelegramTestBot.UI
 
         private void LB_AllTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Label_ViewQuest.Visibility = Visibility.Visible;
+            //CB_TypeQuestion.Visibility = Visibility.Visible;
+            //Label_InputQuest.Visibility = Visibility.Visible;
+            //TB_QuestionContent.Visibility = Visibility.Visible;
             HideAllForTest();
             string nameOfTest = (string)LB_AllTests.SelectedItem;
             TextBl_NameTest.Text = nameOfTest;
             TB_NameOfTest.Text = nameOfTest;
-            for (int i = 0; i < AllTests[0].Questions.Count; i++)
+            LB_QuestOfTest.Items.Clear();
+            for (int i = 0; i < AllTests[LB_AllTests.SelectedIndex].Questions.Count; i++)
             {
-                LB_QuestOfTest.Items.Add(AllTests[0].Questions[i]._question_content);
+                LB_QuestOfTest.Items.Add(AllTests[LB_AllTests.SelectedIndex].Questions[i]._question_content);
             }
         }
 
@@ -116,8 +121,9 @@ namespace TelegramTestBot.UI
             string nameOfTest = (string)LB_AllTests.SelectedItem;
             string newQuest = TB_QuestionContent.Text;
             //LB_QuestOfTest.Items.Add(newQuest);
-            AllTests[0].AddQuestion(newQuest,3);
+            AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest,3);
             //LB_QuestOfTest.Items.Add(newQuest);
+            TB_QuestionContent.Clear();
         }
 
         private void HideAllForTest()
@@ -145,6 +151,9 @@ namespace TelegramTestBot.UI
             LB_QuestOfTest.Visibility = Visibility.Visible;
         }
 
-
+        private void ButtonCreateTest_Poll_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl_Test.SelectedItem = CreateQuestTest;
+        }
     }
 }
