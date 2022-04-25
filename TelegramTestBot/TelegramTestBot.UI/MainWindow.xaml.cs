@@ -59,7 +59,9 @@ namespace TelegramTestBot.UI
             //Button_EditQuest.IsEnabled = false;
             //Button_DeleteQuest.IsEnabled = false;
             //Button_RenameTest.IsEnabled = false;
-
+            MainMenu.Visibility = Visibility.Hidden;
+            CreateQuestTest.Visibility = Visibility.Hidden;
+            TestItem.Visibility = Visibility.Hidden;
 
 
         }

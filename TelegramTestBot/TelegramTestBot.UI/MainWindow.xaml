@@ -82,7 +82,7 @@
                     <RadioButton x:Name="RB_RightAns4" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="36,125,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Вывод готового опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
+            <TabItem x:Name="TestItem" Header="Вывод готового опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
