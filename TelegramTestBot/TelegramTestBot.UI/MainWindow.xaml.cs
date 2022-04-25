@@ -291,5 +291,12 @@ namespace TelegramTestBot.UI
         {
             TabControl_Test.SelectedItem = MainMenu;
         }
+
+        private void Button_EditQuest_Click(object sender, RoutedEventArgs e)
+        {
+            int indexOfTest = LB_QuestOfTest.SelectedIndex;
+            string contentOfQuest = TB_QuestionContent.Text;
+            AllTests[LB_AllTests.SelectedIndex].EditQuestion(indexOfTest, contentOfQuest);
+        }
     }
 }
