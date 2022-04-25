@@ -12,6 +12,8 @@ namespace TelegramTestBot.BL
         public string Name { get; set; }
         public Chat Chat { get; set; }
         public string Test { get; set; }
+        public long ChatId { get; set; }
         public List<string> Answers { get; set; } = new List<string>();
+        public List<string> UsersInGroup { get; set; } = new List<string>();
     }
 }
