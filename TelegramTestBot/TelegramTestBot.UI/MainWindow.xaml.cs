@@ -128,6 +128,9 @@ namespace TelegramTestBot.UI
                 }
             }
             LB_QuestOfTest.Items.Refresh();
+            CB_TypeQuestion.SelectedIndex = -1;
+            CB_TypeQuestion.IsEnabled = false;
+            OpenComponents(-1);
         }
 
 
@@ -256,8 +259,6 @@ namespace TelegramTestBot.UI
                     ChB_RightAns3.Visibility = Visibility.Hidden;
                     ChB_RightAns4.Visibility = Visibility.Hidden;
                     break;
-
-
             }
         }
 
@@ -270,10 +271,13 @@ namespace TelegramTestBot.UI
 
         private void LB_QuestOfTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int questionType = AllTests[LB_AllTests.SelectedIndex].Questions[LB_QuestOfTest.SelectedIndex].TypeOfQuestion;
-            OpenComponents(questionType);
-            CB_TypeQuestion.SelectedIndex = questionType;
-            CB_TypeQuestion.IsEnabled = false;
+            if (LB_QuestOfTest.SelectedIndex != -1)
+            {
+                int questionType = AllTests[LB_AllTests.SelectedIndex].Questions[LB_QuestOfTest.SelectedIndex].TypeOfQuestion;
+                OpenComponents(questionType);
+                CB_TypeQuestion.SelectedIndex = questionType;
+                CB_TypeQuestion.IsEnabled = false;
+            }
         }
 
         private void TB_QuestionContent_TextChanged(object sender, TextChangedEventArgs e)
