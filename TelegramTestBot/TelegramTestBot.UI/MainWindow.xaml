@@ -50,7 +50,7 @@
                     <Label Content="Введите название теста" HorizontalAlignment="Left" Margin="82,10,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="182"/>
                     <TextBox x:Name="TB_NameOfTest" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="171" Margin="72,41,0,6" FontSize="16"/>
                     <Label x:Name="Label_ViewQuest" Content="Вид вопроса" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="31" Width="110" Grid.Column="2" Visibility="Hidden"/>
-                    <ComboBox x:Name="CB_TypeQuestion" Height="30" VerticalAlignment="Top" Grid.Column="2" Margin="10,41,116,0" Visibility="Hidden">
+                    <ComboBox x:Name="CB_TypeQuestion" Height="30" VerticalAlignment="Top" Grid.Column="2" Margin="10,41,116,0" Visibility="Hidden" SelectionChanged="CB_TypeQuestion_SelectionChanged">
                         <TextBlock x:Name="Quest_ChooseAny">Несколько вариантов</TextBlock>
                         <TextBlock x:Name="Quest_ChooseOne">Один вариант</TextBlock>
                         <TextBlock x:Name="Quest_Course">Сортировка</TextBlock>

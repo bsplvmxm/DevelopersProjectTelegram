@@ -126,11 +126,82 @@ namespace TelegramTestBot.UI
                 {
                     LB_QuestOfTest.Items.Add(AllTests[LB_AllTests.SelectedIndex].Questions[i]._question_content);
                 }
-                OpenComponents();
             }
             LB_QuestOfTest.Items.Refresh();
         }
 
+
+        private void CB_TypeQuestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = CB_TypeQuestion.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    TB_Answer1.Visibility = Visibility.Visible;
+                    TB_Answer2.Visibility = Visibility.Visible;
+                    TB_Answer3.Visibility = Visibility.Visible;
+                    TB_Answer4.Visibility = Visibility.Visible;
+                    ChB_RightAns1.Visibility = Visibility.Visible;
+                    ChB_RightAns2.Visibility = Visibility.Visible;
+                    ChB_RightAns3.Visibility = Visibility.Visible;
+                    ChB_RightAns4.Visibility = Visibility.Visible;
+                    RB_RightAns1.Visibility = Visibility.Hidden;
+                    RB_RightAns2.Visibility = Visibility.Hidden;
+                    RB_RightAns3.Visibility = Visibility.Hidden;
+                    RB_RightAns4.Visibility = Visibility.Hidden;
+                    break;
+                case 1:
+                    TB_Answer1.Visibility = Visibility.Visible;
+                    TB_Answer2.Visibility = Visibility.Visible;
+                    TB_Answer3.Visibility = Visibility.Visible;
+                    TB_Answer4.Visibility = Visibility.Visible;
+                    RB_RightAns1.Visibility = Visibility.Visible;
+                    RB_RightAns2.Visibility = Visibility.Visible;
+                    RB_RightAns3.Visibility = Visibility.Visible;
+                    RB_RightAns4.Visibility = Visibility.Visible;
+                    ChB_RightAns1.Visibility = Visibility.Hidden;
+                    ChB_RightAns2.Visibility = Visibility.Hidden;
+                    ChB_RightAns3.Visibility = Visibility.Hidden;
+                    ChB_RightAns4.Visibility = Visibility.Hidden;
+                    break;
+                case 2:
+                    TB_Answer1.Visibility = Visibility.Visible;
+                    TB_Answer2.Visibility = Visibility.Visible;
+                    TB_Answer3.Visibility = Visibility.Visible;
+                    TB_Answer4.Visibility = Visibility.Visible;
+                    break;
+                case 3:
+                    TB_Answer1.Visibility = Visibility.Hidden;
+                    TB_Answer2.Visibility = Visibility.Hidden;
+                    TB_Answer3.Visibility = Visibility.Hidden;
+                    TB_Answer4.Visibility = Visibility.Hidden;
+                    RB_RightAns1.Visibility = Visibility.Hidden;
+                    RB_RightAns2.Visibility = Visibility.Hidden;
+                    RB_RightAns3.Visibility = Visibility.Hidden;
+                    RB_RightAns4.Visibility = Visibility.Hidden;
+                    ChB_RightAns1.Visibility = Visibility.Hidden;
+                    ChB_RightAns2.Visibility = Visibility.Hidden;
+                    ChB_RightAns3.Visibility = Visibility.Hidden;
+                    ChB_RightAns4.Visibility = Visibility.Hidden;
+                    break;
+                case 4:
+                    TB_Answer1.Visibility = Visibility.Visible;
+                    TB_Answer2.Visibility = Visibility.Visible;
+                    TB_Answer3.Visibility = Visibility.Hidden;
+                    TB_Answer4.Visibility = Visibility.Hidden;
+                    RB_RightAns1.Visibility = Visibility.Visible;
+                    RB_RightAns2.Visibility = Visibility.Visible;
+                    RB_RightAns3.Visibility = Visibility.Hidden;
+                    RB_RightAns4.Visibility = Visibility.Hidden;
+                    ChB_RightAns1.Visibility = Visibility.Hidden;
+                    ChB_RightAns2.Visibility = Visibility.Hidden;
+                    ChB_RightAns3.Visibility = Visibility.Hidden;
+                    ChB_RightAns4.Visibility = Visibility.Hidden;
+                    break;
+            }
+            //CB_TypeQuestion.Items.Clear();
+            CB_TypeQuestion.Items.Refresh();
+        }
         private void Button_CreateQuest_Click(object sender, RoutedEventArgs e)
         {
             int index = CB_TypeQuestion.SelectedIndex;
@@ -142,7 +213,7 @@ namespace TelegramTestBot.UI
                 AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
                 //LB_QuestOfTest.Items.Add(newQuest);
                 TB_QuestionContent.Clear();
-                CB_TypeQuestion.Items.Clear();
+                CB_TypeQuestion.Items.Refresh();
             }
         }
 
@@ -215,5 +286,6 @@ namespace TelegramTestBot.UI
         {
             TabControl_Test.SelectedItem = CreateQuestTest;
         }
+
     }
 }
