@@ -67,8 +67,11 @@ namespace TelegramTestBot.UI
         private void EditNameButton_Click(object sender, RoutedEventArgs e)
         {
             LabelError.Visibility = Visibility.Hidden;
+
             string oldName = (string)LB_Users.SelectedItem;
             string newName = TB_Name.Text;
+            string nameOfGroup = (string)CB_groups.SelectedItem;
+
             if (TB_Name.Text != "" && LB_Users.SelectedItem != null)
             {
                 foreach (var users in BaseOfUsers.NameBase)
@@ -81,11 +84,13 @@ namespace TelegramTestBot.UI
                     }
                 }
                 
-                foreach (var user in BaseOfUsers.GroupBase)
+                if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
                 {
-                    int index = user.Value.IndexOf(oldName);
-                    user.Value[index] = newName;
-                    
+                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(oldName))
+                    {
+                        int index = BaseOfUsers.GroupBase[nameOfGroup].IndexOf(oldName);
+                        BaseOfUsers.GroupBase[nameOfGroup][index] = newName;
+                    }                   
                 }
             }   
             else
@@ -100,12 +105,19 @@ namespace TelegramTestBot.UI
 
         private void TestButOut_Click(object sender, RoutedEventArgs e)
         {
+            LabelError.Visibility = Visibility.Hidden;
+
             string userName = (string)LB_Users.SelectedItem;
             string groupName = TB_GroupName.Text;
 
             if (LB_Users.SelectedItem != null && groupName != "")
             {
                 _telegaManager.AddUserInGroup(groupName, userName);
+            }
+            else
+            {
+                LabelError.Visibility = Visibility.Visible;
+                LabelError.Content = "Ты что дурачок?";
             }
 
             LB_Users.Items.Refresh();
@@ -114,11 +126,19 @@ namespace TelegramTestBot.UI
 
         private void AddGroupButt_Click(object sender, RoutedEventArgs e)
         {
+            LabelError.Visibility = Visibility.Hidden;
+
             string groupName = TB_GroupName.Text;
+
             if (groupName != "")
             {
                 _telegaManager.CreateGroup(groupName);
                 CB_groups.Items.Add(groupName);
+            }
+            else
+            {
+                LabelError.Visibility = Visibility.Visible;
+                LabelError.Content = "Ты что дурачок?";
             }
 
             LB_Users.Items.Refresh();
@@ -128,6 +148,8 @@ namespace TelegramTestBot.UI
 
         private void CB_groups_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            LabelError.Visibility = Visibility.Hidden;
+
             string nameGroup = (string)CB_groups.SelectedItem;
             _labels.Clear();
 
@@ -141,12 +163,43 @@ namespace TelegramTestBot.UI
 
         private void DelButt_Click(object sender, RoutedEventArgs e)
         {
+            LabelError.Visibility = Visibility.Hidden;
+
             string username = (string)LB_Users.SelectedItem;
             string nameGroup = (string)CB_groups.SelectedItem;
 
-            if (LB_Users.SelectedItem != null && CB_groups.SelectedItem != null)
+            if (LB_Users.SelectedItem != null && CB_groups.SelectedItem != null && nameGroup != "Others")
             {
                 _telegaManager.DeleteUserFromGroup(nameGroup, username);
+                _telegaManager.AddUserInGroup("Others", username);
+            }
+            else
+            {
+                LabelError.Visibility = Visibility.Visible;
+                LabelError.Content = "Ты что дурачок?";
+            }
+
+            LB_Users.Items.Refresh();
+            CB_groups.Items.Refresh();
+        }
+
+        private void DelGroupButt_Click(object sender, RoutedEventArgs e)
+        {
+            LabelError.Visibility = Visibility.Hidden;
+
+            string nameGroup = (string)CB_groups.SelectedItem;
+            int index = CB_groups.SelectedIndex;
+           
+            
+            if (CB_groups.SelectedItem != null && nameGroup != "Others")
+            {
+                _telegaManager.DeleteGroup(nameGroup);
+                CB_groups.Items.RemoveAt(index);
+            }
+            else
+            {
+                LabelError.Visibility = Visibility.Visible;
+                LabelError.Content = "Ты что дурачок?";
             }
 
             LB_Users.Items.Refresh();

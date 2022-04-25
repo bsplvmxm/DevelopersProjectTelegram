@@ -105,6 +105,20 @@ namespace TelegramTestBot.BL
             }
         }
 
+        public void DeleteGroup(string nameOfGroup)
+        {
+
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            {
+                foreach (var users in BaseOfUsers.GroupBase[nameOfGroup])
+                {
+                    BaseOfUsers.GroupBase[_others].Add(users);
+                }
+
+                BaseOfUsers.GroupBase.Remove(nameOfGroup);
+            }
+        }
+
         public void OutputUsersInGroup(string nameOfGroup)
         {
             //foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
@@ -118,11 +132,13 @@ namespace TelegramTestBot.BL
             //        }
             //    }
             //}
-
-            foreach (var items in BaseOfUsers.GroupBase[nameOfGroup])
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
             {
-                string outputUsers = items;
-                _onMessage(outputUsers);
+                foreach (var items in BaseOfUsers.GroupBase[nameOfGroup])
+                {
+                    string outputUsers = items;
+                    _onMessage(outputUsers);
+                }
             }
         }
 
