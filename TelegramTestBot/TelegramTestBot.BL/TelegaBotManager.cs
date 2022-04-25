@@ -16,9 +16,9 @@ namespace TelegramTestBot.BL
     {
         private TelegramBotClient _client;
         private Action<string> _onMessage;
-        private List<long> _ids;  //для отправки сообщений от бота человеку
-        private List<string> _users;
-        private List<Groups> _group;
+        //private List<long> _ids;  //для отправки сообщений от бота человеку
+        //private List<string> _users;
+        //private List<Groups> _group;
         private string _others;
         
 
@@ -27,8 +27,8 @@ namespace TelegramTestBot.BL
         {
             _client = new TelegramBotClient(token);
             _onMessage = onMessage;
-            _ids = new List<long>();
-            _users = new List<string>();
+            //_ids = new List<long>();
+            //_users = new List<string>();
             _others = "Others";
         }
 
