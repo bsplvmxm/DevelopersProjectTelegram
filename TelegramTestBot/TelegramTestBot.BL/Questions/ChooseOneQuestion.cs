@@ -10,6 +10,7 @@ namespace TelegramTestBot.BL.Questions
     {
         public ChooseOneQuestion(string content) : base(content)
         {
+            TypeOfQuestion = 1;
         }
     }
 }

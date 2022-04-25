@@ -133,7 +133,51 @@ namespace TelegramTestBot.UI
 
         private void CB_TypeQuestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            CB_TypeQuestion.Items.Refresh();
+        }
+        private void Button_CreateQuest_Click(object sender, RoutedEventArgs e)
+        {
             int index = CB_TypeQuestion.SelectedIndex;
+            if (CB_TypeQuestion.SelectedIndex > -1)
+            {
+                string nameOfTest = (string)LB_AllTests.SelectedItem;
+                string newQuest = TB_QuestionContent.Text;
+                //LB_QuestOfTest.Items.Add(newQuest);
+                AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
+                //LB_QuestOfTest.Items.Add(newQuest);
+                TB_QuestionContent.Clear();
+                LB_QuestOfTest.Items.Add(newQuest);
+            }
+            CB_TypeQuestion.SelectedIndex = -1;
+        }
+
+        private void HideAllForTest()
+        {
+            Label_ViewQuest.Visibility = Visibility.Visible;
+            CB_TypeQuestion.Visibility = Visibility.Visible;
+            RB_RightAns1.Visibility = Visibility.Visible;
+            RB_RightAns2.Visibility = Visibility.Visible;
+            RB_RightAns3.Visibility = Visibility.Visible;
+            RB_RightAns4.Visibility = Visibility.Visible;
+            TB_Answer1.Visibility = Visibility.Visible;
+            TB_Answer2.Visibility = Visibility.Visible;
+            TB_Answer3.Visibility = Visibility.Visible;
+            TB_Answer4.Visibility = Visibility.Visible;
+            ChB_RightAns1.Visibility = Visibility.Visible;
+            ChB_RightAns2.Visibility = Visibility.Visible;
+            ChB_RightAns3.Visibility = Visibility.Visible;
+            ChB_RightAns4.Visibility = Visibility.Visible;
+            Label_InputQuest.Visibility = Visibility.Visible;
+            TB_QuestionContent.Visibility = Visibility.Visible;
+            Button_CreateQuest.Visibility = Visibility.Visible;
+            Button_EditQuest.Visibility = Visibility.Visible;
+            Button_DeleteQuest.Visibility = Visibility.Visible;
+            Button_RenameTest.Visibility = Visibility.Visible;
+            LB_QuestOfTest.Visibility = Visibility.Visible;
+        }
+
+        private void OpenComponents(int index)
+        {
             switch (index)
             {
                 case 0:
@@ -198,87 +242,22 @@ namespace TelegramTestBot.UI
                     ChB_RightAns3.Visibility = Visibility.Hidden;
                     ChB_RightAns4.Visibility = Visibility.Hidden;
                     break;
-            }
-            //CB_TypeQuestion.Items.Clear();
-            CB_TypeQuestion.Items.Refresh();
-        }
-        private void Button_CreateQuest_Click(object sender, RoutedEventArgs e)
-        {
-            int index = CB_TypeQuestion.SelectedIndex;
-            if (CB_TypeQuestion.SelectedIndex > -1)
-            {
-                string nameOfTest = (string)LB_AllTests.SelectedItem;
-                string newQuest = TB_QuestionContent.Text;
-                //LB_QuestOfTest.Items.Add(newQuest);
-                AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
-                //LB_QuestOfTest.Items.Add(newQuest);
-                TB_QuestionContent.Clear();
-                CB_TypeQuestion.Items.Refresh();
-            }
-        }
+                case -1:
+                    TB_Answer1.Visibility = Visibility.Hidden;
+                    TB_Answer2.Visibility = Visibility.Hidden;
+                    TB_Answer3.Visibility = Visibility.Hidden;
+                    TB_Answer4.Visibility = Visibility.Hidden;
+                    RB_RightAns1.Visibility = Visibility.Hidden;
+                    RB_RightAns2.Visibility = Visibility.Hidden;
+                    RB_RightAns3.Visibility = Visibility.Hidden;
+                    RB_RightAns4.Visibility = Visibility.Hidden;
+                    ChB_RightAns1.Visibility = Visibility.Hidden;
+                    ChB_RightAns2.Visibility = Visibility.Hidden;
+                    ChB_RightAns3.Visibility = Visibility.Hidden;
+                    ChB_RightAns4.Visibility = Visibility.Hidden;
+                    break;
 
-        private void HideAllForTest()
-        {
-            Label_ViewQuest.Visibility = Visibility.Visible;
-            CB_TypeQuestion.Visibility = Visibility.Visible;
-            RB_RightAns1.Visibility = Visibility.Visible;
-            RB_RightAns2.Visibility = Visibility.Visible;
-            RB_RightAns3.Visibility = Visibility.Visible;
-            RB_RightAns4.Visibility = Visibility.Visible;
-            TB_Answer1.Visibility = Visibility.Visible;
-            TB_Answer2.Visibility = Visibility.Visible;
-            TB_Answer3.Visibility = Visibility.Visible;
-            TB_Answer4.Visibility = Visibility.Visible;
-            ChB_RightAns1.Visibility = Visibility.Visible;
-            ChB_RightAns2.Visibility = Visibility.Visible;
-            ChB_RightAns3.Visibility = Visibility.Visible;
-            ChB_RightAns4.Visibility = Visibility.Visible;
-            Label_InputQuest.Visibility = Visibility.Visible;
-            TB_QuestionContent.Visibility = Visibility.Visible;
-            Button_CreateQuest.Visibility = Visibility.Visible;
-            Button_EditQuest.Visibility = Visibility.Visible;
-            Button_DeleteQuest.Visibility = Visibility.Visible;
-            Button_RenameTest.Visibility = Visibility.Visible;
-            LB_QuestOfTest.Visibility = Visibility.Visible;
-        }
 
-        private void OpenComponents()
-        {
-            int index = CB_TypeQuestion.SelectedIndex;
-            switch (index)
-            {
-                case 0:
-                    TB_Answer1.Visibility = Visibility.Visible;
-                    TB_Answer2.Visibility = Visibility.Visible;
-                    TB_Answer3.Visibility = Visibility.Visible;
-                    TB_Answer4.Visibility = Visibility.Visible;
-                    ChB_RightAns1.Visibility = Visibility.Visible;
-                    ChB_RightAns2.Visibility = Visibility.Visible;
-                    ChB_RightAns3.Visibility = Visibility.Visible;
-                    ChB_RightAns4.Visibility = Visibility.Visible;
-                    break;
-                case 1:
-                    TB_Answer1.Visibility = Visibility.Visible;
-                    TB_Answer2.Visibility = Visibility.Visible;
-                    TB_Answer3.Visibility = Visibility.Visible;
-                    TB_Answer4.Visibility = Visibility.Visible;
-                    RB_RightAns1.Visibility = Visibility.Visible;
-                    RB_RightAns2.Visibility = Visibility.Visible;
-                    RB_RightAns3.Visibility = Visibility.Visible;
-                    RB_RightAns4.Visibility = Visibility.Visible;
-                    break;
-                case 2:
-                    TB_Answer1.Visibility = Visibility.Visible;
-                    TB_Answer2.Visibility = Visibility.Visible;
-                    TB_Answer3.Visibility = Visibility.Visible;
-                    TB_Answer4.Visibility = Visibility.Visible;
-                    break;
-                case 4:
-                    TB_Answer1.Visibility = Visibility.Visible;
-                    TB_Answer2.Visibility = Visibility.Visible;
-                    RB_RightAns1.Visibility = Visibility.Visible;
-                    RB_RightAns2.Visibility = Visibility.Visible;
-                    break;
             }
         }
 
@@ -289,5 +268,19 @@ namespace TelegramTestBot.UI
             TabControl_Test.SelectedItem = CreateQuestTest;
         }
 
+        private void LB_QuestOfTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int questionType = AllTests[LB_AllTests.SelectedIndex].Questions[LB_QuestOfTest.SelectedIndex].TypeOfQuestion;
+            OpenComponents(questionType);
+            CB_TypeQuestion.SelectedIndex = questionType;
+            CB_TypeQuestion.IsEnabled = false;
+        }
+
+        private void TB_QuestionContent_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CB_TypeQuestion.SelectedIndex = -1;
+            CB_TypeQuestion.IsEnabled = true;
+            OpenComponents(-1);
+        }
     }
 }

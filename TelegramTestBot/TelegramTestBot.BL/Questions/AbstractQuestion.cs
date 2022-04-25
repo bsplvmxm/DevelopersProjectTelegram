@@ -16,6 +16,8 @@ namespace TelegramTestBot.BL
 
         public List<string> Answers { get; set; }
 
+        public int TypeOfQuestion { get; protected set; }
+
         public AbstractQuestion(string content)
         {
             _question_content = content;

@@ -11,6 +11,7 @@ namespace TelegramTestBot.BL.Questions
         public string UserPollAnswer { get; set; }
         public PollQuestion(string content) : base(content)
         {
+            TypeOfQuestion = 3;
         }
     }
 }
