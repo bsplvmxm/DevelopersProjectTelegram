@@ -57,7 +57,7 @@
                         <TextBlock x:Name="Quest_Poll">Ввод ответа</TextBlock>
                         <TextBlock x:Name="Quest_YeNo">Да/Нет</TextBlock>
                     </ComboBox>
-                    <Button x:Name="Button_CreateQuest" Content="Добавить вопрос" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Visibility="Hidden" Click="Button_CreateQuest_Click"/>
+                    <Button x:Name="Button_CreateQuest" Content="Добавить вопрос" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Visibility="Hidden" Click="Button_CreateQuest_Click" Margin="127,0,0,0"/>
                     <Button x:Name="Button_EditQuest" Content="Изменить вопрос" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Grid.Column="1" Visibility="Hidden"/>
                     <Button x:Name="Button_DeleteQuest" Content="Удалить вопрос" HorizontalAlignment="Left" Margin="55,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"  Grid.Column="2" Visibility="Hidden"/>
                     <TextBox x:Name="TB_QuestionContent" Grid.Column="1" HorizontalAlignment="Center" Margin="0,41,0,0" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="41" Visibility="Hidden" TextChanged="TB_QuestionContent_TextChanged"/>
@@ -80,6 +80,7 @@
                     <RadioButton x:Name="RB_RightAns2" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,67,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
                     <RadioButton x:Name="RB_RightAns3" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,96,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
                     <RadioButton x:Name="RB_RightAns4" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="36,125,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
+                    <Button x:Name="Button_BackMain" Content="Главная" HorizontalAlignment="Left" Margin="27,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="77" Click="Button_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="TestItem" Header="Вывод готового опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">

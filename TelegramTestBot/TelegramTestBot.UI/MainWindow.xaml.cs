@@ -59,9 +59,9 @@ namespace TelegramTestBot.UI
             //Button_EditQuest.IsEnabled = false;
             //Button_DeleteQuest.IsEnabled = false;
             //Button_RenameTest.IsEnabled = false;
-            MainMenu.Visibility = Visibility.Visible;
-            CreateQuestTest.Visibility = Visibility.Visible;
-            TestItem.Visibility = Visibility.Visible;
+            MainMenu.Visibility = Visibility.Hidden;
+            CreateQuestTest.Visibility = Visibility.Hidden;
+            TestItem.Visibility = Visibility.Hidden;
 
 
         }
@@ -285,6 +285,11 @@ namespace TelegramTestBot.UI
             CB_TypeQuestion.SelectedIndex = -1;
             CB_TypeQuestion.IsEnabled = true;
             OpenComponents(-1);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl_Test.SelectedItem = MainMenu;
         }
     }
 }
