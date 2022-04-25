@@ -51,11 +51,11 @@
                     <TextBox x:Name="TB_NameOfTest" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="171" Margin="72,41,0,6" FontSize="16"/>
                     <Label x:Name="Label_ViewQuest" Content="Вид вопроса" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="31" Width="110" Grid.Column="2" Visibility="Hidden"/>
                     <ComboBox x:Name="CB_TypeQuestion" Height="30" VerticalAlignment="Top" Grid.Column="2" Margin="10,41,116,0" Visibility="Hidden">
-                        <TextBlock x:Name="Quest_YeNo">Да/Нет</TextBlock>
-                        <TextBlock x:Name="Quest_Course">Сортировка</TextBlock>
-                        <TextBlock x:Name="Quest_ChooseOne">Один вариант</TextBlock>
                         <TextBlock x:Name="Quest_ChooseAny">Несколько вариантов</TextBlock>
+                        <TextBlock x:Name="Quest_ChooseOne">Один вариант</TextBlock>
+                        <TextBlock x:Name="Quest_Course">Сортировка</TextBlock>
                         <TextBlock x:Name="Quest_Poll">Ввод ответа</TextBlock>
+                        <TextBlock x:Name="Quest_YeNo">Да/Нет</TextBlock>
                     </ComboBox>
                     <Button x:Name="Button_CreateQuest" Content="Добавить вопрос" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Visibility="Hidden" Click="Button_CreateQuest_Click"/>
                     <Button x:Name="Button_EditQuest" Content="Изменить вопрос" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="166" FontSize="16" Grid.Column="1" Visibility="Hidden"/>

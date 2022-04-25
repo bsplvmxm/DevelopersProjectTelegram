@@ -59,9 +59,9 @@ namespace TelegramTestBot.UI
             //Button_EditQuest.IsEnabled = false;
             //Button_DeleteQuest.IsEnabled = false;
             //Button_RenameTest.IsEnabled = false;
-            MainMenu.Visibility = Visibility.Hidden;
-            CreateQuestTest.Visibility = Visibility.Hidden;
-            TestItem.Visibility = Visibility.Hidden;
+            MainMenu.Visibility = Visibility.Visible;
+            CreateQuestTest.Visibility = Visibility.Visible;
+            TestItem.Visibility = Visibility.Visible;
 
 
         }
@@ -94,38 +94,56 @@ namespace TelegramTestBot.UI
            
         private void Button_AddTest_Click(object sender, RoutedEventArgs e)
         {
-            string nameTest = TB_NameOfTest.Text;
-            AllTests.Add(new Test(nameTest));
-            LB_AllTests.Items.Add(nameTest);
-            TB_NameOfTest.Clear();
+            if (TB_NameOfTest.Text != "")
+            {
+                string nameTest = TB_NameOfTest.Text;
+                AllTests.Add(new Test(nameTest));
+                LB_AllTests.Items.Add(nameTest);
+                TB_NameOfTest.Clear();
+            }
  
         }
 
         private void LB_AllTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Label_ViewQuest.Visibility = Visibility.Visible;
-            //CB_TypeQuestion.Visibility = Visibility.Visible;
-            //Label_InputQuest.Visibility = Visibility.Visible;
-            //TB_QuestionContent.Visibility = Visibility.Visible;
-            HideAllForTest();
-            string nameOfTest = (string)LB_AllTests.SelectedItem;
-            TextBl_NameTest.Text = nameOfTest;
-            TB_NameOfTest.Text = nameOfTest;
-            LB_QuestOfTest.Items.Clear();
-            for (int i = 0; i < AllTests[LB_AllTests.SelectedIndex].Questions.Count; i++)
+            //HideAllForTest();
+            if (LB_AllTests.SelectedItem != null)
             {
-                LB_QuestOfTest.Items.Add(AllTests[LB_AllTests.SelectedIndex].Questions[i]._question_content);
+                Label_ViewQuest.Visibility = Visibility.Visible;
+                CB_TypeQuestion.Visibility = Visibility.Visible;
+                Label_InputQuest.Visibility = Visibility.Visible;
+                TB_QuestionContent.Visibility = Visibility.Visible;
+                Button_CreateQuest.Visibility = Visibility.Visible;
+                Button_EditQuest.Visibility = Visibility.Visible;
+                Button_DeleteQuest.Visibility = Visibility.Visible;
+                Button_RenameTest.Visibility = Visibility.Visible;
+                LB_QuestOfTest.Visibility = Visibility.Visible;
+                string nameOfTest = (string)LB_AllTests.SelectedItem;
+                TextBl_NameTest.Text = nameOfTest;
+                TB_NameOfTest.Text = nameOfTest;
+                LB_QuestOfTest.Items.Clear();
+                for (int i = 0; i < AllTests[LB_AllTests.SelectedIndex].Questions.Count; i++)
+                {
+                    LB_QuestOfTest.Items.Add(AllTests[LB_AllTests.SelectedIndex].Questions[i]._question_content);
+                }
+                OpenComponents();
             }
+            LB_QuestOfTest.Items.Refresh();
         }
 
         private void Button_CreateQuest_Click(object sender, RoutedEventArgs e)
         {
-            string nameOfTest = (string)LB_AllTests.SelectedItem;
-            string newQuest = TB_QuestionContent.Text;
-            //LB_QuestOfTest.Items.Add(newQuest);
-            AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest,3);
-            //LB_QuestOfTest.Items.Add(newQuest);
-            TB_QuestionContent.Clear();
+            int index = CB_TypeQuestion.SelectedIndex;
+            if (CB_TypeQuestion.SelectedIndex > -1)
+            {
+                string nameOfTest = (string)LB_AllTests.SelectedItem;
+                string newQuest = TB_QuestionContent.Text;
+                //LB_QuestOfTest.Items.Add(newQuest);
+                AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
+                //LB_QuestOfTest.Items.Add(newQuest);
+                TB_QuestionContent.Clear();
+                CB_TypeQuestion.Items.Clear();
+            }
         }
 
         private void HideAllForTest()
@@ -151,6 +169,46 @@ namespace TelegramTestBot.UI
             Button_DeleteQuest.Visibility = Visibility.Visible;
             Button_RenameTest.Visibility = Visibility.Visible;
             LB_QuestOfTest.Visibility = Visibility.Visible;
+        }
+
+        private void OpenComponents()
+        {
+            int index = CB_TypeQuestion.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    TB_Answer1.Visibility = Visibility.Visible;
+                    TB_Answer2.Visibility = Visibility.Visible;
+                    TB_Answer3.Visibility = Visibility.Visible;
+                    TB_Answer4.Visibility = Visibility.Visible;
+                    ChB_RightAns1.Visibility = Visibility.Visible;
+                    ChB_RightAns2.Visibility = Visibility.Visible;
+                    ChB_RightAns3.Visibility = Visibility.Visible;
+                    ChB_RightAns4.Visibility = Visibility.Visible;
+                    break;
+                case 1:
+                    TB_Answer1.Visibility = Visibility.Visible;
+                    TB_Answer2.Visibility = Visibility.Visible;
+                    TB_Answer3.Visibility = Visibility.Visible;
+                    TB_Answer4.Visibility = Visibility.Visible;
+                    RB_RightAns1.Visibility = Visibility.Visible;
+                    RB_RightAns2.Visibility = Visibility.Visible;
+                    RB_RightAns3.Visibility = Visibility.Visible;
+                    RB_RightAns4.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    TB_Answer1.Visibility = Visibility.Visible;
+                    TB_Answer2.Visibility = Visibility.Visible;
+                    TB_Answer3.Visibility = Visibility.Visible;
+                    TB_Answer4.Visibility = Visibility.Visible;
+                    break;
+                case 4:
+                    TB_Answer1.Visibility = Visibility.Visible;
+                    TB_Answer2.Visibility = Visibility.Visible;
+                    RB_RightAns1.Visibility = Visibility.Visible;
+                    RB_RightAns2.Visibility = Visibility.Visible;
+                    break;
+            }
         }
 
         private void ButtonCreateTest_Poll_Click(object sender, RoutedEventArgs e)
