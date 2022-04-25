@@ -313,6 +313,10 @@ namespace TelegramTestBot.UI
                     TB_Answer4.Text = "";
                     break;
             }
+            TB_Answer1.IsEnabled = true;
+            TB_Answer2.IsEnabled = true;
+            TB_Answer3.IsEnabled = true;
+            TB_Answer4.IsEnabled = true;
         }
 
         
