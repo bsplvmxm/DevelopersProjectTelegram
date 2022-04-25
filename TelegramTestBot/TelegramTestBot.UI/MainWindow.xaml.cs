@@ -225,10 +225,6 @@ namespace TelegramTestBot.UI
                     RB_RightAns2.Visibility = Visibility.Hidden;
                     RB_RightAns3.Visibility = Visibility.Hidden;
                     RB_RightAns4.Visibility = Visibility.Hidden;
-                    TB_Answer1.Text = "";
-                    TB_Answer2.Text = "";
-                    TB_Answer3.Text = "";
-                    TB_Answer4.Text = "";
                     break;
                 case 1:
                     TB_Answer1.Visibility = Visibility.Visible;
@@ -243,20 +239,12 @@ namespace TelegramTestBot.UI
                     ChB_RightAns2.Visibility = Visibility.Hidden;
                     ChB_RightAns3.Visibility = Visibility.Hidden;
                     ChB_RightAns4.Visibility = Visibility.Hidden;
-                    TB_Answer1.Text = "";
-                    TB_Answer2.Text = "";
-                    TB_Answer3.Text = "";
-                    TB_Answer4.Text = "";
                     break;
                 case 2:
                     TB_Answer1.Visibility = Visibility.Visible;
                     TB_Answer2.Visibility = Visibility.Visible;
                     TB_Answer3.Visibility = Visibility.Visible;
                     TB_Answer4.Visibility = Visibility.Visible;
-                    TB_Answer1.Text = "";
-                    TB_Answer2.Text = "";
-                    TB_Answer3.Text = "";
-                    TB_Answer4.Text = "";
                     break;
                 case 3:
                     TB_Answer1.Visibility = Visibility.Hidden;
@@ -271,10 +259,6 @@ namespace TelegramTestBot.UI
                     ChB_RightAns2.Visibility = Visibility.Hidden;
                     ChB_RightAns3.Visibility = Visibility.Hidden;
                     ChB_RightAns4.Visibility = Visibility.Hidden;
-                    TB_Answer1.Text = "";
-                    TB_Answer2.Text = "";
-                    TB_Answer3.Text = "";
-                    TB_Answer4.Text = "";
                     break;
                 case 4:
                     TB_Answer1.Visibility = Visibility.Visible;
@@ -330,10 +314,15 @@ namespace TelegramTestBot.UI
                 int testIndex = LB_AllTests.SelectedIndex;
                 int questionType = AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
                 TB_QuestionContent.Text = AllTests[testIndex].Questions[questionIndex]._question_content;
-                //try catch для вариатов ответа
+                TB_Answer1.Text = AllTests[testIndex].Questions[questionIndex].Answers[0];
+                TB_Answer2.Text = AllTests[testIndex].Questions[questionIndex].Answers[1];
+                TB_Answer3.Text = AllTests[testIndex].Questions[questionIndex].Answers[2];
+                TB_Answer4.Text = AllTests[testIndex].Questions[questionIndex].Answers[3];
                 OpenComponents(questionType);
+
                 CB_TypeQuestion.SelectedIndex = questionType;
                 CB_TypeQuestion.IsEnabled = false;
+
             }
         }
 
@@ -366,18 +355,25 @@ namespace TelegramTestBot.UI
             switch(typeOfQestion)
             {
                 case 0:
+                    AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                    //AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
                     break;
                 case 1:
-                    AllTests[testIndex].Questions[questionIndex].Answers = new List<string>()
-                    {
-                    TB_Answer1.Text,
-                    TB_Answer2.Text,
-                    TB_Answer3.Text,
-                    TB_Answer4.Text,
-                    };
-                    AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
+                    AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;                    
+                    //AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
                     break;
                 case 2:
+                    AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                    AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                    //AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
                     break;
                 case 3:
                     break;
