@@ -301,7 +301,28 @@ namespace TelegramTestBot.UI
             TB_Answer4.IsEnabled = true;
         }
 
-        
+        private string CorrectAnswerForRB()
+        {
+            string correctAnswer = "";
+            if (RB_RightAns1.IsChecked == true)
+            {
+                correctAnswer = TB_Answer1.Text;
+            }
+            else if (RB_RightAns2.IsChecked == true)
+            {
+                correctAnswer = TB_Answer2.Text;
+            }
+            else if (RB_RightAns3.IsChecked == true)
+            {
+                correctAnswer = TB_Answer3.Text;
+            }
+            else if (RB_RightAns4.IsChecked == true)
+            {
+                correctAnswer = TB_Answer4.Text;
+            }
+
+            return correctAnswer;
+        }
 
 
         private void LB_QuestOfTest_SelectionChanged(object sender, SelectionChangedEventArgs e)

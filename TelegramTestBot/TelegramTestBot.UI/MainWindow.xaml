@@ -76,10 +76,10 @@
                     <CheckBox x:Name="ChB_RightAns2" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="192,67,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="20" Visibility="Hidden"/>
                     <CheckBox x:Name="ChB_RightAns3" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="192,96,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="20" Visibility="Hidden"/>
                     <CheckBox x:Name="ChB_RightAns4" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="192,125,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="20" Visibility="Hidden"/>
-                    <RadioButton x:Name="RB_RightAns1" GroupName="ForOneVariant" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,36,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
-                    <RadioButton x:Name="RB_RightAns2" GroupName="ForOneVariant" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,67,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
-                    <RadioButton x:Name="RB_RightAns3" GroupName="ForOneVariant" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,96,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
-                    <RadioButton x:Name="RB_RightAns4" GroupName="ForOneVariant" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="36,125,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
+                    <RadioButton x:Name="RB_RightAns1" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,36,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
+                    <RadioButton x:Name="RB_RightAns2" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,67,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
+                    <RadioButton x:Name="RB_RightAns3" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="35,96,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
+                    <RadioButton x:Name="RB_RightAns4" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="36,125,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="19" Visibility="Hidden"/>
                     <Button x:Name="Button_AddAnswers" Grid.Column="2" Content="Добавить/Изменить ответы" HorizontalAlignment="Left" Height="33" Margin="59,163,0,0" Grid.Row="1" VerticalAlignment="Top" Width="158" Click="Button_AddAnswers_Click"/>
                 </Grid>
             </TabItem>
