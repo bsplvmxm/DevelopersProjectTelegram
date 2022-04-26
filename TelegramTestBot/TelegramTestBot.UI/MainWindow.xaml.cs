@@ -328,7 +328,6 @@ namespace TelegramTestBot.UI
         private List<string> CorrectAnswerForChB()
         {
             _correctAnswers = new List<string>();
-            string correctAnswer = "";
             if (ChB_RightAns1.IsChecked == true)
             {
                 _correctAnswers.Add(TB_Answer1.Text);
@@ -396,11 +395,16 @@ namespace TelegramTestBot.UI
             int typeOfQestion = CB_TypeQuestion.SelectedIndex;
             int rbIndex=0;
 
+            // This region only for testing, you can delete it
             #region TestMethodForCorrectAnswers
             string corAns = CorrectAnswerForRB();
-            TB_QuestionContent.Text = corAns;
-
-            #endregion  // It`s only for testing, you can delete it
+            TB_QuestionContent.Text += corAns;
+            _correctAnswers = CorrectAnswerForChB();
+            for (int i = 0; i < _correctAnswers.Count; i++)
+            {
+                TB_QuestionContent.Text += _correctAnswers[i].ToString();
+            }
+            #endregion  
 
             switch (typeOfQestion)
             {
