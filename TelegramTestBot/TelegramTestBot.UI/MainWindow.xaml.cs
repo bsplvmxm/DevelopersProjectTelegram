@@ -307,11 +307,11 @@ namespace TelegramTestBot.UI
             string correctAnswer = "";
             if (RB_RightAns1.IsChecked == true)
             {
-                correctAnswer = TB_Answer3.Text;
+                correctAnswer = TB_Answer1.Text;
             }
             else if (RB_RightAns2.IsChecked == true)
             {
-                correctAnswer = TB_Answer3.Text;
+                correctAnswer = TB_Answer2.Text;
             }
             else if (RB_RightAns3.IsChecked == true)
             {
@@ -320,6 +320,21 @@ namespace TelegramTestBot.UI
             else if (RB_RightAns4.IsChecked == true)
             {
                 correctAnswer = TB_Answer4.Text;
+            }
+
+            return correctAnswer;
+        }
+
+        private string CorrectAnswerForYesNo()
+        {
+            string correctAnswer = "";
+            if (RB_RightAns1.IsChecked == true)
+            {
+                correctAnswer = TB_Answer1.Text;
+            }
+            else if (RB_RightAns2.IsChecked == true)
+            {
+                correctAnswer = TB_Answer2.Text;
             }
 
             return correctAnswer;
