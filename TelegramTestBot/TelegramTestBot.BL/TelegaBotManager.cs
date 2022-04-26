@@ -62,7 +62,7 @@ namespace TelegramTestBot.BL
 
         public void OutputUser()
         {           
-            foreach (KeyValuePair<long, string> regs in BaseOfUsers.NameBase)
+            foreach (var regs in BaseOfUsers.NameBase)
             {
                 if (BaseOfUsers.RegBase.ContainsKey(regs.Key))
                 {
@@ -76,7 +76,7 @@ namespace TelegramTestBot.BL
         {
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup) && !BaseOfUsers.GroupBase[nameOfGroup].Contains(nameOfUser))
             {
-                foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
+                foreach (var users in BaseOfUsers.GroupBase)
                 {
                     if (users.Value.Contains(nameOfUser))
                     {

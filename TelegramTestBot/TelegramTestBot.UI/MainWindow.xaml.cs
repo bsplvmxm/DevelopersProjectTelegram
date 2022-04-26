@@ -111,7 +111,7 @@ namespace TelegramTestBot.UI
             string userName = (string)LB_Users.SelectedItem;
             string groupName = TB_GroupName.Text;
 
-            if (LB_Users.SelectedItem != null && groupName != "")
+            if (LB_Users.SelectedItem != null && groupName != "" && CB_groups.Items.Contains(groupName))
             {
                 _telegaManager.AddUserInGroup(groupName, userName);
                 _labels.RemoveAt(_labels.IndexOf(userName));
