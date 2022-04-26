@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
         <ListBox x:Name="ListBoxForAdd" Margin="91,138,57,14">
             <TextBox Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" Width="606" Height="40"/>
-            <Button Content="Удалить" Margin="0,0,0,0" Height="40" Width="90"/>
+            <Button x:Name="BtnDel" Content="Удалить" Margin="0,0,0,0" Height="40" Width="90" Click="BtnDel_Click"/>
         </ListBox>
         <Label Content="Label" HorizontalAlignment="Left" Margin="119,90,0,0" VerticalAlignment="Top"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="91,4,0,0" VerticalAlignment="Top" Height="35" Width="107" Grid.Row="1"/>
+        <Button x:Name="BtnCancel" Content="Отмена" HorizontalAlignment="Left" Margin="91,4,0,0" VerticalAlignment="Top" Height="35" Width="107" Grid.Row="1" Click="Button_Click"/>
         <Button x:Name="BtnAdd" Content="Добавить" HorizontalAlignment="Left" Margin="467,4,0,0" VerticalAlignment="Top" Height="35" Width="107" Click="BtnAdd_Click" Grid.Row="1"/>
         <Button Content="Готово" HorizontalAlignment="Left" Margin="636,4,0,0" VerticalAlignment="Top" Height="35" Width="107" Grid.Row="1"/>
     </Grid>

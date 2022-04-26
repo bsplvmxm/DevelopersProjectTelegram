@@ -32,5 +32,15 @@ namespace TelegramTestBot.UI
             ListBoxForAdd.Items.Add(textBox);
             ListBoxForAdd.Items.Add(button);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxForAdd.Items.Clear();
+        }
+
+        private void BtnDel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
