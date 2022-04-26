@@ -24,6 +24,7 @@ namespace TelegramTestBot.UI
         private List<string> _labels;
         private DispatcherTimer _timer;  //счетчик времени
         private List<Test> AllTests;
+        private List<string> _correctAnswers;
 
         public MainWindow()
         {
@@ -306,11 +307,11 @@ namespace TelegramTestBot.UI
             string correctAnswer = "";
             if (RB_RightAns1.IsChecked == true)
             {
-                correctAnswer = TB_Answer1.Text;
+                correctAnswer = TB_Answer3.Text;
             }
             else if (RB_RightAns2.IsChecked == true)
             {
-                correctAnswer = TB_Answer2.Text;
+                correctAnswer = TB_Answer3.Text;
             }
             else if (RB_RightAns3.IsChecked == true)
             {
@@ -322,6 +323,30 @@ namespace TelegramTestBot.UI
             }
 
             return correctAnswer;
+        }
+
+        private List<string> CorrectAnswerForChB()
+        {
+            _correctAnswers = new List<string>();
+            string correctAnswer = "";
+            if (ChB_RightAns1.IsChecked == true)
+            {
+                _correctAnswers.Add(TB_Answer1.Text);
+            }
+            if (ChB_RightAns2.IsChecked == true)
+            {
+                _correctAnswers.Add(TB_Answer2.Text);
+            }
+            if (ChB_RightAns3.IsChecked == true)
+            {
+                _correctAnswers.Add(TB_Answer3.Text);
+            }
+            if (ChB_RightAns4.IsChecked == true)
+            {
+                _correctAnswers.Add(TB_Answer4.Text);
+            }
+
+            return _correctAnswers;
         }
 
 
@@ -370,7 +395,14 @@ namespace TelegramTestBot.UI
             int questionIndex = LB_QuestOfTest.SelectedIndex;
             int typeOfQestion = CB_TypeQuestion.SelectedIndex;
             int rbIndex=0;
-            switch(typeOfQestion)
+
+            #region TestMethodForCorrectAnswers
+            string corAns = CorrectAnswerForRB();
+            TB_QuestionContent.Text = corAns;
+
+            #endregion  // It`s only for testing, you can delete it
+
+            switch (typeOfQestion)
             {
                 case 0:
                     AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
