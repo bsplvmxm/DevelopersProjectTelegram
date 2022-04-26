@@ -62,6 +62,7 @@ namespace TelegramTestBot.UI
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
             _telegaManager.StartBot();
+            CB_groups.SelectedIndex = 0;
         }
 
         private void EditNameButton_Click(object sender, RoutedEventArgs e)
@@ -113,6 +114,7 @@ namespace TelegramTestBot.UI
             if (LB_Users.SelectedItem != null && groupName != "")
             {
                 _telegaManager.AddUserInGroup(groupName, userName);
+                _labels.RemoveAt(_labels.IndexOf(userName));
             }
             else
             {
@@ -172,6 +174,7 @@ namespace TelegramTestBot.UI
             {
                 _telegaManager.DeleteUserFromGroup(nameGroup, username);
                 _telegaManager.AddUserInGroup("Others", username);
+                _labels.RemoveAt(_labels.IndexOf(username));
             }
             else
             {
@@ -195,6 +198,7 @@ namespace TelegramTestBot.UI
             {
                 _telegaManager.DeleteGroup(nameGroup);
                 CB_groups.Items.RemoveAt(index);
+                CB_groups.SelectedIndex = 0;
             }
             else
             {
