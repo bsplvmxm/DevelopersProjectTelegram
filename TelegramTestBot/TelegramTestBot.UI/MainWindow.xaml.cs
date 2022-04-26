@@ -210,6 +210,7 @@ namespace TelegramTestBot.UI
 
         private void OpenComponents(int index)
         {
+            TB_CorrectAnswer.IsEnabled = false;
             switch (index)
             {
                 case 0:
@@ -306,7 +307,7 @@ namespace TelegramTestBot.UI
 
         private void LB_QuestOfTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (LB_QuestOfTest.SelectedIndex != -1)
+            if (LB_QuestOfTest.SelectedIndex != -1 && LB_AllTests.SelectedIndex != -1)
             {
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
                 int testIndex = LB_AllTests.SelectedIndex;
@@ -316,8 +317,16 @@ namespace TelegramTestBot.UI
                 TB_Answer2.Text = AllTests[testIndex].Questions[questionIndex].Answers[1];
                 TB_Answer3.Text = AllTests[testIndex].Questions[questionIndex].Answers[2];
                 TB_Answer4.Text = AllTests[testIndex].Questions[questionIndex].Answers[3];
+                TB_CorrectAnswer.Text = AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
                 OpenComponents(questionType);
-
+                if(questionIndex == 2)
+                {
+                    TB_CorrectAnswer.IsEnabled = true;
+                }
+                else
+                {
+                    TB_CorrectAnswer.IsEnabled = false;
+                }
                 CB_TypeQuestion.SelectedIndex = questionType;
                 CB_TypeQuestion.IsEnabled = false;
 
@@ -348,7 +357,7 @@ namespace TelegramTestBot.UI
             int testIndex = LB_AllTests.SelectedIndex;
             int questionIndex = LB_QuestOfTest.SelectedIndex;
             int typeOfQestion = CB_TypeQuestion.SelectedIndex;
-            int rbIndex=0;
+            string correctAnswer = CreateCorrectAnswer(typeOfQestion);
             switch(typeOfQestion)
             {
                 case 0:
@@ -356,30 +365,101 @@ namespace TelegramTestBot.UI
                     AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
                     AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
                     AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
-                    //AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
+                    AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                     break;
                 case 1:
                     AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
                     AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
                     AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
                     AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;                    
-                    //AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
+                    AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                     break;
                 case 2:
-                    AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
-                    //AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
-                    break;
+                    {
+                        AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                        AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                        AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                        AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        break;
+                    }
                 case 3:
                     break;
                 case 4:
-                    AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
-                    //AllTests[testIndex].Questions[questionIndex].ChooseCorrect(rbIndex);
+                    AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                     break;
             }
         }
+
+        private string CreateCorrectAnswer(int typeOfQuestion)
+        {
+            string correctAnswer="";
+            switch(typeOfQuestion)
+            {
+                case 0:
+                    {
+                        if (ChB_RightAns1.IsChecked == true)
+                        {
+                            correctAnswer += "1";
+                        }
+                        if (ChB_RightAns2.IsChecked == true)
+                        {
+                            correctAnswer += "2";
+                        }
+                        if (ChB_RightAns3.IsChecked == true)
+                        {
+                            correctAnswer += "3";
+                        }
+                        if (ChB_RightAns4.IsChecked == true)
+                        {
+                            correctAnswer += "4";
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        if (RB_RightAns1.IsChecked == true)
+                        {
+                            correctAnswer = TB_Answer1.Text;
+                        }
+                        else if (RB_RightAns2.IsChecked == true)
+                        {
+                            correctAnswer = TB_Answer2.Text;
+                        }
+                        else if (RB_RightAns3.IsChecked == true)
+                        {
+                            correctAnswer = TB_Answer3.Text;
+                        }
+                        else if (RB_RightAns4.IsChecked == true)
+                        {
+                            correctAnswer = TB_Answer4.Text;
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        correctAnswer = TB_CorrectAnswer.Text;
+                    }
+                    break;
+                case 4:
+                    {
+                        if (RB_RightAns1.IsChecked == true)
+                        {
+                            correctAnswer = TB_Answer1.Text;
+                        }
+                        else
+                        {
+                            correctAnswer = TB_Answer2.Text;
+                        }
+                        break;
+                    }
+            }
+            if(correctAnswer == "")
+            {
+                correctAnswer = "Введите правильный ответ";
+            }
+            return correctAnswer;
+        }
+
     }
 }
