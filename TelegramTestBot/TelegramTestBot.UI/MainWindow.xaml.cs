@@ -39,29 +39,11 @@ namespace TelegramTestBot.UI
             _timer.Start();
             AllTests = new List<Test>();
 
-            //Label_ViewQuest.IsEnabled = false;
-            //CB_TypeQuestion.IsEnabled = false;
-            //RB_RightAns1.IsEnabled = false;
-            //RB_RightAns2.IsEnabled = false;
-            //RB_RightAns3.IsEnabled = false;
-            //RB_RightAns4.IsEnabled = false;
-            //TB_Answer1.IsEnabled = false;
-            //TB_Answer2.IsEnabled = false;
-            //TB_Answer3.IsEnabled = false;
-            //TB_Answer4.IsEnabled = false;
-            //ChB_RightAns1.IsEnabled = false;
-            //ChB_RightAns2.IsEnabled = false;
-            //ChB_RightAns3.IsEnabled = false;
-            //ChB_RightAns4.IsEnabled = false;
-            //Label_InputQuest.IsEnabled = false;
-            //TB_QuestionContent.IsEnabled = false;
-            //Button_CreateQuest.IsEnabled = false;
-            //Button_EditQuest.IsEnabled = false;
-            //Button_DeleteQuest.IsEnabled = false;
-            //Button_RenameTest.IsEnabled = false;
             MainMenu.Visibility = Visibility.Hidden;
             CreateQuestTest.Visibility = Visibility.Hidden;
             TestItem.Visibility = Visibility.Hidden;
+            Button_AddAnswers.Visibility = Visibility.Hidden;
+            TB_CorrectAnswer.Visibility = Visibility.Hidden;
 
 
         }
@@ -260,6 +242,8 @@ namespace TelegramTestBot.UI
                     ChB_RightAns2.Visibility = Visibility.Hidden;
                     ChB_RightAns3.Visibility = Visibility.Hidden;
                     ChB_RightAns4.Visibility = Visibility.Hidden;
+                    Button_AddAnswers.Visibility = Visibility.Hidden;
+                    TB_CorrectAnswer.Visibility = Visibility.Hidden;
                     break;
                 case 4:
                     TB_Answer1.Visibility = Visibility.Visible;
@@ -307,6 +291,8 @@ namespace TelegramTestBot.UI
 
         private void LB_QuestOfTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Button_AddAnswers.Visibility = Visibility.Visible;
+            TB_CorrectAnswer.Visibility = Visibility.Visible;
             if (LB_QuestOfTest.SelectedIndex != -1 && LB_AllTests.SelectedIndex != -1)
             {
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
@@ -329,7 +315,6 @@ namespace TelegramTestBot.UI
                 }
                 CB_TypeQuestion.SelectedIndex = questionType;
                 CB_TypeQuestion.IsEnabled = false;
-
             }
         }
 
@@ -389,6 +374,9 @@ namespace TelegramTestBot.UI
                     AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                     break;
             }
+            OpenComponents(-1);
+            Button_AddAnswers.Visibility = Visibility.Hidden;
+            TB_CorrectAnswer.Visibility = Visibility.Hidden;
         }
 
         private string CreateCorrectAnswer(int typeOfQuestion)
