@@ -16,19 +16,12 @@ namespace TelegramTestBot.BL
     {
         private TelegramBotClient _client;
         private Action<string> _onMessage;
-        //private List<long> _ids;  //для отправки сообщений от бота человеку
-        //private List<string> _users;
-        //private List<Groups> _group;
         private string _others;
         
-
-
         public TelegaBotManager(string token, Action<string> onMessage)
         {
             _client = new TelegramBotClient(token);
             _onMessage = onMessage;
-            //_ids = new List<long>();
-            //_users = new List<string>();
             _others = "Others";
         }
 
@@ -53,11 +46,6 @@ namespace TelegramTestBot.BL
 
                 await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu", replyMarkup: inlineKeyboard);
             }
-        }
-
-        public void EditUserName(string username)
-        {
-            
         }
 
         public void OutputUser()
@@ -121,17 +109,6 @@ namespace TelegramTestBot.BL
 
         public void OutputUsersInGroup(string nameOfGroup)
         {
-            //foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
-            //{
-            //    if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
-            //    {
-            //        for (int i = 0; i < users.Value.Count; i++)
-            //        {                        
-            //            string outputUsers = users.Value[i];
-            //            _onMessage(outputUsers);
-            //        }
-            //    }
-            //}
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
             {
                 foreach (var items in BaseOfUsers.GroupBase[nameOfGroup])
