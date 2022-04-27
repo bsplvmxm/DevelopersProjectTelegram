@@ -449,5 +449,9 @@ namespace TelegramTestBot.UI
             return correctAnswer;
         }
 
+        private void Button_GoToMain_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl_Test.SelectedItem = MainMenu;
+        }
     }
 }
