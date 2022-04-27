@@ -35,6 +35,31 @@ namespace TelegramTestBot.BL
             
         }
 
+        public async void SendToGroup(string nameOfGroup)
+        {
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            {
+                foreach (var users in BaseOfUsers.NameBase)
+                {
+                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
+                    {
+                        await _client.SendTextMessageAsync(new ChatId(users.Key), "");
+                    }
+                }
+            }
+        }
+
+        public async void SendToUser(string nameOfUser)
+        {
+            foreach (var users in BaseOfUsers.NameBase)
+            {
+                if (BaseOfUsers.NameBase.ContainsValue(nameOfUser))
+                {
+                    await _client.SendTextMessageAsync(new ChatId(users.Key), "");
+                }
+            }
+        }
+
         public async void StartingButton(long id)
         {
             if (BaseOfUsers.NameBase.ContainsKey(id))
