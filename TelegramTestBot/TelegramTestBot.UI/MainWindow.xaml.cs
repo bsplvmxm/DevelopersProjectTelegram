@@ -104,7 +104,7 @@ namespace TelegramTestBot.UI
             TB_Name.Clear();           
         }
 
-        private void TestButOut_Click(object sender, RoutedEventArgs e)
+        private void AddUserButt_Click(object sender, RoutedEventArgs e)
         {
             LabelError.Visibility = Visibility.Hidden;
 
@@ -163,7 +163,7 @@ namespace TelegramTestBot.UI
             LB_Users.Items.Refresh();
         }
 
-        private void DelButt_Click(object sender, RoutedEventArgs e)
+        private void DelUserButt_Click(object sender, RoutedEventArgs e)
         {
             LabelError.Visibility = Visibility.Hidden;
 
