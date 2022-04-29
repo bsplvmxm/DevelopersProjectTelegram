@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL.Questions
 {
-    internal class ChooseOneQuestion : AbstractQuestion
+    internal class ChooseOneQuestion : AbstractQuestions
     {
         public ChooseOneQuestion(string content) : base(content)
         {
