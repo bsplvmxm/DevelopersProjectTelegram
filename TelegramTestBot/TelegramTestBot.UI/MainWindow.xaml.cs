@@ -305,7 +305,7 @@ namespace TelegramTestBot.UI
                 TB_Answer4.Text = AllTests[testIndex].Questions[questionIndex].Answers[3];
                 TB_CorrectAnswer.Text = AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
                 OpenComponents(questionType);
-                if(questionIndex == 2)
+                if(questionType == 2)
                 {
                     TB_CorrectAnswer.IsEnabled = true;
                 }
@@ -315,6 +315,7 @@ namespace TelegramTestBot.UI
                 }
                 CB_TypeQuestion.SelectedIndex = questionType;
                 CB_TypeQuestion.IsEnabled = false;
+                GetFlags(testIndex,questionIndex);
             }
         }
 
@@ -332,9 +333,12 @@ namespace TelegramTestBot.UI
 
         private void Button_EditQuest_Click(object sender, RoutedEventArgs e)
         {
-            int indexOfTest = LB_QuestOfTest.SelectedIndex;
+            int indexOfQuestion = LB_QuestOfTest.SelectedIndex;
+            int indexOfTest = LB_AllTests.SelectedIndex;
             string contentOfQuest = TB_QuestionContent.Text;
-            AllTests[LB_AllTests.SelectedIndex].EditQuestion(indexOfTest, contentOfQuest);
+            AllTests[indexOfTest].EditQuestion(indexOfQuestion, contentOfQuest);
+            LB_QuestOfTest.Items[indexOfQuestion] = contentOfQuest;
+
         }
 
         private void Button_AddAnswers_Click(object sender, RoutedEventArgs e)
@@ -452,6 +456,79 @@ namespace TelegramTestBot.UI
         private void Button_GoToMain_Click(object sender, RoutedEventArgs e)
         {
             TabControl_Test.SelectedItem = MainMenu;
+        }
+
+        public void GetFlags(int testIndex, int questionIndex)
+        {
+            RB_RightAns1.IsChecked = false;
+            RB_RightAns2.IsChecked = false;
+            RB_RightAns3.IsChecked = false;
+            RB_RightAns4.IsChecked = false;
+            ChB_RightAns1.IsChecked=false;
+            ChB_RightAns2.IsChecked=false;
+            ChB_RightAns3.IsChecked=false;
+            ChB_RightAns4.IsChecked=false;
+
+            int typeOfQuestion = AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
+            string correctAnswer = "";
+            correctAnswer = AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
+            switch(typeOfQuestion)
+            {
+                //case 0:
+                //    if (correctAnswer != null)
+                //    {
+                //        //for (int i = 0; i < correctAnswer.Length; i++)
+                //        //{
+                //        int c = correctAnswer[0];
+                //        if (c == 1)
+                //        {
+                //            ChB_RightAns1.IsChecked=(true);
+                //        }
+                //        if (c == 2)
+                //        {
+                //            ChB_RightAns2.IsChecked = true;
+                //        }
+                //        if (c == 3)
+                //        {
+                //            ChB_RightAns3.IsChecked = true;
+                //        }
+                //        if (c == 4)
+                //        {
+                //            ChB_RightAns4.IsChecked = true;
+                //        }
+                //        //}
+                //    }
+                //    break;
+                case 1:
+                    if (TB_Answer1.Text == correctAnswer)
+                    {
+                        RB_RightAns1.IsChecked = true;
+                    }
+                    else if (TB_Answer2.Text == correctAnswer)
+                    {
+                        RB_RightAns2.IsChecked = true;
+                    }
+                    else if (TB_Answer3.Text == correctAnswer)
+                    {
+                        RB_RightAns3.IsChecked = true;
+                    }
+                    else if (TB_Answer4.Text == correctAnswer)
+                    {
+                        RB_RightAns4.IsChecked = true;
+                    }
+                    break;
+                case 4:
+                    if (TB_Answer1.Text == correctAnswer)
+                    {
+                        RB_RightAns1.IsChecked = true;
+                    }
+                    else if (TB_Answer2.Text == correctAnswer)
+                    {
+                        RB_RightAns2.IsChecked = true;
+                    }
+                    break;
+                
+            }
         }
     }
 }
