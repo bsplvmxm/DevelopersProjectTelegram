@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using TelegramTestBot.BL;
+using TelegramTestBot.BL.Data;
 
 namespace TelegramTestBot.UI
 {
@@ -118,7 +119,7 @@ namespace TelegramTestBot.UI
                 LB_QuestOfTest.Items.Clear();
                 for (int i = 0; i < AllTests[LB_AllTests.SelectedIndex].Questions.Count; i++)
                 {
-                    LB_QuestOfTest.Items.Add(AllTests[LB_AllTests.SelectedIndex].Questions[i]._question_content);
+                    LB_QuestOfTest.Items.Add(AllTests[LB_AllTests.SelectedIndex].Questions[i].ContentOfQuestion);
                 }
             }
             LB_QuestOfTest.Items.Refresh();
@@ -295,7 +296,7 @@ namespace TelegramTestBot.UI
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
                 int testIndex = LB_AllTests.SelectedIndex;
                 int questionType = AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
-                TB_QuestionContent.Text = AllTests[testIndex].Questions[questionIndex]._question_content;
+                TB_QuestionContent.Text = AllTests[testIndex].Questions[questionIndex].ContentOfQuestion;
                 TB_Answer1.Text = AllTests[testIndex].Questions[questionIndex].Answers[0];
                 TB_Answer2.Text = AllTests[testIndex].Questions[questionIndex].Answers[1];
                 TB_Answer3.Text = AllTests[testIndex].Questions[questionIndex].Answers[2];

@@ -8,9 +8,9 @@ namespace TelegramTestBot.BL
 {
     public abstract class AbstractQuestions
     {
-        public string _question_content;
+        public string ContentOfQuestion { get; set; }
 
-        public string UserAnswer { get; set; }
+        public List<string> UsersAnswers { get; set; }
 
         public string CorrectAnswer { get; protected set; }
 
@@ -20,7 +20,7 @@ namespace TelegramTestBot.BL
 
         public AbstractQuestions(string content)
         {
-            _question_content = content;
+            ContentOfQuestion = content;
         }
 
         public void AddAnswer(string answer)
@@ -73,10 +73,10 @@ namespace TelegramTestBot.BL
             CorrectAnswer = answer;
         }
 
-        public bool CheckUserAnswer()
+        public bool CheckUserAnswer(int index)
         {
             bool result = false;
-            string UserAnswerCheck = UserAnswer.Trim();
+            string UserAnswerCheck = UsersAnswers[index].Trim();
             UserAnswerCheck = UserAnswerCheck.ToLower();
             string CorrectAnswerCheck = CorrectAnswer.Trim();
             CorrectAnswerCheck = CorrectAnswer.ToLower();
@@ -89,7 +89,7 @@ namespace TelegramTestBot.BL
 
         public void Send()
         {
-            UserAnswer = Console.ReadLine();
+
         }
     }
 }

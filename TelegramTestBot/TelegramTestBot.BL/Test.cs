@@ -53,7 +53,7 @@ namespace TelegramTestBot.BL
                 {
                     throw new Exception();
                 }
-                Questions[index]._question_content = question;
+                Questions[index].ContentOfQuestion = question;
             }
         }
 
