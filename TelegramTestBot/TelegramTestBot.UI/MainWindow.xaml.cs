@@ -132,7 +132,7 @@ namespace TelegramTestBot.UI
 
             string groupName = TB_GroupName.Text;
 
-            if (groupName != "")
+            if (groupName != "" && !BaseOfUsers.GroupBase.ContainsKey(groupName))
             {
                 _telegaManager.CreateGroup(groupName);
                 CB_groups.Items.Add(groupName);

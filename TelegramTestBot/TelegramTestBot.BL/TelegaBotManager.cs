@@ -60,31 +60,6 @@ namespace TelegramTestBot.BL
             }
         }
 
-        public async void StartingButton(long id)
-        {
-            if (BaseOfUsers.NameBase.ContainsKey(id))
-            {
-                var inlineKeyboard = new InlineKeyboardMarkup(new[]
-                {
-                InlineKeyboardButton.WithCallbackData("/start","startReg"),
-                });
-
-                await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu", replyMarkup: inlineKeyboard);
-            }
-        }
-
-        public void OutputUser()
-        {           
-            foreach (var regs in BaseOfUsers.NameBase)
-            {
-                if (BaseOfUsers.RegBase.ContainsKey(regs.Key))
-                {
-                    string regUsers = regs.Value;
-                    _onMessage(regUsers);
-                }
-            }
-        }
-
         public void AddUserInGroup(string nameOfGroup, string nameOfUser)
         {
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup) && !BaseOfUsers.GroupBase[nameOfGroup].Contains(nameOfUser))
@@ -132,6 +107,18 @@ namespace TelegramTestBot.BL
             }
         }
 
+        public void OutputUser()
+        {           
+            foreach (var regs in BaseOfUsers.NameBase)
+            {
+                if (BaseOfUsers.RegBase.ContainsKey(regs.Key))
+                {
+                    string regUsers = regs.Value;
+                    _onMessage(regUsers);
+                }
+            }
+        }
+
         public void OutputUsersInGroup(string nameOfGroup)
         {
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
@@ -144,7 +131,20 @@ namespace TelegramTestBot.BL
             }
         }
 
-        public async void Registration(long id)
+        private async void StartingButton(long id)
+        {
+            if (BaseOfUsers.NameBase.ContainsKey(id))
+            {
+                var inlineKeyboard = new InlineKeyboardMarkup(new[]
+                {
+                InlineKeyboardButton.WithCallbackData("/start","startReg"),
+                });
+
+                await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu", replyMarkup: inlineKeyboard);
+            }
+        }
+
+        private async void Registration(long id)
         {
             if (!BaseOfUsers.RegBase.ContainsKey(id))
             {
