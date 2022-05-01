@@ -7,10 +7,11 @@ using TelegramTestBot.BL.Questions;
 
 namespace TelegramTestBot.BL
 {
-    class Test
+    public class Test
     {
         public string NameTest { get; set; }
         public List<AbstractQuestion> Questions { get; set; }
+
 
         public Test(string nameTest)
         {
@@ -53,7 +54,7 @@ namespace TelegramTestBot.BL
             Questions[index]._question_content = question;
         }
 
-        public void DeleteQuestionPoll(int index)
+        public void DeleteQuestionByIndex(int index)
         {
             if (Questions.Count < 1)
             {

@@ -10,6 +10,14 @@ namespace TelegramTestBot.BL.Questions
     {
         public ChooseAnyQuestion(string content) : base(content)
         {
+            TypeOfQuestion = 0;
+            Answers = new List<string>()
+            {
+                "Вариант 1",
+                "Вариант 2",
+                "Вариант 3",
+                "Вариант 4",
+            };
         }
     }
 } 

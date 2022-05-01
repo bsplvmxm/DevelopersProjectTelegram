@@ -10,7 +10,8 @@ namespace TelegramTestBot.BL.Questions
     {
         public YesNoQuestion(string content) : base(content)
         {
-            Answers = new List<string>() { "No", "Yes" };
+            Answers = new List<string>() { "Нет", "Да", "biba", "boba" };
+            TypeOfQuestion = 4;
         }
     }
 }
