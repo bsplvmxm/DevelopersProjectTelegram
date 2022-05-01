@@ -62,6 +62,7 @@ namespace TelegramTestBot.UI
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
             _telegaManager.StartBot();
+            CB_groups.SelectedIndex = 0;
         }
 
         private void EditNameButton_Click(object sender, RoutedEventArgs e)
@@ -103,16 +104,17 @@ namespace TelegramTestBot.UI
             TB_Name.Clear();           
         }
 
-        private void TestButOut_Click(object sender, RoutedEventArgs e)
+        private void AddUserButt_Click(object sender, RoutedEventArgs e)
         {
             LabelError.Visibility = Visibility.Hidden;
 
             string userName = (string)LB_Users.SelectedItem;
             string groupName = TB_GroupName.Text;
 
-            if (LB_Users.SelectedItem != null && groupName != "")
+            if (LB_Users.SelectedItem != null && groupName != "" && CB_groups.Items.Contains(groupName))
             {
                 _telegaManager.AddUserInGroup(groupName, userName);
+                _labels.RemoveAt(_labels.IndexOf(userName));
             }
             else
             {
@@ -130,7 +132,7 @@ namespace TelegramTestBot.UI
 
             string groupName = TB_GroupName.Text;
 
-            if (groupName != "")
+            if (groupName != "" && !BaseOfUsers.GroupBase.ContainsKey(groupName))
             {
                 _telegaManager.CreateGroup(groupName);
                 CB_groups.Items.Add(groupName);
@@ -161,7 +163,7 @@ namespace TelegramTestBot.UI
             LB_Users.Items.Refresh();
         }
 
-        private void DelButt_Click(object sender, RoutedEventArgs e)
+        private void DelUserButt_Click(object sender, RoutedEventArgs e)
         {
             LabelError.Visibility = Visibility.Hidden;
 
@@ -172,6 +174,7 @@ namespace TelegramTestBot.UI
             {
                 _telegaManager.DeleteUserFromGroup(nameGroup, username);
                 _telegaManager.AddUserInGroup("Others", username);
+                _labels.RemoveAt(_labels.IndexOf(username));
             }
             else
             {
@@ -195,6 +198,7 @@ namespace TelegramTestBot.UI
             {
                 _telegaManager.DeleteGroup(nameGroup);
                 CB_groups.Items.RemoveAt(index);
+                CB_groups.SelectedIndex = 0;
             }
             else
             {

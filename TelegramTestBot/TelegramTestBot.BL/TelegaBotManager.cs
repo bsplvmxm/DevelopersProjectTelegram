@@ -16,19 +16,12 @@ namespace TelegramTestBot.BL
     {
         private TelegramBotClient _client;
         private Action<string> _onMessage;
-        //private List<long> _ids;  //для отправки сообщений от бота человеку
-        //private List<string> _users;
-        //private List<Groups> _group;
         private string _others;
         
-
-
         public TelegaBotManager(string token, Action<string> onMessage)
         {
             _client = new TelegramBotClient(token);
             _onMessage = onMessage;
-            //_ids = new List<long>();
-            //_users = new List<string>();
             _others = "Others";
         }
 
@@ -42,32 +35,27 @@ namespace TelegramTestBot.BL
             
         }
 
-        public async void StartingButton(long id)
+        public async void SendToGroup(string nameOfGroup)
         {
-            if (BaseOfUsers.NameBase.ContainsKey(id))
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
             {
-                var inlineKeyboard = new InlineKeyboardMarkup(new[]
+                foreach (var users in BaseOfUsers.NameBase)
                 {
-                InlineKeyboardButton.WithCallbackData("/start","startReg"),
-                });
-
-                await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu", replyMarkup: inlineKeyboard);
+                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
+                    {
+                        await _client.SendTextMessageAsync(new ChatId(users.Key), "");
+                    }
+                }
             }
         }
 
-        public void EditUserName(string username)
+        public async void SendToUser(string nameOfUser)
         {
-            
-        }
-
-        public void OutputUser()
-        {           
-            foreach (KeyValuePair<long, string> regs in BaseOfUsers.NameBase)
+            foreach (var users in BaseOfUsers.NameBase)
             {
-                if (BaseOfUsers.RegBase.ContainsKey(regs.Key))
+                if (BaseOfUsers.NameBase.ContainsValue(nameOfUser))
                 {
-                    string regUsers = regs.Value;
-                    _onMessage(regUsers);
+                    await _client.SendTextMessageAsync(new ChatId(users.Key), "");
                 }
             }
         }
@@ -76,7 +64,7 @@ namespace TelegramTestBot.BL
         {
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup) && !BaseOfUsers.GroupBase[nameOfGroup].Contains(nameOfUser))
             {
-                foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
+                foreach (var users in BaseOfUsers.GroupBase)
                 {
                     if (users.Value.Contains(nameOfUser))
                     {
@@ -119,19 +107,20 @@ namespace TelegramTestBot.BL
             }
         }
 
+        public void OutputUser()
+        {           
+            foreach (var regs in BaseOfUsers.NameBase)
+            {
+                if (BaseOfUsers.RegBase.ContainsKey(regs.Key))
+                {
+                    string regUsers = regs.Value;
+                    _onMessage(regUsers);
+                }
+            }
+        }
+
         public void OutputUsersInGroup(string nameOfGroup)
         {
-            //foreach (KeyValuePair<string, List<string>> users in BaseOfUsers.GroupBase)
-            //{
-            //    if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
-            //    {
-            //        for (int i = 0; i < users.Value.Count; i++)
-            //        {                        
-            //            string outputUsers = users.Value[i];
-            //            _onMessage(outputUsers);
-            //        }
-            //    }
-            //}
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
             {
                 foreach (var items in BaseOfUsers.GroupBase[nameOfGroup])
@@ -142,7 +131,20 @@ namespace TelegramTestBot.BL
             }
         }
 
-        public async void Registration(long id)
+        private async void StartingButton(long id)
+        {
+            if (BaseOfUsers.NameBase.ContainsKey(id))
+            {
+                var inlineKeyboard = new InlineKeyboardMarkup(new[]
+                {
+                InlineKeyboardButton.WithCallbackData("/start","startReg"),
+                });
+
+                await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu", replyMarkup: inlineKeyboard);
+            }
+        }
+
+        private async void Registration(long id)
         {
             if (!BaseOfUsers.RegBase.ContainsKey(id))
             {
