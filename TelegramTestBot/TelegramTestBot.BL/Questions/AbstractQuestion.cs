@@ -12,9 +12,11 @@ namespace TelegramTestBot.BL
 
         public string UserAnswer { get; set; }
 
-        public string CorrectAnswer { get; set; }
+        public string CorrectAnswer { get; protected set; }
 
         public List<string> Answers { get; set; }
+
+        public int TypeOfQuestion { get; protected set; }
 
         public AbstractQuestion(string content)
         {
@@ -29,6 +31,7 @@ namespace TelegramTestBot.BL
             }
             answer = answer.Trim();
             Answers.Add(answer);
+            CorrectAnswer = "Введите правильный ответ";
         }
         public void EditAnswer(int index, string answer)
         {
@@ -61,13 +64,13 @@ namespace TelegramTestBot.BL
             Answers.RemoveAt(index);
         }
 
-        public void ChooseCorrect(int index)
+        public void ChooseCorrect(string answer)
         {
-            if (index < 0 || index > Answers.Count)
+            if (answer == "")
             {
-                throw new IndexOutOfRangeException("Wrong index");
+                throw new ArgumentNullException("Empty string");
             }
-            CorrectAnswer = Answers[index];
+            CorrectAnswer = answer;
         }
 
         public bool CheckUserAnswer()
