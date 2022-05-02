@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TelegramBot For DevEdu" Height="450" Width="800">
     <Grid>
-        <TabControl x:Name="TabControl_Test">
+        <TabControl x:Name="TabControl_Test" SelectionChanged="TabControl_Test_SelectionChanged">
             <TabItem x:Name="MainMenu" Header="Главное меню">
                 <Grid >
                     <Label Content="Пользователи " HorizontalAlignment="Left" Margin="259,18,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16"/>
@@ -91,9 +91,10 @@
                     <Button x:Name="Button_AddAnswers" Grid.Column="2" Content="Добавить/Изменить ответы" HorizontalAlignment="Left" Height="33" Margin="59,194,0,0" Grid.Row="1" VerticalAlignment="Top" Width="158" Click="Button_AddAnswers_Click" Grid.RowSpan="2"/>
                     <TextBox x:Name="TB_CorrectAnswer" Grid.Column="2" HorizontalAlignment="Left" Margin="78,171,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Button x:Name="Button_GoToMain" Content="На главную" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="93" FontSize="16" Click="Button_GoToMain_Click"/>
+                    <Button x:Name="ButtonDelTest" Content="Удалить тест" HorizontalAlignment="Left" Margin="127,185,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="137" Click="ButtonDelTest_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="StartTest" Header="Запуск теста/опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
+            <TabItem x:Name="StartTest" Header="Запуск теста/опроса" HorizontalAlignment="Center" Width="138" Margin="0,-1,0,1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>

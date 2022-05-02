@@ -595,5 +595,18 @@ namespace TelegramTestBot.UI
         {
             TabControl_Test.SelectedItem = CreateQuestTest;
         }
+
+        private void ButtonDelTest_Click(object sender, RoutedEventArgs e)
+        {
+            int testIndex = LB_AllTests.SelectedIndex;
+            AllTests.RemoveAt(testIndex);
+            LB_AllTests.Items.RemoveAt(LB_AllTests.SelectedIndex);
+            TB_NameOfTest.Text = "";
+        }
+
+        public void TabControl_Test_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
