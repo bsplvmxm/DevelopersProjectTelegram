@@ -12,6 +12,7 @@ namespace TelegramTestBot.BL.Questions
         {
             TypeOfQuestion = 3;
             Answers = new List<string>() { "", "", "", "" };
+            CorrectAnswer = "Без правильного ответа";
         }
     }
 }

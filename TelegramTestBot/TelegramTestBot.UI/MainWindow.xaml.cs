@@ -687,9 +687,7 @@ namespace TelegramTestBot.UI
                 string nameTest = MyTests.AllTests[i].NameTest;
                 LB_AllTests.Items.Add(nameTest);
                 Cb_SelectTest.Items.Add(nameTest);
-
             }
-
         }
     }
 }
