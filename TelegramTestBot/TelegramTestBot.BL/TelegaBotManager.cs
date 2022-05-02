@@ -35,31 +35,6 @@ namespace TelegramTestBot.BL
             
         }
 
-        public async void SendToGroup(string nameOfGroup)
-        {
-            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
-            {
-                foreach (var users in BaseOfUsers.NameBase)
-                {
-                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
-                    {
-                        await _client.SendTextMessageAsync(new ChatId(users.Key), "");
-                    }
-                }
-            }
-        }
-
-        public async void SendToUser(string nameOfUser)
-        {
-            foreach (var users in BaseOfUsers.NameBase)
-            {
-                if (BaseOfUsers.NameBase.ContainsValue(nameOfUser))
-                {
-                    await _client.SendTextMessageAsync(new ChatId(users.Key), "");
-                }
-            }
-        }
-
         public void AddUserInGroup(string nameOfGroup, string nameOfUser)
         {
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup) && !BaseOfUsers.GroupBase[nameOfGroup].Contains(nameOfUser))
@@ -107,6 +82,18 @@ namespace TelegramTestBot.BL
             }
         }
 
+        public void OutputUsersInGroup(string nameOfGroup)
+        {
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            {
+                foreach (var items in BaseOfUsers.GroupBase[nameOfGroup])
+                {
+                    string outputUsers = items;
+                    _onMessage(outputUsers);
+                }
+            }
+        }
+
         public void OutputUser()
         {           
             foreach (var regs in BaseOfUsers.NameBase)
@@ -119,14 +106,27 @@ namespace TelegramTestBot.BL
             }
         }
 
-        public void OutputUsersInGroup(string nameOfGroup)
+        public async void SendToGroup(string nameOfGroup)
         {
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
             {
-                foreach (var items in BaseOfUsers.GroupBase[nameOfGroup])
+                foreach (var users in BaseOfUsers.NameBase)
                 {
-                    string outputUsers = items;
-                    _onMessage(outputUsers);
+                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
+                    {
+                        await _client.SendTextMessageAsync(new ChatId(users.Key), "");
+                    }
+                }
+            }
+        }
+
+        public async void SendToUser(string nameOfUser)
+        {
+            foreach (var users in BaseOfUsers.NameBase)
+            {
+                if (BaseOfUsers.NameBase.ContainsValue(nameOfUser))
+                {
+                    await _client.SendTextMessageAsync(new ChatId(users.Key), "");
                 }
             }
         }
