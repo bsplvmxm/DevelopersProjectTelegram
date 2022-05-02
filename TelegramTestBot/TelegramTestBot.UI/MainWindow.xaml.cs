@@ -34,6 +34,7 @@ namespace TelegramTestBot.UI
 
             LB_Users.ItemsSource = _labels;
             CB_groups.Items.Add("Others");
+            CB_GroupList.Items.Add("Others");
             
             LabelError.Visibility = Visibility.Hidden;
 
@@ -117,9 +118,9 @@ namespace TelegramTestBot.UI
             LabelError.Visibility = Visibility.Hidden;
 
             string userName = (string)LB_Users.SelectedItem;
-            string groupName = TB_GroupName.Text;
+            string groupName = (string)CB_GroupList.SelectedItem;
 
-            if (LB_Users.SelectedItem != null && groupName != "" && CB_groups.Items.Contains(groupName))
+            if (LB_Users.SelectedItem != null && CB_GroupList.SelectedItem != null && groupName != "" && CB_groups.Items.Contains(groupName))
             {
                 _telegaManager.AddUserInGroup(groupName, userName);
                 _labels.RemoveAt(_labels.IndexOf(userName));
@@ -144,6 +145,7 @@ namespace TelegramTestBot.UI
             {
                 _telegaManager.CreateGroup(groupName);
                 CB_groups.Items.Add(groupName);
+                CB_GroupList.Items.Add(groupName);
             }
             else
             {
@@ -153,6 +155,7 @@ namespace TelegramTestBot.UI
 
             LB_Users.Items.Refresh();
             CB_groups.Items.Refresh();
+            CB_GroupList.Items.Refresh();
             TB_GroupName.Clear();
         }
 
@@ -206,6 +209,7 @@ namespace TelegramTestBot.UI
             {
                 _telegaManager.DeleteGroup(nameGroup);
                 CB_groups.Items.RemoveAt(index);
+                CB_GroupList.Items.Remove(nameGroup);
                 CB_groups.SelectedIndex = 0;
             }
             else
