@@ -14,7 +14,7 @@
                     <Button x:Name="ButtonCreateGroup" Content="Создать группу" HorizontalAlignment="Left" Margin="42,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166" FontSize="16"/>
                     <Button x:Name="ButtonCreateTest_Poll" Content="Создать тест/опрос" HorizontalAlignment="Left" Margin="295,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="47" Width="166" Click="ButtonCreateTest_Poll_Click" FontSize="16"/>
                     <Button x:Name="ButtonCreateReport" Content="Создать отчет" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Height="47" Width="166" Grid.Column="1"/>
-                    <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="1" FontSize="16"/>
+                    <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="1" FontSize="16" Click="ButtonStartTest_Click"/>
                     <ListView x:Name="UserList" Margin="477,310,-915,-170" Grid.RowSpan="2" Grid.Column="1">
                         <ListView.View>
                             <GridView>
@@ -93,7 +93,7 @@
                     <Button x:Name="Button_GoToMain" Content="На главную" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="47" Width="93" FontSize="16" Click="Button_GoToMain_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TestItem" Header="Запуск теста/опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
+            <TabItem x:Name="StartTest" Header="Запуск теста/опроса" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="138" Margin="0,-1,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
@@ -105,10 +105,19 @@
                         <RowDefinition Height="5*"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
-                    <Grid/>
-                    <TextBlock HorizontalAlignment="Left" Margin="122,50,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="108" Grid.Column="1" FontSize="16"/>
-                    <Label Content="Опрос:" Grid.Column="1" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Center" Width="77" FontSize="16"/>
+                    <Grid>
+                        <Label x:Name="Label_SelectGroup" Content="Выберите группу" HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top" Height="34" Width="138" FontSize="16" RenderTransformOrigin="0.507,0.035"/>
+                    </Grid>
                     <ListBox Grid.Row="1" Grid.ColumnSpan="3" Margin="-13,0,0,81" Grid.RowSpan="2"/>
+                    <ComboBox x:Name="CB_SelectGroup" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" Width="164" Height="25"/>
+                    <ComboBox x:Name="Cb_SelectTest" Grid.Column="1" HorizontalAlignment="Left" Margin="35,71,0,0" VerticalAlignment="Top" Width="180" Height="25"/>
+                    <Label x:Name="Label_SelectTest" Content="Выберите тест" HorizontalAlignment="Left" Margin="56,27,0,0" VerticalAlignment="Top" Height="34" Width="138" FontSize="16" RenderTransformOrigin="0.507,0.035" Grid.Column="1"/>
+                    <Label x:Name="Label_SpecifiTime" Content="Укажите время" HorizontalAlignment="Left" Margin="70,27,0,0" VerticalAlignment="Top" Height="34" Width="138" FontSize="16" RenderTransformOrigin="0.507,0.035" Grid.Column="2"/>
+                    <TextBox x:Name="Tb_TimeToTest" Grid.Column="2" HorizontalAlignment="Left" Margin="70,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Height="25"/>
+                    <Button x:Name="Button_GoToMain1" Content="На главную" HorizontalAlignment="Left" Margin="81,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="44" Width="109" FontSize="16" Click="Button_GoToMain1_Click"/>
+                    <Button x:Name="Button_AddTest1" Content="Создать тест\опрос" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="44" Width="152" FontSize="16" Grid.Column="1" Click="Button_AddTest1_Click"/>
+                    <Button x:Name="Button_StartTest" Content="Запустить тест" HorizontalAlignment="Center" Margin="0,43,0,0" Grid.Row="1" VerticalAlignment="Top" Height="44" Width="110" FontSize="16" Grid.Column="1"/>
+                    <Button x:Name="Button_StopTest" Content="Остановить тест" HorizontalAlignment="Center" Margin="0,101,0,0" Grid.Row="1" VerticalAlignment="Top" Height="44" Width="123" FontSize="16" Grid.Column="1"/>
                 </Grid>
             </TabItem>
         </TabControl>
