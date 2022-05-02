@@ -286,8 +286,6 @@ namespace TelegramTestBot.UI
             string newQuest = TB_QuestionContent.Text;
             if (CB_TypeQuestion.SelectedIndex > -1 && TB_QuestionContent.Text !="")
             {
-                //string nameOfTest = (string)LB_AllTests.SelectedItem;
-                string newQuest = TB_QuestionContent.Text;
                 AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
                 TB_QuestionContent.Clear();
                 LB_QuestOfTest.Items.Add(newQuest);
@@ -454,9 +452,9 @@ namespace TelegramTestBot.UI
 
             if (TB_QuestionContent.Text!="" && LB_QuestOfTest.SelectedItem != null)
             {
-                if (AllTests[indexTest].Questions[indexQuestion]._question_content == oldContent)
+                if (AllTests[indexTest].Questions[indexQuestion].ContentOfQuestion == oldContent)
                 {
-                    AllTests[indexTest].Questions[indexQuestion]._question_content = newContent;
+                    AllTests[indexTest].Questions[indexQuestion].ContentOfQuestion = newContent;
                     LB_QuestOfTest.Items[indexQuestion] =newContent;
                     TB_QuestionContent.Clear();
                 }
