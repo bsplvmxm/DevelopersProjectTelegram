@@ -45,7 +45,7 @@ namespace TelegramTestBot.UI
 
             MainMenu.Visibility = Visibility.Hidden;
             CreateQuestTest.Visibility = Visibility.Hidden;
-            TestItem.Visibility = Visibility.Hidden;
+            StartTest.Visibility = Visibility.Hidden;
             Button_AddAnswers.Visibility = Visibility.Hidden;
             TB_CorrectAnswer.Visibility = Visibility.Hidden;
         }
@@ -576,6 +576,21 @@ namespace TelegramTestBot.UI
         private void Button_GoToMain_Click(object sender, RoutedEventArgs e)
         {
             TabControl_Test.SelectedItem = MainMenu;
+        }
+
+        private void ButtonStartTest_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl_Test.SelectedItem = StartTest;
+        }
+
+        private void Button_GoToMain1_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl_Test.SelectedItem = MainMenu;
+        }
+
+        private void Button_AddTest1_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl_Test.SelectedItem = CreateQuestTest;
         }
     }
 }
