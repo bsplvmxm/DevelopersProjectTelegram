@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL.Questions
 {
-    internal class CourseQuestion : AbstractQuestions
+    public class CourseQuestion : AbstractQuestions
     {
         public CourseQuestion(string content) : base(content)
         {
             TypeOfQuestion = 2;
             Answers = new List<string>()
             {
-                "Вариант 1",
-                "Вариант 2",
-                "Вариант 3",
-                "Вариант 4",
+                "Элемент 1",
+                "Элемент 2",
+                "Элемент 3",
+                "Элемент 4",
             };
         }
     }

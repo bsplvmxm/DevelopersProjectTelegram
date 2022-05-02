@@ -10,13 +10,14 @@ namespace TelegramTestBot.BL
     {
         public string ContentOfQuestion { get; set; }
 
-        public List<string> UsersAnswers { get; set; }
-
-        public string CorrectAnswer { get;  set; }
+        public int TypeOfQuestion { get;  set; }
 
         public List<string> Answers { get; set; }
 
-        public int TypeOfQuestion { get;  set; }
+        public string CorrectAnswer { get;  set; }
+
+        public List<string> UsersAnswers { get; set; }
+
 
         public AbstractQuestions()
         {
@@ -26,6 +27,10 @@ namespace TelegramTestBot.BL
         public AbstractQuestions(string content)
         {
             ContentOfQuestion = content;
+            Answers = new List<string>();
+            UsersAnswers = new List<string>();
+            TypeOfQuestion = 0;
+            CorrectAnswer = "";
         }
 
         public void AddAnswer(string answer)
@@ -95,6 +100,54 @@ namespace TelegramTestBot.BL
         public void Send()
         {
 
+        }
+
+        public override string ToString()
+        {
+            string text;
+            text = ContentOfQuestion;
+            text += $"; Type: {TypeOfQuestion} ;";
+            foreach(string s in Answers)
+            {
+                text += $" {s},";
+            }
+            text += $"; CorrAnsw {CorrectAnswer} ;";
+            foreach(string s in UsersAnswers)
+            {
+                text += $" {s} ,";
+            }
+            return text;
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool flag = true;
+            if (obj == null || !(obj is AbstractQuestions))
+            {
+                flag = false;
+            }
+            AbstractQuestions question = (AbstractQuestions)obj;
+            if ((question.ContentOfQuestion != this.ContentOfQuestion) ||
+                (question.CorrectAnswer != this.CorrectAnswer) ||
+                (question.TypeOfQuestion != this.TypeOfQuestion))
+            {
+                flag = false;
+            }
+            for(int i = 0; i<question.Answers.Count;i++)
+            {
+                if (question.Answers[i] != this.Answers[i])
+                {
+                    flag = false;
+                }
+            }
+            for(int j = 0; j < question.UsersAnswers.Count;j++)
+            {
+                if(question.UsersAnswers[j] != this.UsersAnswers[j])
+                {
+                    flag = false;
+                }
+            }
+            return flag;
         }
     }
 }
