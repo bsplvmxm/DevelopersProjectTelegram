@@ -590,10 +590,5 @@ namespace TelegramTestBot.UI
             Cb_SelectTest.Items.RemoveAt(testIndex);
             TB_NameOfTest.Text = "";
         }
-
-        public void TabControl_Test_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
