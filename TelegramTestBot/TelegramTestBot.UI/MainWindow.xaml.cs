@@ -144,6 +144,7 @@ namespace TelegramTestBot.UI
             {
                 _telegaManager.CreateGroup(groupName);
                 CB_groups.Items.Add(groupName);
+                CB_SelectGroup.Items.Add(groupName);
             }
             else
             {
@@ -206,6 +207,7 @@ namespace TelegramTestBot.UI
             {
                 _telegaManager.DeleteGroup(nameGroup);
                 CB_groups.Items.RemoveAt(index);
+                CB_SelectGroup.Items.Remove(nameGroup);
                 CB_groups.SelectedIndex = 0;
             }
             else
@@ -227,6 +229,7 @@ namespace TelegramTestBot.UI
                 AllTests.Add(new Test(nameTest));
                 LB_AllTests.Items.Add(nameTest);
                 TB_NameOfTest.Clear();
+                Cb_SelectTest.Items.Add(nameTest);
             }
  
         }
