@@ -12,11 +12,11 @@ namespace TelegramTestBot.BL
 
         public List<string> UsersAnswers { get; set; }
 
-        public string CorrectAnswer { get; protected set; }
+        public string CorrectAnswer { get;  set; }
 
         public List<string> Answers { get; set; }
 
-        public int TypeOfQuestion { get; protected set; }
+        public int TypeOfQuestion { get;  set; }
 
         public AbstractQuestions()
         {

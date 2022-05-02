@@ -12,6 +12,10 @@ namespace TelegramTestBot.BL
         public string NameTest { get; set; }
         public List<AbstractQuestions> Questions { get; set; }
 
+        public Test()
+        {
+
+        }
 
         public Test(string nameTest)
         {

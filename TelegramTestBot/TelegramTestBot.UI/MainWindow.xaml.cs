@@ -24,8 +24,7 @@ namespace TelegramTestBot.UI
         private const string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
         private List<string> _labels;
         private DispatcherTimer _timer;  //счетчик времени
-        private TestBase MyTests = TestBase.GetInstance();
-        //MyTestsAllTests;
+        private TestsBase MyTests = TestsBase.GetInstance();
 
         public MainWindow()
         {
@@ -43,7 +42,6 @@ namespace TelegramTestBot.UI
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += OnTimerTick;
             _timer.Start();
-            //MyTests.AllTests = MyTests.AllTests;
 
             MainMenu.Visibility = Visibility.Hidden;
             CreateQuestTest.Visibility = Visibility.Hidden;
@@ -659,6 +657,22 @@ namespace TelegramTestBot.UI
                         break;
                     }
                 
+            }
+        }
+
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            MyTests.Save(MyTests.AllTests);
+        }
+
+        private void Button_Load_Click(object sender, RoutedEventArgs e)
+        {
+            MyTests.Load();
+            for (int i = 0; i < MyTests.AllTests.Count; i++)
+            {
+                LB_AllTests.Items.Add(MyTests.AllTests[i].NameTest);
+
             }
         }
     }
