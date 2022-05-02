@@ -498,9 +498,9 @@ namespace TelegramTestBot.UI
                     AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                     break;
             }
-            OpenComponents(-1);
-            Button_AddAnswers.Visibility = Visibility.Hidden;
-            TB_CorrectAnswer.Visibility = Visibility.Hidden;
+            //OpenComponents(-1);
+            //Button_AddAnswers.Visibility = Visibility.Hidden;
+            //TB_CorrectAnswer.Visibility = Visibility.Hidden;
         }
 
         private string CreateCorrectAnswer(int typeOfQuestion)
