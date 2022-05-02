@@ -29,8 +29,8 @@ namespace TelegramTestBot.BL
             ContentOfQuestion = content;
             Answers = new List<string>();
             UsersAnswers = new List<string>();
-            TypeOfQuestion = 0;
-            CorrectAnswer = "";
+            TypeOfQuestion = -23;
+            CorrectAnswer = "Правильный ответ";
         }
 
         public void AddAnswer(string answer)
@@ -41,7 +41,6 @@ namespace TelegramTestBot.BL
             }
             answer = answer.Trim();
             Answers.Add(answer);
-            CorrectAnswer = "Введите правильный ответ";
         }
         public void EditAnswer(int index, string answer)
         {
