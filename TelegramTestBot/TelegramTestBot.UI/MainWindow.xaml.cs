@@ -588,7 +588,7 @@ namespace TelegramTestBot.UI
         private void ButtonDelTest_Click(object sender, RoutedEventArgs e)
         {
             int testIndex = LB_AllTests.SelectedIndex;
-            AllTests.RemoveAt(testIndex);
+            MyTests.AllTests.RemoveAt(testIndex);
             LB_AllTests.Items.RemoveAt(testIndex);
             Cb_SelectTest.Items.RemoveAt(testIndex);
             TB_NameOfTest.Text = "";

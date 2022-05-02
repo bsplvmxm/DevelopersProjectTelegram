@@ -12,7 +12,7 @@ namespace TelegramTestBot.BL.Data
 {
     public class TestsBase
     {
-        private const string filePath = @"D:\Курсы\Домашка\DevelopersProjectTelegram\developersTB.tb";
+        private const string filePath = @"developersTB.tb";
         public List<Test> AllTests { get; private set; }
 
         private static TestsBase _instance;
