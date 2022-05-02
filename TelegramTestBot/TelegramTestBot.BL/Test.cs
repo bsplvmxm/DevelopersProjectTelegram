@@ -45,15 +45,6 @@ namespace TelegramTestBot.BL
             }
         }
 
-        public void EditQuestion(int index, string question)
-        {
-            if (question == null)
-            {
-                throw new Exception();
-            }
-            Questions[index]._question_content = question;
-        }
-
         public void DeleteQuestionByIndex(int index)
         {
             if (Questions.Count < 1)
