@@ -403,7 +403,7 @@ namespace TelegramTestBot.UI
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
                 int testIndex = LB_AllTests.SelectedIndex;
                 int questionType = MyTests.AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
-                TB_QuestionContent.Text = MyTests.AllTests[testIndex].Questions[questionIndex].ContentOfQuestion;
+                //TB_QuestionContent.Text = MyTests.AllTests[testIndex].Questions[questionIndex].ContentOfQuestion;
                 TB_Answer1.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0];
                 TB_Answer2.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1];
                 TB_Answer3.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2];
@@ -490,9 +490,6 @@ namespace TelegramTestBot.UI
                         break;
                     }
             }
-            //OpenComponents(-1);
-            //Button_AddAnswers.Visibility = Visibility.Hidden;
-            //TB_CorrectAnswer.Visibility = Visibility.Hidden;
         }
 
         private string CreateCorrectAnswerText(int typeOfQuestion)
@@ -681,6 +678,8 @@ namespace TelegramTestBot.UI
 
         private void Button_Load_Click(object sender, RoutedEventArgs e)
         {
+            LB_AllTests.Items.Clear();
+            LB_QuestOfTest.Items.Clear();
             MyTests.Load();
             for (int i = 0; i < MyTests.AllTests.Count; i++)
             {
