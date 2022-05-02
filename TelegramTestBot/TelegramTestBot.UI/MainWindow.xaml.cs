@@ -600,7 +600,8 @@ namespace TelegramTestBot.UI
         {
             int testIndex = LB_AllTests.SelectedIndex;
             AllTests.RemoveAt(testIndex);
-            LB_AllTests.Items.RemoveAt(LB_AllTests.SelectedIndex);
+            LB_AllTests.Items.RemoveAt(testIndex);
+            Cb_SelectTest.Items.RemoveAt(testIndex);
             TB_NameOfTest.Text = "";
         }
 
