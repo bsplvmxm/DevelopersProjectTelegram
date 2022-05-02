@@ -217,7 +217,7 @@ namespace TelegramTestBot.UI
             LB_Users.Items.Refresh();
             CB_groups.Items.Refresh();
         }
-
+        
            
         private void Button_AddTest_Click(object sender, RoutedEventArgs e)
         {
