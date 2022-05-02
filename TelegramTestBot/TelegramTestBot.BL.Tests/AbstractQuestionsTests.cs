@@ -10,14 +10,35 @@ namespace TelegramTestBot.BL.Tests
 {
     public class Tests
     {
-        [TestCaseSource(typeof(ChooseCorrectTestSource))]
+        [TestCaseSource(typeof(AbstractQuestionsTestSource))]
         public void ChooseCorrectTest(AbstractQuestions question, AbstractQuestions expected_question, string answer)
         {
             question.ChooseCorrect(answer);
             Assert.AreEqual(expected_question, question);
         }
 
-        
+        [TestCaseSource(typeof (EditAnswerTestSource))]
+        public void EditAnswerTest(AbstractQuestions question, AbstractQuestions expected_question, int index, string answer)
+        {
+            question.EditAnswer(index, answer);
+            Assert.AreEqual(expected_question,question);
+        }
+
+
+
+
+        [TestCaseSource(typeof(DeleteAnswerTestSource))]
+        public void DeleteAnswerTest(AbstractQuestions question, AbstractQuestions expected_question, int index)
+        {
+            question.DeleteAnswer(index);
+            Assert.AreEqual(expected_question, question);
+        }
+
+
+
+
+
+
         [TestCaseSource(typeof(AddAnswerTestSource))]
         public void AddAnswerTest(AbstractQuestions question, AbstractQuestions expected_question, string answer)
         {

@@ -35,13 +35,14 @@ namespace TelegramTestBot.BL
 
         public void AddAnswer(string answer)
         {
-            if (answer == null)
+            if (answer == "")
             {
-                throw new ArgumentNullException("Gotta write something");
+                answer = "Новый вариант";
             }
             answer = answer.Trim();
             Answers.Add(answer);
         }
+
         public void EditAnswer(int index, string answer)
         {
             if (Answers.Count == 0)
@@ -52,9 +53,9 @@ namespace TelegramTestBot.BL
             {
                 throw new ArgumentOutOfRangeException();
             }
-            if (answer == null)
+            if (answer == "")
             {
-                throw new ArgumentNullException("Gotta write something");
+                answer = "Введите ответ";
             }
             answer = answer.Trim();
             Answers[index] = answer;
@@ -77,13 +78,20 @@ namespace TelegramTestBot.BL
         {
             if (answer == "")
             {
-                throw new ArgumentNullException("Empty string");
+                CorrectAnswer = "Ответ не выбран";
             }
-            CorrectAnswer = answer;
+            else
+            {
+                CorrectAnswer = answer;
+            }
         }
 
         public bool CheckUserAnswer(int index)
         {
+            if(Answers.Count == 0|| index<0 || index > Answers.Count)
+            {
+                throw new Exception("Chto-to zdes ne tak");
+            }
             bool result = false;
             string UserAnswerCheck = UsersAnswers[index].Trim();
             UserAnswerCheck = UserAnswerCheck.ToLower();
@@ -100,6 +108,8 @@ namespace TelegramTestBot.BL
         {
 
         }
+
+
 
         public override string ToString()
         {
