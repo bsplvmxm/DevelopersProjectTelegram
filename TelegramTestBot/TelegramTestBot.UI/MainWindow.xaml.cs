@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using TelegramTestBot.BL;
+using TelegramTestBot.BL.Data;
 
 namespace TelegramTestBot.UI
 {
@@ -23,7 +24,7 @@ namespace TelegramTestBot.UI
         private const string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
         private List<string> _labels;
         private DispatcherTimer _timer;  //счетчик времени
-        private List<Test> AllTests;
+        private TestsBase MyTests = TestsBase.GetInstance();
 
         public MainWindow()
         {
@@ -40,7 +41,6 @@ namespace TelegramTestBot.UI
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += OnTimerTick;
             _timer.Start();
-            AllTests = new List<Test>();
 
             MainMenu.Visibility = Visibility.Hidden;
             CreateQuestTest.Visibility = Visibility.Hidden;
@@ -212,13 +212,14 @@ namespace TelegramTestBot.UI
             if (TB_NameOfTest.Text != "")
             {
                 string nameTest = TB_NameOfTest.Text;
-                AllTests.Add(new Test(nameTest));
+                MyTests.AllTests.Add(new Test(nameTest));
                 LB_AllTests.Items.Add(nameTest);
                 TB_NameOfTest.Clear();
                 Cb_SelectTest.Items.Add(nameTest);
             }
  
         }
+
         private void Button_RenameTest_Click(object sender, RoutedEventArgs e)
         {
             int testIndex = LB_AllTests.SelectedIndex;
@@ -226,7 +227,7 @@ namespace TelegramTestBot.UI
             newNameOfTest = newNameOfTest.Trim();
             if(testIndex != -1 && newNameOfTest != "")
             {
-                AllTests[testIndex].NameTest = newNameOfTest;
+                MyTests.AllTests[testIndex].NameTest = newNameOfTest;
                 LB_AllTests.Items[testIndex] = newNameOfTest;
                 TB_NameOfTest.Clear();
             }
@@ -249,9 +250,9 @@ namespace TelegramTestBot.UI
                 TextBl_NameTest.Text = nameOfTest;
                 TB_NameOfTest.Text = nameOfTest;
                 LB_QuestOfTest.Items.Clear();
-                for (int i = 0; i < AllTests[LB_AllTests.SelectedIndex].Questions.Count; i++)
+                for (int i = 0; i < MyTests.AllTests[LB_AllTests.SelectedIndex].Questions.Count; i++)
                 {
-                    LB_QuestOfTest.Items.Add(AllTests[LB_AllTests.SelectedIndex].Questions[i]._question_content);
+                    LB_QuestOfTest.Items.Add(MyTests.AllTests[LB_AllTests.SelectedIndex].Questions[i].ContentOfQuestion);
                 }
             }
             LB_QuestOfTest.Items.Refresh();
@@ -266,13 +267,14 @@ namespace TelegramTestBot.UI
         {
             CB_TypeQuestion.Items.Refresh();
         }
+
         private void Button_CreateQuest_Click(object sender, RoutedEventArgs e)
         {
             int index = CB_TypeQuestion.SelectedIndex;
             string newQuest = TB_QuestionContent.Text;
             if (CB_TypeQuestion.SelectedIndex > -1 && TB_QuestionContent.Text !="")
             {
-                AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
+                MyTests.AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
                 TB_QuestionContent.Clear();
                 LB_QuestOfTest.Items.Add(newQuest);
             }
@@ -283,13 +285,14 @@ namespace TelegramTestBot.UI
         {
             TabControl_Test.SelectedItem = CreateQuestTest;
         }
+
         private void Button_DeleteQuest_Click(object sender, RoutedEventArgs e)
         {
             if (CB_TypeQuestion.SelectedIndex > -1)
             {
                 int testIndex = LB_AllTests.SelectedIndex;
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
-                AllTests[testIndex].DeleteQuestionByIndex(questionIndex);
+                MyTests.AllTests[testIndex].DeleteQuestionByIndex(questionIndex);
                 LB_QuestOfTest.Items.RemoveAt(LB_QuestOfTest.SelectedIndex);
                 TB_QuestionContent.Text = "";
             }
@@ -399,15 +402,15 @@ namespace TelegramTestBot.UI
             {
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
                 int testIndex = LB_AllTests.SelectedIndex;
-                int questionType = AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
-                TB_QuestionContent.Text = AllTests[testIndex].Questions[questionIndex]._question_content;
-                TB_Answer1.Text = AllTests[testIndex].Questions[questionIndex].Answers[0];
-                TB_Answer2.Text = AllTests[testIndex].Questions[questionIndex].Answers[1];
-                TB_Answer3.Text = AllTests[testIndex].Questions[questionIndex].Answers[2];
-                TB_Answer4.Text = AllTests[testIndex].Questions[questionIndex].Answers[3];
-                TB_CorrectAnswer.Text = AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
+                int questionType = MyTests.AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
+                TB_QuestionContent.Text = MyTests.AllTests[testIndex].Questions[questionIndex].ContentOfQuestion;
+                TB_Answer1.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0];
+                TB_Answer2.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1];
+                TB_Answer3.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2];
+                TB_Answer4.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3];
+                TB_CorrectAnswer.Text = MyTests.AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
                 OpenComponents(questionType);
-                if(questionIndex == 2)
+                if(questionType == 2)
                 {
                     TB_CorrectAnswer.IsEnabled = true;
                 }
@@ -417,6 +420,7 @@ namespace TelegramTestBot.UI
                 }
                 CB_TypeQuestion.SelectedIndex = questionType;
                 CB_TypeQuestion.IsEnabled = false;
+                GetFlags(testIndex,questionIndex);
             }
         }
 
@@ -425,11 +429,6 @@ namespace TelegramTestBot.UI
             CB_TypeQuestion.SelectedIndex = -1;
             CB_TypeQuestion.IsEnabled = true;
             OpenComponents(-1);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            TabControl_Test.SelectedItem = MainMenu;
         }
 
         private void Button_EditQuest_Click(object sender, RoutedEventArgs e)
@@ -441,9 +440,9 @@ namespace TelegramTestBot.UI
 
             if (TB_QuestionContent.Text!="" && LB_QuestOfTest.SelectedItem != null)
             {
-                if (AllTests[indexTest].Questions[indexQuestion]._question_content == oldContent)
+                if (MyTests.AllTests[indexTest].Questions[indexQuestion].ContentOfQuestion == oldContent)
                 {
-                    AllTests[indexTest].Questions[indexQuestion]._question_content = newContent;
+                    MyTests.AllTests[indexTest].Questions[indexQuestion].ContentOfQuestion = newContent;
                     LB_QuestOfTest.Items[indexQuestion] =newContent;
                     TB_QuestionContent.Clear();
                 }
@@ -454,45 +453,49 @@ namespace TelegramTestBot.UI
         {
             int testIndex = LB_AllTests.SelectedIndex;
             int questionIndex = LB_QuestOfTest.SelectedIndex;
-            int typeOfQestion = CB_TypeQuestion.SelectedIndex;
-            string correctAnswer = CreateCorrectAnswer(typeOfQestion);
+            int typeOfQestion = MyTests.AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
+            string correctAnswer = CreateCorrectAnswerText(typeOfQestion);
             switch(typeOfQestion)
             {
                 case 0:
-                    AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
-                    AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
-                    break;
-                case 1:
-                    AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
-                    AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;                    
-                    AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
-                    break;
-                case 2:
                     {
-                        AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
-                        AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                         break;
                     }
-                case 3:
-                    break;
+                case 1:
+                    {
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        break;
+                    }
+                case 2:
+                    {
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        break;
+                    }
                 case 4:
-                    AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
-                    break;
+                    {
+                        MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        break;
+                    }
             }
             //OpenComponents(-1);
             //Button_AddAnswers.Visibility = Visibility.Hidden;
             //TB_CorrectAnswer.Visibility = Visibility.Hidden;
         }
 
-        private string CreateCorrectAnswer(int typeOfQuestion)
+        private string CreateCorrectAnswerText(int typeOfQuestion)
         {
             string correctAnswer="";
             switch(typeOfQuestion)
@@ -589,6 +592,101 @@ namespace TelegramTestBot.UI
             LB_AllTests.Items.RemoveAt(testIndex);
             Cb_SelectTest.Items.RemoveAt(testIndex);
             TB_NameOfTest.Text = "";
+        }
+
+        public void GetFlags(int testIndex, int questionIndex)
+        {
+            RB_RightAns1.IsChecked = false;
+            RB_RightAns2.IsChecked = false;
+            RB_RightAns3.IsChecked = false;
+            RB_RightAns4.IsChecked = false;
+            ChB_RightAns1.IsChecked=false;
+            ChB_RightAns2.IsChecked=false;
+            ChB_RightAns3.IsChecked=false;
+            ChB_RightAns4.IsChecked=false;
+
+            int typeOfQuestion = MyTests.AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
+            string correctAnswer = "";
+            correctAnswer = MyTests.AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
+            switch(typeOfQuestion)
+            {
+                case 0:
+                    {
+                        if (correctAnswer != null)
+                        {
+                            for (int i = 0; i < correctAnswer.Length; i++)
+                            {
+                                int c = correctAnswer[i];
+                                if (c == 49)
+                                {
+                                    ChB_RightAns1.IsChecked = (true);
+                                }
+                                if (c == 50)
+                                {
+                                    ChB_RightAns2.IsChecked = true;
+                                }
+                                if (c == 51)
+                                {
+                                    ChB_RightAns3.IsChecked = true;
+                                }
+                                if (c == 52)
+                                {
+                                    ChB_RightAns4.IsChecked = true;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        if (TB_Answer1.Text == correctAnswer)
+                        {
+                            RB_RightAns1.IsChecked = true;
+                        }
+                        else if (TB_Answer2.Text == correctAnswer)
+                        {
+                            RB_RightAns2.IsChecked = true;
+                        }
+                        else if (TB_Answer3.Text == correctAnswer)
+                        {
+                            RB_RightAns3.IsChecked = true;
+                        }
+                        else if (TB_Answer4.Text == correctAnswer)
+                        {
+                            RB_RightAns4.IsChecked = true;
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        if (TB_Answer1.Text == correctAnswer)
+                        {
+                            RB_RightAns1.IsChecked = true;
+                        }
+                        else if (TB_Answer2.Text == correctAnswer)
+                        {
+                            RB_RightAns2.IsChecked = true;
+                        }
+                        break;
+                    }
+                
+            }
+        }
+
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            MyTests.Save(MyTests.AllTests);
+        }
+
+        private void Button_Load_Click(object sender, RoutedEventArgs e)
+        {
+            MyTests.Load();
+            for (int i = 0; i < MyTests.AllTests.Count; i++)
+            {
+                LB_AllTests.Items.Add(MyTests.AllTests[i].NameTest);
+
+            }
         }
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL.Questions
 {
-    public class YesNoQuestion : AbstractQuestion
+    public class YesNoQuestion : AbstractQuestions
     {
         public YesNoQuestion(string content) : base(content)
         {
-            Answers = new List<string>() { "Нет", "Да", "biba", "boba" };
+            Answers = new List<string>() { "Нет", "Да", "", "" };
             TypeOfQuestion = 4;
         }
     }

@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL.Questions
 {
-    internal class PollQuestion : AbstractQuestion
+    internal class PollQuestion : AbstractQuestions
     {
-        public string UserPollAnswer { get; set; }
         public PollQuestion(string content) : base(content)
         {
             TypeOfQuestion = 3;
-            Answers = new List<string>() { "ti kotik", "ti kotik", "ti kotik", "ti kotik" };
+            Answers = new List<string>() { "", "", "", "" };
         }
     }
 }
