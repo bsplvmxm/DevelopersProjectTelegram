@@ -684,9 +684,12 @@ namespace TelegramTestBot.UI
             MyTests.Load();
             for (int i = 0; i < MyTests.AllTests.Count; i++)
             {
-                LB_AllTests.Items.Add(MyTests.AllTests[i].NameTest);
+                string nameTest = MyTests.AllTests[i].NameTest;
+                LB_AllTests.Items.Add(nameTest);
+                Cb_SelectTest.Items.Add(nameTest);
 
             }
+
         }
     }
 }
