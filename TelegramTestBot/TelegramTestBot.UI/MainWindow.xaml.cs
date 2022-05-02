@@ -48,8 +48,6 @@ namespace TelegramTestBot.UI
             TestItem.Visibility = Visibility.Hidden;
             Button_AddAnswers.Visibility = Visibility.Hidden;
             TB_CorrectAnswer.Visibility = Visibility.Hidden;
-
-
         }
 
         public void OnMessage(string s)
@@ -247,7 +245,6 @@ namespace TelegramTestBot.UI
 
         private void LB_AllTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //HideAllForTest();
             if (LB_AllTests.SelectedItem != null)
             {
                 Label_ViewQuest.Visibility = Visibility.Visible;
@@ -283,13 +280,10 @@ namespace TelegramTestBot.UI
         private void Button_CreateQuest_Click(object sender, RoutedEventArgs e)
         {
             int index = CB_TypeQuestion.SelectedIndex;
+            string newQuest = TB_QuestionContent.Text;
             if (CB_TypeQuestion.SelectedIndex > -1 && TB_QuestionContent.Text !="")
             {
-                string nameOfTest = (string)LB_AllTests.SelectedItem;
-                string newQuest = TB_QuestionContent.Text;
-                //LB_QuestOfTest.Items.Add(newQuest);
                 AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
-                //LB_QuestOfTest.Items.Add(newQuest);
                 TB_QuestionContent.Clear();
                 LB_QuestOfTest.Items.Add(newQuest);
             }
@@ -310,31 +304,6 @@ namespace TelegramTestBot.UI
                 LB_QuestOfTest.Items.RemoveAt(LB_QuestOfTest.SelectedIndex);
                 TB_QuestionContent.Text = "";
             }
-        }
-
-        private void HideAllForTest()
-        {
-            Label_ViewQuest.Visibility = Visibility.Visible;
-            CB_TypeQuestion.Visibility = Visibility.Visible;
-            RB_RightAns1.Visibility = Visibility.Visible;
-            RB_RightAns2.Visibility = Visibility.Visible;
-            RB_RightAns3.Visibility = Visibility.Visible;
-            RB_RightAns4.Visibility = Visibility.Visible;
-            TB_Answer1.Visibility = Visibility.Visible;
-            TB_Answer2.Visibility = Visibility.Visible;
-            TB_Answer3.Visibility = Visibility.Visible;
-            TB_Answer4.Visibility = Visibility.Visible;
-            ChB_RightAns1.Visibility = Visibility.Visible;
-            ChB_RightAns2.Visibility = Visibility.Visible;
-            ChB_RightAns3.Visibility = Visibility.Visible;
-            ChB_RightAns4.Visibility = Visibility.Visible;
-            Label_InputQuest.Visibility = Visibility.Visible;
-            TB_QuestionContent.Visibility = Visibility.Visible;
-            Button_CreateQuest.Visibility = Visibility.Visible;
-            Button_EditQuest.Visibility = Visibility.Visible;
-            Button_DeleteQuest.Visibility = Visibility.Visible;
-            Button_RenameTest.Visibility = Visibility.Visible;
-            LB_QuestOfTest.Visibility = Visibility.Visible;
         }
 
         private void OpenComponents(int index)
@@ -433,9 +402,6 @@ namespace TelegramTestBot.UI
             TB_Answer4.IsEnabled = true;
         }
 
-        
-
-
         private void LB_QuestOfTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Button_AddAnswers.Visibility = Visibility.Visible;
@@ -479,9 +445,20 @@ namespace TelegramTestBot.UI
 
         private void Button_EditQuest_Click(object sender, RoutedEventArgs e)
         {
-            int indexOfTest = LB_QuestOfTest.SelectedIndex;
-            string contentOfQuest = TB_QuestionContent.Text;
-            AllTests[LB_AllTests.SelectedIndex].EditQuestion(indexOfTest, contentOfQuest);
+            string oldContent = (string)LB_QuestOfTest.SelectedItem;
+            string newContent = TB_QuestionContent.Text;
+            int indexQuestion = LB_QuestOfTest.SelectedIndex;
+            int indexTest = LB_AllTests.SelectedIndex;
+
+            if (TB_QuestionContent.Text!="" && LB_QuestOfTest.SelectedItem != null)
+            {
+                if (AllTests[indexTest].Questions[indexQuestion]._question_content == oldContent)
+                {
+                    AllTests[indexTest].Questions[indexQuestion]._question_content = newContent;
+                    LB_QuestOfTest.Items[indexQuestion] =newContent;
+                    TB_QuestionContent.Clear();
+                }
+            }
         }
 
         private void Button_AddAnswers_Click(object sender, RoutedEventArgs e)
