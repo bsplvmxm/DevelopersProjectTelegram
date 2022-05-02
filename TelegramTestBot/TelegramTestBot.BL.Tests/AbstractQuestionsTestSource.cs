@@ -230,5 +230,43 @@ namespace TelegramTestBot.BL.Tests
         }
     }
 
+    public class CheckUserAnswerTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            AbstractQuestions question;
+            int index;
+            bool expected_result = false;
+            bool actual_result = false;
+
+
+            index = 0;
+            question = new AbstractQuestions("Kak Tebya zovut?");
+            question.Answers = new List<string> { "Petya", "Sasha", "Ilya", "Vova" };
+            question.UsersAnswers = new List<string> { "Ilya", "Vova" };
+            question.CorrectAnswer = "Ilya";
+
+            yield return new object[] { question, index, true, actual_result };
+
+            index = 0;
+            question = new AbstractQuestions("Ti kotik");
+            question.Answers = new List<string> { "Da", "Nyet" };
+            question.UsersAnswers = new List<string> { "Nyet", "Da" };
+            question.CorrectAnswer = "Da";
+
+            yield return new object[] { question, index, false, actual_result };
+
+            index = 1;
+            question = new AbstractQuestions("Ti kotik");
+            question.Answers = new List<string> { "Da", "Nyet" };
+            question.UsersAnswers = new List<string> { "Nyet", "Da" };
+            question.CorrectAnswer = "Da";
+
+            yield return new object[] { question, index, true, actual_result };
+
+
+        }
+    }
+
 
 }
