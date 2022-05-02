@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL
 {
-    public abstract class AbstractQuestions
+    public class AbstractQuestions
     {
         public string ContentOfQuestion { get; set; }
 
@@ -17,6 +17,11 @@ namespace TelegramTestBot.BL
         public List<string> Answers { get; set; }
 
         public int TypeOfQuestion { get; protected set; }
+
+        public AbstractQuestions()
+        {
+
+        }
 
         public AbstractQuestions(string content)
         {

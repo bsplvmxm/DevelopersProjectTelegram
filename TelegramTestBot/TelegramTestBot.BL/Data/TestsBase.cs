@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL.Data
 {
-    public class SingletoneTests
+    public class TestBase
     {
         public List<Test> AllTests { get; private set; }
 
-        private static SingletoneTests _instance;
+        private static TestBase _instance;
 
-        private SingletoneTests()
+        private TestBase()
         {
             AllTests = new List<Test>();
         }
 
-        public static SingletoneTests GetInstance()
+        public static TestBase GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new SingletoneTests();
+                _instance = new TestBase();
             }
             return _instance;
         }

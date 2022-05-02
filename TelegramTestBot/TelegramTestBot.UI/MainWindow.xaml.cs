@@ -24,7 +24,8 @@ namespace TelegramTestBot.UI
         private const string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
         private List<string> _labels;
         private DispatcherTimer _timer;  //счетчик времени
-        private List<Test> AllTests;
+        private TestBase MyTests = TestBase.GetInstance();
+        //MyTestsAllTests;
 
         public MainWindow()
         {
@@ -42,7 +43,7 @@ namespace TelegramTestBot.UI
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += OnTimerTick;
             _timer.Start();
-            AllTests = new List<Test>();
+            //MyTests.AllTests = MyTests.AllTests;
 
             MainMenu.Visibility = Visibility.Hidden;
             CreateQuestTest.Visibility = Visibility.Hidden;
@@ -225,7 +226,7 @@ namespace TelegramTestBot.UI
             if (TB_NameOfTest.Text != "")
             {
                 string nameTest = TB_NameOfTest.Text;
-                AllTests.Add(new Test(nameTest));
+                MyTests.AllTests.Add(new Test(nameTest));
                 LB_AllTests.Items.Add(nameTest);
                 TB_NameOfTest.Clear();
             }
@@ -239,7 +240,7 @@ namespace TelegramTestBot.UI
             newNameOfTest = newNameOfTest.Trim();
             if(testIndex != -1 && newNameOfTest != "")
             {
-                AllTests[testIndex].NameTest = newNameOfTest;
+                MyTests.AllTests[testIndex].NameTest = newNameOfTest;
                 LB_AllTests.Items[testIndex] = newNameOfTest;
                 TB_NameOfTest.Clear();
             }
@@ -262,9 +263,9 @@ namespace TelegramTestBot.UI
                 TextBl_NameTest.Text = nameOfTest;
                 TB_NameOfTest.Text = nameOfTest;
                 LB_QuestOfTest.Items.Clear();
-                for (int i = 0; i < AllTests[LB_AllTests.SelectedIndex].Questions.Count; i++)
+                for (int i = 0; i < MyTests.AllTests[LB_AllTests.SelectedIndex].Questions.Count; i++)
                 {
-                    LB_QuestOfTest.Items.Add(AllTests[LB_AllTests.SelectedIndex].Questions[i].ContentOfQuestion);
+                    LB_QuestOfTest.Items.Add(MyTests.AllTests[LB_AllTests.SelectedIndex].Questions[i].ContentOfQuestion);
                 }
             }
             LB_QuestOfTest.Items.Refresh();
@@ -286,7 +287,7 @@ namespace TelegramTestBot.UI
             string newQuest = TB_QuestionContent.Text;
             if (CB_TypeQuestion.SelectedIndex > -1 && TB_QuestionContent.Text !="")
             {
-                AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
+                MyTests.AllTests[LB_AllTests.SelectedIndex].AddQuestion(newQuest, index);
                 TB_QuestionContent.Clear();
                 LB_QuestOfTest.Items.Add(newQuest);
             }
@@ -304,7 +305,7 @@ namespace TelegramTestBot.UI
             {
                 int testIndex = LB_AllTests.SelectedIndex;
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
-                AllTests[testIndex].DeleteQuestionByIndex(questionIndex);
+                MyTests.AllTests[testIndex].DeleteQuestionByIndex(questionIndex);
                 LB_QuestOfTest.Items.RemoveAt(LB_QuestOfTest.SelectedIndex);
                 TB_QuestionContent.Text = "";
             }
@@ -414,13 +415,13 @@ namespace TelegramTestBot.UI
             {
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
                 int testIndex = LB_AllTests.SelectedIndex;
-                int questionType = AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
-                TB_QuestionContent.Text = AllTests[testIndex].Questions[questionIndex].ContentOfQuestion;
-                TB_Answer1.Text = AllTests[testIndex].Questions[questionIndex].Answers[0];
-                TB_Answer2.Text = AllTests[testIndex].Questions[questionIndex].Answers[1];
-                TB_Answer3.Text = AllTests[testIndex].Questions[questionIndex].Answers[2];
-                TB_Answer4.Text = AllTests[testIndex].Questions[questionIndex].Answers[3];
-                TB_CorrectAnswer.Text = AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
+                int questionType = MyTests.AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
+                TB_QuestionContent.Text = MyTests.AllTests[testIndex].Questions[questionIndex].ContentOfQuestion;
+                TB_Answer1.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0];
+                TB_Answer2.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1];
+                TB_Answer3.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2];
+                TB_Answer4.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3];
+                TB_CorrectAnswer.Text = MyTests.AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
                 OpenComponents(questionType);
                 if(questionType == 2)
                 {
@@ -452,9 +453,9 @@ namespace TelegramTestBot.UI
 
             if (TB_QuestionContent.Text!="" && LB_QuestOfTest.SelectedItem != null)
             {
-                if (AllTests[indexTest].Questions[indexQuestion].ContentOfQuestion == oldContent)
+                if (MyTests.AllTests[indexTest].Questions[indexQuestion].ContentOfQuestion == oldContent)
                 {
-                    AllTests[indexTest].Questions[indexQuestion].ContentOfQuestion = newContent;
+                    MyTests.AllTests[indexTest].Questions[indexQuestion].ContentOfQuestion = newContent;
                     LB_QuestOfTest.Items[indexQuestion] =newContent;
                     TB_QuestionContent.Clear();
                 }
@@ -465,40 +466,40 @@ namespace TelegramTestBot.UI
         {
             int testIndex = LB_AllTests.SelectedIndex;
             int questionIndex = LB_QuestOfTest.SelectedIndex;
-            int typeOfQestion = AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
+            int typeOfQestion = MyTests.AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
             string correctAnswer = CreateCorrectAnswerText(typeOfQestion);
             switch(typeOfQestion)
             {
                 case 0:
                     {
-                        AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
-                        AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                         break;
                     }
                 case 1:
                     {
-                        AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
-                        AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                         break;
                     }
                 case 2:
                     {
-                        AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
-                        AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
-                        AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2] = TB_Answer3.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3] = TB_Answer4.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                         break;
                     }
                 case 4:
                     {
-                        AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
+                        MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                         break;
                     }
             }
@@ -593,9 +594,9 @@ namespace TelegramTestBot.UI
             ChB_RightAns3.IsChecked=false;
             ChB_RightAns4.IsChecked=false;
 
-            int typeOfQuestion = AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
+            int typeOfQuestion = MyTests.AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
             string correctAnswer = "";
-            correctAnswer = AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
+            correctAnswer = MyTests.AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
             switch(typeOfQuestion)
             {
                 case 0:
