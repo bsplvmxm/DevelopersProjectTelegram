@@ -10,13 +10,13 @@ namespace TelegramTestBot.BL
     public class Test
     {
         public string NameTest { get; set; }
-        public List<AbstractQuestion> Questions { get; set; }
+        public List<AbstractQuestions> Questions { get; set; }
 
 
         public Test(string nameTest)
         {
             NameTest = nameTest;
-            Questions = new List<AbstractQuestion>();
+            Questions = new List<AbstractQuestions>();
         }
 
         public void AddQuestion(string question, int index)
@@ -45,6 +45,18 @@ namespace TelegramTestBot.BL
             }
         }
 
+        public void EditQuestion(int index, string question)
+        {
+            if (index > -1 && index < Questions.Count)
+            {
+                if (question == null)
+                {
+                    throw new Exception();
+                }
+                Questions[index].ContentOfQuestion = question;
+            }
+        }
+
         public void DeleteQuestionByIndex(int index)
         {
             if (Questions.Count < 1)
@@ -57,7 +69,7 @@ namespace TelegramTestBot.BL
 
         public void StartTest()
         {
-            foreach (AbstractQuestion question in Questions)
+            foreach (AbstractQuestions question in Questions)
             {
                 question.Send();
             }
