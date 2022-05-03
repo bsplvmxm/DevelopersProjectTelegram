@@ -57,9 +57,9 @@ namespace TelegramTestBot.BL
         {
             if (index > -1 && index < Questions.Count)
             {
-                if (question == null)
+                if (question == "")
                 {
-                    throw new Exception();
+                    question = "Введите вопрос";
                 }
                 Questions[index].ContentOfQuestion = question;
             }

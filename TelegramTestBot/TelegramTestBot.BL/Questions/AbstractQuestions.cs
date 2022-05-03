@@ -26,6 +26,10 @@ namespace TelegramTestBot.BL
 
         public AbstractQuestions(string content)
         {
+            if(content == "")
+            {
+                content = "Введите вопрос";
+            }
             ContentOfQuestion = content;
             Answers = new List<string>();
             UsersAnswers = new List<string>();

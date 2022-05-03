@@ -23,5 +23,12 @@ namespace TelegramTestBot.BL.Tests.TestTests
             Assert.Throws<ArgumentException>(() => test.AddQuestion(question, index));
         }
 
+        [TestCaseSource(typeof(EditQuestionTestSource))]
+        public void EditQuestionTest(Test test, Test expected_test, int index, string question)
+        {
+            test.EditQuestion(index, question);
+            Assert.AreEqual(expected_test, test);
+        }
+
     }
 }

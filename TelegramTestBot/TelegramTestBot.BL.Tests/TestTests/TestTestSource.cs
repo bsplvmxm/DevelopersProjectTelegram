@@ -54,4 +54,36 @@ namespace TelegramTestBot.BL.Tests.TestTests
 
         }
     }
+
+    public class EditQuestionTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            Test test = new Test("0");
+            Test expectedTest = new Test("0");
+
+            string question = "Выбор нескольких";
+            int index = 0;
+            test.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new ChooseAnyQuestion("2v") };
+            expectedTest.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("Выбор нескольких"), new ChooseAnyQuestion("2v") };
+            yield return new object[] { test, expectedTest, index, question };
+
+            test = new Test("1");
+            expectedTest = new Test("1");
+            question = "New Q";
+            index = 1;
+            test.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new PollQuestion("2v") };
+            expectedTest.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new PollQuestion("New Q") };
+            yield return new object[] { test, expectedTest, index, question };
+
+            test = new Test("1");
+            expectedTest = new Test("1");
+            question = "";
+            index = 2;
+            test.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new PollQuestion("2v"), new PollQuestion("3v") };
+            expectedTest.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new PollQuestion("2v"), new PollQuestion("Введите вопрос") };
+            yield return new object[] { test, expectedTest, index, question };
+
+        }
+    }
 }
