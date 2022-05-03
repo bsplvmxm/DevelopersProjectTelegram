@@ -694,5 +694,10 @@ namespace TelegramTestBot.UI
                 Cb_SelectTest.Items.Add(nameTest);
             }
         }
+
+        private void Button_StartTest_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
