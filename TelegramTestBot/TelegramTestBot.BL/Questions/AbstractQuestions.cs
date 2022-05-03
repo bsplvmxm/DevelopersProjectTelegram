@@ -10,13 +10,14 @@ namespace TelegramTestBot.BL
     {
         public string ContentOfQuestion { get; set; }
 
-        public List<string> UsersAnswers { get; set; }
-
-        public string CorrectAnswer { get;  set; }
+        public int TypeOfQuestion { get;  set; }
 
         public List<string> Answers { get; set; }
 
-        public int TypeOfQuestion { get;  set; }
+        public string CorrectAnswer { get;  set; }
+
+        public List<string> UsersAnswers { get; set; }
+
 
         public AbstractQuestions()
         {
@@ -25,19 +26,27 @@ namespace TelegramTestBot.BL
 
         public AbstractQuestions(string content)
         {
+            if(content == "")
+            {
+                content = "Введите вопрос";
+            }
             ContentOfQuestion = content;
+            Answers = new List<string>();
+            UsersAnswers = new List<string>();
+            TypeOfQuestion = -23;
+            CorrectAnswer = "Правильный ответ";
         }
 
         public void AddAnswer(string answer)
         {
-            if (answer == null)
+            if (answer == "")
             {
-                throw new ArgumentNullException("Gotta write something");
+                answer = "Новый вариант";
             }
             answer = answer.Trim();
             Answers.Add(answer);
-            CorrectAnswer = "Введите правильный ответ";
         }
+
         public void EditAnswer(int index, string answer)
         {
             if (Answers.Count == 0)
@@ -46,11 +55,11 @@ namespace TelegramTestBot.BL
             }
             if (index < 0 || index >= Answers.Count)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentException("Wrong Index");
             }
-            if (answer == null)
+            if (answer == "")
             {
-                throw new ArgumentNullException("Gotta write something");
+                answer = "Введите ответ";
             }
             answer = answer.Trim();
             Answers[index] = answer;
@@ -73,13 +82,24 @@ namespace TelegramTestBot.BL
         {
             if (answer == "")
             {
-                throw new ArgumentNullException("Empty string");
+                CorrectAnswer = "Ответ не выбран";
             }
-            CorrectAnswer = answer;
+            else
+            {
+                CorrectAnswer = answer;
+            }
         }
 
         public bool CheckUserAnswer(int index)
         {
+            if(Answers.Count == 0)
+            {
+                throw new Exception("Answers are empty");
+            }
+            if(index < 0 || index > Answers.Count)
+            {
+                throw new IndexOutOfRangeException("Wrong Index");
+            }
             bool result = false;
             string UserAnswerCheck = UsersAnswers[index].Trim();
             UserAnswerCheck = UserAnswerCheck.ToLower();
@@ -95,6 +115,56 @@ namespace TelegramTestBot.BL
         public void Send()
         {
 
+        }
+
+
+
+        public override string ToString()
+        {
+            string text;
+            text = ContentOfQuestion;
+            text += $"; Type: {TypeOfQuestion} ;";
+            foreach(string s in Answers)
+            {
+                text += $" {s},";
+            }
+            text += $"; CorrAnsw {CorrectAnswer} ;";
+            foreach(string s in UsersAnswers)
+            {
+                text += $" {s} ,";
+            }
+            return text;
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool flag = true;
+            if (obj == null || !(obj is AbstractQuestions))
+            {
+                flag = false;
+            }
+            AbstractQuestions question = (AbstractQuestions)obj;
+            if ((question.ContentOfQuestion != this.ContentOfQuestion) ||
+                (question.CorrectAnswer != this.CorrectAnswer) ||
+                (question.TypeOfQuestion != this.TypeOfQuestion))
+            {
+                flag = false;
+            }
+            for(int i = 0; i<question.Answers.Count;i++)
+            {
+                if (question.Answers[i] != this.Answers[i])
+                {
+                    flag = false;
+                }
+            }
+            for(int j = 0; j < question.UsersAnswers.Count;j++)
+            {
+                if(question.UsersAnswers[j] != this.UsersAnswers[j])
+                {
+                    flag = false;
+                }
+            }
+            return flag;
         }
     }
 }

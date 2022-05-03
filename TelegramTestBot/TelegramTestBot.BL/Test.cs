@@ -27,7 +27,11 @@ namespace TelegramTestBot.BL
         {
             if (question == "")
             {
-                throw new NullReferenceException();
+                question = "Введите вопрос";
+            }
+            if(index < 0|| index > 4)
+            {
+                throw new ArgumentException("Wrong index(type of question)");
             }
             switch (index)
             {
@@ -53,9 +57,9 @@ namespace TelegramTestBot.BL
         {
             if (index > -1 && index < Questions.Count)
             {
-                if (question == null)
+                if (question == "")
                 {
-                    throw new Exception();
+                    question = "Введите вопрос";
                 }
                 Questions[index].ContentOfQuestion = question;
             }
@@ -63,11 +67,13 @@ namespace TelegramTestBot.BL
 
         public void DeleteQuestionByIndex(int index)
         {
-            if (Questions.Count < 1)
+            if (Questions.Count > 1)
             {
-                throw new Exception("List is Empty");
+                if (index > -1 && index < Questions.Count)
+                {
+                    Questions.RemoveAt(index);
+                }
             }
-            Questions.RemoveAt(index);
         }
 
         
@@ -85,9 +91,41 @@ namespace TelegramTestBot.BL
         {
 
         }
+
+
+
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj == null || !(obj is Test))
+            {
+                result = false;
+            }
+            Test test = (Test)obj;
+            if(test.NameTest != NameTest)
+            {
+                result = false;
+            }
+            for(int i = 0; i < Questions.Count; i++)
+            {
+                if (!(test.Questions[i].Equals(Questions[i])))
+                {
+                    result = false;
+                }                    
+            }
+            return result;
+        }
         public override string ToString()
         {
-            return NameTest;
+            string result = "";
+            result += $"{NameTest} ";
+            foreach(AbstractQuestions question in Questions)
+            {
+                string qwe = question.ToString();
+                result += $"{qwe} ";
+            }
+            return result;
         }
     }
 }

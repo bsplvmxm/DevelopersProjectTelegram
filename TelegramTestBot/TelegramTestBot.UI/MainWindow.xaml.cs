@@ -403,12 +403,18 @@ namespace TelegramTestBot.UI
                 int questionIndex = LB_QuestOfTest.SelectedIndex;
                 int testIndex = LB_AllTests.SelectedIndex;
                 int questionType = MyTests.AllTests[testIndex].Questions[questionIndex].TypeOfQuestion;
-                //TB_QuestionContent.Text = MyTests.AllTests[testIndex].Questions[questionIndex].ContentOfQuestion;
-                TB_Answer1.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0];
-                TB_Answer2.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1];
-                TB_Answer3.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2];
-                TB_Answer4.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3];
-                TB_CorrectAnswer.Text = MyTests.AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
+                TB_QuestionContent.Text = MyTests.AllTests[testIndex].Questions[questionIndex].ContentOfQuestion;
+                if (questionType != 3)
+                {
+                    TB_Answer1.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0];
+                    TB_Answer2.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1];
+                    if (questionType != 4)
+                    {
+                        TB_Answer3.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[2];
+                        TB_Answer4.Text = MyTests.AllTests[testIndex].Questions[questionIndex].Answers[3];
+                    }
+                    TB_CorrectAnswer.Text = MyTests.AllTests[testIndex].Questions[questionIndex].CorrectAnswer;
+                }
                 OpenComponents(questionType);
                 if(questionType == 2)
                 {
