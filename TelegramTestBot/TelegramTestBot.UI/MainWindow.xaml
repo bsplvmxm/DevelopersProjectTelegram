@@ -12,8 +12,8 @@
                 <Grid >
                     <Label Content="Пользователи " HorizontalAlignment="Left" Margin="98,18,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16" Grid.Column="1"/>
                     <Button x:Name="ButtonCreateTest_Poll" Content="Создать тест/опрос" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="160" Click="ButtonCreateTest_Poll_Click" FontSize="16" Margin="30,23,0,0" Grid.ColumnSpan="2"/>
-                    <Button x:Name="ButtonCreateReport" Content="Создать отчет" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Height="47" Width="166" Grid.Column="2"/>
-                    <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Left" Margin="5,69,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="2" FontSize="16" Click="ButtonStartTest_Click"/>
+                    <Button x:Name="ButtonCreateReport" Content="Создать отчет" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="2"/>
+                    <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Center" Margin="0,14,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="2" FontSize="16" Click="ButtonStartTest_Click"/>
                     <ListView x:Name="UserList" Margin="477,310,-915,-170" Grid.RowSpan="2" Grid.Column="2">
                         <ListView.View>
                             <GridView>
@@ -22,20 +22,22 @@
                         </ListView.View>
                     </ListView>
                     <ListBox x:Name="LB_Users" Margin="0,55,0,90" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                    <ComboBox x:Name="CB_groups" HorizontalAlignment="Left" Margin="314,33,0,0" VerticalAlignment="Top" Width="136" SelectionChanged="CB_groups_SelectionChanged" Grid.Column="1"/>
-                    <ComboBox x:Name="CB_GroupList" Grid.Column="2" HorizontalAlignment="Left" Margin="5,278,0,0" VerticalAlignment="Top" Height="20" Width="160" FontSize="10"/>
-                    <TextBox x:Name="TB_Name" Grid.Column="2" HorizontalAlignment="Left" Margin="5,205,0,0" Text="Enter new name" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="160"/>
-                    <TextBox x:Name="TB_GroupName" Grid.Column="2" HorizontalAlignment="Left" Margin="5,258,0,0" Text="Enter group name" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="160"/>
-                    <Button x:Name="ButtonStart" Content="Start" Grid.Column="2" HorizontalAlignment="Left" Margin="45,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="50" Width="90" Click="ButtonStart_Click" FontSize="16"/>
-                    <Button x:Name="EditNameButton" Content="Сохранить" HorizontalAlignment="Left" Margin="5,225,0,0" VerticalAlignment="Top" Height="20" Width="160" Click="EditNameButton_Click" Grid.Column="2"/>
+                    <ComboBox x:Name="CB_groups" HorizontalAlignment="Left" Margin="314,33,0,0" VerticalAlignment="Top" Width="136" SelectionChanged="CB_groups_SelectionChanged" Grid.Column="1" Height="22"/>
+                    <ComboBox x:Name="CB_GroupList" Grid.Column="2" HorizontalAlignment="Center" Margin="0,223,0,0" VerticalAlignment="Top" Height="20" Width="160" FontSize="10"/>
+                    <TextBox x:Name="TB_Name" Grid.Column="2" HorizontalAlignment="Center" Margin="0,138,0,0" Text="Enter new name" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="160"/>
+                    <TextBox x:Name="TB_GroupName" Grid.Column="2" HorizontalAlignment="Center" Margin="0,203,0,0" Text="Enter group name" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="160"/>
+                    <Button x:Name="ButtonStart" Content="Start" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="50" Width="90" Click="ButtonStart_Click" FontSize="16"/>
+                    <Button x:Name="EditNameButton" Content="Сохранить" HorizontalAlignment="Center" Margin="0,158,0,0" VerticalAlignment="Top" Height="20" Width="160" Click="EditNameButton_Click" Grid.Column="2"/>
                     <Button x:Name="AddUserButt" Content="Добавить в группу" HorizontalAlignment="Left" Margin="71,23,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="AddUserButt_Click" Grid.Column="1"/>
                     <Button x:Name="AddGroupButt" Content="Создать группу" HorizontalAlignment="Left" Margin="273,23,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="AddGroupButt_Click" Grid.Column="1"/>
                     <Button x:Name="DelUserButt" Content="Удалить из группы" HorizontalAlignment="Left" Margin="71,47,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="DelUserButt_Click" Grid.Column="1"/>
                     <Button x:Name="DelGroupButt" Content="Удалить группу" HorizontalAlignment="Left" Margin="273,47,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="DelGroupButt_Click" Grid.Column="1"/>
+                    <TextBox x:Name="TB_Token" Grid.Column="2" HorizontalAlignment="Center" Margin="0,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="172"/>
+                    <Label Content="Введите токен:" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16" Grid.Column="2"/>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="161*"/>
-                        <ColumnDefinition Width="460*"/>
-                        <ColumnDefinition Width="173*"/>
+                        <ColumnDefinition Width="450*"/>
+                        <ColumnDefinition Width="183*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="7*"/>
