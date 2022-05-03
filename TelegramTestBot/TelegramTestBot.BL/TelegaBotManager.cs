@@ -9,6 +9,9 @@ using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using TelegramTestBot.BL.Data;
+using TelegramTestBot.BL.Questions;
+
 
 namespace TelegramTestBot.BL
 {
@@ -106,15 +109,20 @@ namespace TelegramTestBot.BL
             }
         }
 
-        public async void SendToGroup(string nameOfGroup)
+        public async void SendToGroup(string nameOfGroup,int indexOfTest)
         {
+            TestsBase tests = TestsBase.GetInstance();
+            Test currentTest = tests.AllTests[indexOfTest];
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
             {
                 foreach (var users in BaseOfUsers.NameBase)
                 {
                     if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
                     {
-                        await _client.SendTextMessageAsync(new ChatId(users.Key), "");
+                        foreach(AbstractQuestions question in currentTest.Questions)
+                        {
+                            await _client.SendTextMessageAsync(new ChatId(users.Key), $"{question.ContentOfQuestion}");
+                        }
                     }
                 }
             }
