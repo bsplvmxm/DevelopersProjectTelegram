@@ -119,9 +119,9 @@ namespace TelegramTestBot.BL
                 {
                     if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
                     {
-                        foreach(AbstractQuestions question in currentTest.Questions)
-                        {
-                            await _client.SendTextMessageAsync(new ChatId(users.Key), $"{question.ContentOfQuestion}");
+                        for(int i = 0; i < currentTest.Questions.Count; i++)
+                        {                           
+                            await _client.SendTextMessageAsync(new ChatId(users.Key), $"{currentTest.Questions[i].ContentOfQuestion}");
                         }
                     }
                 }
