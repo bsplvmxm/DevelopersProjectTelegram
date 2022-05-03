@@ -51,7 +51,6 @@ namespace TelegramTestBot.BL.Tests.TestTests
             test.Questions = new List<AbstractQuestions>();
             expectedTest.Questions = new List<AbstractQuestions>() { new YesNoQuestion(question)};
             yield return new object[] { test, expectedTest, question, index };
-
         }
     }
 
@@ -83,7 +82,48 @@ namespace TelegramTestBot.BL.Tests.TestTests
             test.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new PollQuestion("2v"), new PollQuestion("3v") };
             expectedTest.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new PollQuestion("2v"), new PollQuestion("Введите вопрос") };
             yield return new object[] { test, expectedTest, index, question };
+        }
+    }
 
+    public class DeleteQuestionByIndexTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            Test test = new Test("0");
+            Test expectedTest = new Test("0");
+
+            int index = 0;
+            test.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new ChooseAnyQuestion("2v") };
+            expectedTest.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("2v") };
+            yield return new object[] { test, expectedTest, index };
+
+            test = new Test("1");
+            expectedTest = new Test("1");
+            index = 1;
+            test.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new ChooseAnyQuestion("2v") };
+            expectedTest.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v") };
+            yield return new object[] { test, expectedTest, index };
+
+            test = new Test("1");
+            expectedTest = new Test("1");
+            index = -1;
+            test.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new ChooseAnyQuestion("2v") };
+            expectedTest.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new ChooseAnyQuestion("2v") };
+            yield return new object[] { test, expectedTest, index };
+
+            test = new Test("1");
+            expectedTest = new Test("1");
+            index = 2;
+            test.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new ChooseAnyQuestion("2v") };
+            expectedTest.Questions = new List<AbstractQuestions>() { new ChooseAnyQuestion("1v"), new ChooseAnyQuestion("2v") };
+            yield return new object[] { test, expectedTest, index };
+
+            test = new Test("1");
+            expectedTest = new Test("1");
+            index = 2;
+            test.Questions = new List<AbstractQuestions>() {};
+            expectedTest.Questions = new List<AbstractQuestions>() {};
+            yield return new object[] { test, expectedTest, index };
         }
     }
 }

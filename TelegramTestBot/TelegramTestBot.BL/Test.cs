@@ -67,11 +67,13 @@ namespace TelegramTestBot.BL
 
         public void DeleteQuestionByIndex(int index)
         {
-            if (Questions.Count < 1)
+            if (Questions.Count > 1)
             {
-                throw new Exception("List is Empty");
+                if (index > -1 && index < Questions.Count)
+                {
+                    Questions.RemoveAt(index);
+                }
             }
-            Questions.RemoveAt(index);
         }
 
         

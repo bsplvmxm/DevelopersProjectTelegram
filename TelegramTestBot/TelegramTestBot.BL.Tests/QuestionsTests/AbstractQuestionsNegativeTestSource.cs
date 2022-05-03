@@ -98,5 +98,4 @@ namespace TelegramTestBot.BL.Tests
             yield return new object[] { question, index };
         }
     }
-
 }
