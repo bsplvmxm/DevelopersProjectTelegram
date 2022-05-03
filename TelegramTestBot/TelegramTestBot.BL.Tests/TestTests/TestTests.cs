@@ -16,5 +16,12 @@ namespace TelegramTestBot.BL.Tests.TestTests
             test.AddQuestion(question, index);
             Assert.AreEqual(expected_test, test);
         }
+
+        [TestCaseSource(typeof(AddQuestionWrongIndexTestSource))]
+        public void AddQuestionTest_WhenIndexIsWrong_ShouldThrowArgumentException(Test test, string question, int index)
+        {
+            Assert.Throws<ArgumentException>(() => test.AddQuestion(question, index));
+        }
+
     }
 }
