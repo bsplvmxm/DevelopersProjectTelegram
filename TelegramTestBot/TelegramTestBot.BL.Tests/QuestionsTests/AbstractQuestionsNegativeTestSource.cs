@@ -31,6 +31,7 @@ namespace TelegramTestBot.BL.Tests
             yield return new object[] { question, index, new_answer };
         }
     }
+
     public class EditAnswerEmptyAnswersTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()
@@ -76,6 +77,7 @@ namespace TelegramTestBot.BL.Tests
             yield return new object[] { question, index};
         }
     }
+
     public class DeleteAnswerEmptyAnswersTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()
@@ -96,7 +98,5 @@ namespace TelegramTestBot.BL.Tests
             yield return new object[] { question, index };
         }
     }
-
-
 
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TelegramTestBot.BL.Tests
 {
-    public class AbstractQuestionsTestSource : IEnumerable
+    public class ChooseCorrectTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()
         {
@@ -268,6 +268,5 @@ namespace TelegramTestBot.BL.Tests
 
         }
     }
-
 
 }

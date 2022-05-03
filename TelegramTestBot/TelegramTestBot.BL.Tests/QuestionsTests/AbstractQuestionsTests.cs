@@ -8,7 +8,7 @@ using TelegramTestBot.BL.Questions;
 
 namespace TelegramTestBot.BL.Tests
 {
-    public class Tests
+    public class AbstractQuestionTests
     {
         [TestCaseSource(typeof(AddAnswerTestSource))]
         public void AddAnswerTest(AbstractQuestions question, AbstractQuestions expected_question, string answer)
@@ -61,7 +61,7 @@ namespace TelegramTestBot.BL.Tests
 
 
 
-        [TestCaseSource(typeof(AbstractQuestionsTestSource))]
+        [TestCaseSource(typeof(ChooseCorrectTestSource))]
         public void ChooseCorrectTest(AbstractQuestions question, AbstractQuestions expected_question, string answer)
         {
             question.ChooseCorrect(answer);

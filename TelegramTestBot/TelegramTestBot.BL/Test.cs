@@ -27,7 +27,11 @@ namespace TelegramTestBot.BL
         {
             if (question == "")
             {
-                throw new NullReferenceException();
+                question = "Введите вопрос";
+            }
+            if(index < 0|| index > 4)
+            {
+                throw new ArgumentException("Wrong index(type of question)");
             }
             switch (index)
             {
@@ -85,9 +89,41 @@ namespace TelegramTestBot.BL
         {
 
         }
+
+
+
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj == null || !(obj is Test))
+            {
+                result = false;
+            }
+            Test test = (Test)obj;
+            if(test.NameTest != NameTest)
+            {
+                result = false;
+            }
+            for(int i = 0; i < Questions.Count; i++)
+            {
+                if (!(test.Questions[i].Equals(Questions[i])))
+                {
+                    result = false;
+                }                    
+            }
+            return result;
+        }
         public override string ToString()
         {
-            return NameTest;
+            string result = "";
+            result += $"{NameTest} ";
+            foreach(AbstractQuestions question in Questions)
+            {
+                string qwe = question.ToString();
+                result += $"{qwe} ";
+            }
+            return result;
         }
     }
 }
