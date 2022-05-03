@@ -51,7 +51,7 @@ namespace TelegramTestBot.BL
             }
             if (index < 0 || index >= Answers.Count)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentException("Wrong Index");
             }
             if (answer == "")
             {
@@ -88,9 +88,13 @@ namespace TelegramTestBot.BL
 
         public bool CheckUserAnswer(int index)
         {
-            if(Answers.Count == 0|| index<0 || index > Answers.Count)
+            if(Answers.Count == 0)
             {
-                throw new Exception("Chto-to zdes ne tak");
+                throw new Exception("Answers are empty");
+            }
+            if(index < 0 || index > Answers.Count)
+            {
+                throw new IndexOutOfRangeException("Wrong Index");
             }
             bool result = false;
             string UserAnswerCheck = UsersAnswers[index].Trim();

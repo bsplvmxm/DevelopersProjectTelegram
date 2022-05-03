@@ -18,12 +18,26 @@ namespace TelegramTestBot.BL.Tests
         }
 
 
+
         [TestCaseSource(typeof (EditAnswerTestSource))]
         public void EditAnswerTest(AbstractQuestions question, AbstractQuestions expected_question, int index, string answer)
         {
             question.EditAnswer(index, answer);
             Assert.AreEqual(expected_question,question);
         }
+
+        [TestCaseSource(typeof(EditAnswerEmptyAnswersTestSource))]
+        public void EditAnswerTest_WhanAnswersAreEmpty_ShouldThrowException(AbstractQuestions question, int index, string answer)
+        {
+            Assert.Throws<Exception>(() => question.EditAnswer(index, answer));
+        }
+
+        [TestCaseSource(typeof(EditAnswerWrongIndexTestSource))]
+        public void EditAnswerTest_WhanIndexIsWrong_ShouldThrowArgumentException(AbstractQuestions question, int index, string answer)
+        {
+            Assert.Throws<ArgumentException>(() => question.EditAnswer(index, answer));
+        }
+
 
 
         [TestCaseSource(typeof(DeleteAnswerTestSource))]
@@ -32,6 +46,19 @@ namespace TelegramTestBot.BL.Tests
             question.DeleteAnswer(index);
             Assert.AreEqual(expected_question, question);
         }
+
+        [TestCaseSource(typeof(DeleteAnswerEmptyAnswersTestSource))]
+        public void DeleteAnswerTest_WhenAnswersAreEmpty_ShouldThrowException(AbstractQuestions question, int index)
+        {
+            Assert.Throws<Exception>(() => question.DeleteAnswer(index));
+        }
+
+        [TestCaseSource(typeof(DeleteAnswerWrongIndexTestSource))]
+        public void DeleteAnswerTest_WhenIndexIsWrong_ShoulThrowArgumentException(AbstractQuestions question, int index)
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => question.DeleteAnswer(index));
+        }
+
 
 
         [TestCaseSource(typeof(AbstractQuestionsTestSource))]
@@ -42,6 +69,7 @@ namespace TelegramTestBot.BL.Tests
         }
 
 
+
         [TestCaseSource(typeof(CheckUserAnswerTestSource))]
         public void CheckUserAnswerTest(AbstractQuestions question, int index, bool expected_result, bool actual_result)
         {
@@ -49,8 +77,16 @@ namespace TelegramTestBot.BL.Tests
             Assert.AreEqual(expected_result, actual_result);
         }
 
+        [TestCaseSource(typeof(DeleteAnswerEmptyAnswersTestSource))]
+        public void CheckUserAnswerTest_WhenAnswersAreEmpty_ShouldThrowException(AbstractQuestions question, int index)
+        {
+            Assert.Throws<Exception>(() => question.CheckUserAnswer(index));
+        }
 
-
-
+        [TestCaseSource(typeof(DeleteAnswerWrongIndexTestSource))]
+        public void CheckUserAnswerTest_WhenIndexIsWrong_ShoulThrowArgumentException(AbstractQuestions question, int index)
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => question.CheckUserAnswer(index));
+        }
     }
 }
