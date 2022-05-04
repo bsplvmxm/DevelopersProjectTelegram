@@ -15,8 +15,7 @@ namespace TelegramTestBot.BL
         public List<string> Answers { get; set; }
 
         public string CorrectAnswer { get;  set; }
-
-        public List<string> UsersAnswers { get; set; }
+        public List<string> UsersAnswers { get;  set; }
 
 
         public AbstractQuestions()
