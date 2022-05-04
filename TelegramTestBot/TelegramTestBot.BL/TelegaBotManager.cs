@@ -20,6 +20,9 @@ namespace TelegramTestBot.BL
         private TelegramBotClient _client;
         private Action<string> _onMessage;
         private string _others;
+        public bool isTesting = false;
+        public int _indexOfTest;
+        private int _indexOfQuest;
         
         public TelegaBotManager(string token, Action<string> onMessage)
         {
@@ -30,7 +33,7 @@ namespace TelegramTestBot.BL
 
         public void StartBot()
         {
-            _client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);        
+            _client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);
         }
 
         public void StopBot()
@@ -109,33 +112,45 @@ namespace TelegramTestBot.BL
             }
         }
 
-        public async void SendToGroup(string nameOfGroup,int indexOfTest)
+        public async void SendToGroup(long id)
         {
             TestsBase tests = TestsBase.GetInstance();
-            Test currentTest = tests.AllTests[indexOfTest];
-            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            Test currentTest = tests.AllTests[_indexOfTest];
+
+            if (BaseOfUsers.UserAnswers.ContainsKey(id))
             {
-                foreach (var users in BaseOfUsers.NameBase)
-                {
-                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
-                    {
-                        for(int i = 0; i < currentTest.Questions.Count; i++)
-                        {                           
-                            await _client.SendTextMessageAsync(new ChatId(users.Key), $"{currentTest.Questions[i].ContentOfQuestion}");
-                        }
-                    }
-                }
+                _indexOfQuest = 0;
+                await _client.SendTextMessageAsync(new ChatId(id), $"{currentTest.Questions[_indexOfQuest].ContentOfQuestion}");
+            }                      
+        }
+
+        public async void SendNextQuestion(long id)
+        {
+            TestsBase tests = TestsBase.GetInstance();
+            Test currentTest = tests.AllTests[_indexOfTest];
+            
+            if (_indexOfQuest < currentTest.Questions.Count-1)
+            {
+                _indexOfQuest++;
+                await _client.SendTextMessageAsync(new ChatId(id), $"{currentTest.Questions[_indexOfQuest].ContentOfQuestion}");
             }
         }
 
-        public async void SendToUser(string nameOfUser)
+        public async void SendToUser(long id)
         {
-            foreach (var users in BaseOfUsers.NameBase)
+            if (BaseOfUsers.NameBase.ContainsKey(id) && BaseOfUsers.RegBase.ContainsKey(id))
             {
-                if (BaseOfUsers.NameBase.ContainsValue(nameOfUser))
+                var inlineKeyboard = new InlineKeyboardMarkup(new[]
                 {
-                    await _client.SendTextMessageAsync(new ChatId(users.Key), "");
-                }
+                InlineKeyboardButton.WithCallbackData("ДА", "yes"),
+                InlineKeyboardButton.WithCallbackData("НЕТ", "no"),
+                });
+
+                await _client.SendTextMessageAsync(new ChatId(id), "Ты хочешь начать тестирование?", replyMarkup: inlineKeyboard);
+            }
+            else
+            {
+                await _client.SendTextMessageAsync(new ChatId(id), "Sorry, bro, go for a walk, this test not to u");
             }
         }
 
@@ -173,24 +188,42 @@ namespace TelegramTestBot.BL
         }
 
         private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-        {          
+        {
             if (update.Message != null && update.Message.Text != null && !BaseOfUsers.NameBase.ContainsKey(update.Message.Chat.Id))
             {              
                 CreateGroup(_others);
 
                 BaseOfUsers.NameBase.Add(update.Message.Chat.Id, update.Message.Chat.Username);
-                
-                StartingButton(update.Message.Chat.Id);               
+
+                StartingButton(update.Message.Chat.Id);
             }
             else if (update.CallbackQuery != null)
             {
-                await botClient.EditMessageTextAsync(
-                    update.CallbackQuery.Message.Chat.Id,
-                    update.CallbackQuery.Message.MessageId,
-                    update.CallbackQuery.Message.Text,
-                    replyMarkup: null);
+                if (isTesting == true && update.CallbackQuery.Data == "yes")
+                {
+                    //TestsBase tests = TestsBase.GetInstance();
+                    //Test currentTest = tests.AllTests[_indexOfTest];
 
-                Registration(update.CallbackQuery.Message.Chat.Id);
+                    await botClient.EditMessageTextAsync(
+                        update.CallbackQuery.Message.Chat.Id,
+                        update.CallbackQuery.Message.MessageId,
+                        update.CallbackQuery.Message.Text,
+                        replyMarkup: null);
+
+                    BaseOfUsers.UserAnswers.Add(update.CallbackQuery.Message.Chat.Id, new List<string>());
+
+                    SendToGroup(update.CallbackQuery.Message.Chat.Id);
+                }
+                else if (update.CallbackQuery.Data == "startReg")
+                {
+                    await botClient.EditMessageTextAsync(
+                        update.CallbackQuery.Message.Chat.Id,
+                        update.CallbackQuery.Message.MessageId,
+                        update.CallbackQuery.Message.Text,
+                        replyMarkup: null);
+
+                    Registration(update.CallbackQuery.Message.Chat.Id);
+                }
             }
             else if (BaseOfUsers.RegBase.ContainsValue(false))
             {
@@ -201,6 +234,19 @@ namespace TelegramTestBot.BL
 
                 await _client.SendTextMessageAsync(update.Message.Chat, "Registration successfull!", replyMarkup: null);
                 return;
+            }
+            //else if (isTesting == true && update.Message.Text == "/test" && !BaseOfUsers.UserAnswers.ContainsKey(update.Message.Chat.Id))
+            //{
+            //    SendToUser(update.Message.Chat.Id);
+            //}
+            else if (isTesting == true && BaseOfUsers.UserAnswers.ContainsKey(update.Message.Chat.Id) && update.Message.Text != null)
+            {
+                TestsBase tests = TestsBase.GetInstance();
+                Test currentTest = tests.AllTests[_indexOfTest];
+
+                BaseOfUsers.UserAnswers[update.Message.Chat.Id].Add(update.Message.Text);
+
+                SendNextQuestion(update.Message.Chat.Id);
             }
         }
 

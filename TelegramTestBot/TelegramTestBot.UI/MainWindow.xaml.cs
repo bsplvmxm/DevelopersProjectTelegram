@@ -697,10 +697,21 @@ namespace TelegramTestBot.UI
 
         private void Button_StartTest_Click(object sender, RoutedEventArgs e)
         {
-            int indexOfTest = Cb_SelectTest.SelectedIndex;
+            int index = Cb_SelectTest.SelectedIndex;
             string nameOfGroup = (string)CB_SelectGroup.SelectedItem;
 
-            _telegaManager.SendToGroup(nameOfGroup, indexOfTest);
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            {
+                foreach (var users in BaseOfUsers.NameBase)
+                {
+                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
+                    {
+                        _telegaManager.SendToUser(users.Key);
+                        _telegaManager.isTesting = true;
+                        _telegaManager._indexOfTest = index;
+                    }
+                }
+            }
 
         }
     }
