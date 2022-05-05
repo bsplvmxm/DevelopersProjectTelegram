@@ -278,7 +278,17 @@ namespace TelegramTestBot.BL
                         replyMarkup: null);
 
                     Registration(update.CallbackQuery.Message.Chat.Id);
-                }               
+                }
+                else if (_isTesting == true && update.CallbackQuery.Data == "no")
+                {
+                    await botClient.EditMessageTextAsync(
+                        update.CallbackQuery.Message.Chat.Id,
+                        update.CallbackQuery.Message.MessageId,
+                        update.CallbackQuery.Message.Text,
+                        replyMarkup: null);
+
+                    await botClient.SendTextMessageAsync(update.CallbackQuery.Message.Chat.Id, "ok, bro, go for a walk((((");
+                }
             }
             else if (BaseOfUsers.RegBase.ContainsValue(false))
             {

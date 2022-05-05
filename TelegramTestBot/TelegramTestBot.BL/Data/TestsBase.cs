@@ -75,7 +75,10 @@ namespace TelegramTestBot.BL.Data
                     if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
                     {
                         usersNames.Add(users.Value);
-                        allAnswersOfUsers.Add(BaseOfUsers.UserAnswers[users.Key]);
+                        if (BaseOfUsers.UserAnswers.Keys.Count != 0)
+                        {
+                            allAnswersOfUsers.Add(BaseOfUsers.UserAnswers[users.Key]);
+                        }
                     }
                 }
             }
@@ -119,18 +122,19 @@ namespace TelegramTestBot.BL.Data
                     if (j<allAnswersOfUsers[i].Count)
                     {
                         oSheet.Cells[i + 2, j + 2] = $"{allAnswersOfUsers[i][j]}";//ответ на конкретный вопрос
-                            if (currentTest.Questions[j].TypeOfQuestion == 3)
-                            {
-                                oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Gray);
-                            }
-                            else if (allAnswersOfUsers[i][j] == currentTest.Questions[j].CorrectAnswer)
-                            {
-                                oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGreen);
-                            }
-                            else if (allAnswersOfUsers[i][j] != currentTest.Questions[j].CorrectAnswer)
-                            {
-                                oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
-                            }
+
+                        if (currentTest.Questions[j].TypeOfQuestion == 3)
+                        {
+                            oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Gray);
+                        }
+                        else if (allAnswersOfUsers[i][j] == currentTest.Questions[j].CorrectAnswer)
+                        {
+                            oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGreen);
+                        }
+                        else if (allAnswersOfUsers[i][j] != currentTest.Questions[j].CorrectAnswer)
+                        {
+                            oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
+                        }
                     }
                     else
                     {
