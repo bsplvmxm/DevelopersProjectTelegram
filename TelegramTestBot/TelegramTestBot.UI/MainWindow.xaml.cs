@@ -51,15 +51,13 @@ namespace TelegramTestBot.UI
 
         public void OnMessage(string s)
         {
-            _labels.Add(s);
-            
+            _labels.Add(s);          
         }
 
         private void Window_Initialized(object sender, EventArgs e)
         {
             
         }
-
 
         private void OnTimerTick(object sender, EventArgs e)
         {
@@ -204,8 +202,7 @@ namespace TelegramTestBot.UI
 
             LB_Users.Items.Refresh();
             CB_groups.Items.Refresh();
-        }
-        
+        }        
            
         private void Button_AddTest_Click(object sender, RoutedEventArgs e)
         {
@@ -678,7 +675,6 @@ namespace TelegramTestBot.UI
             }
         }
 
-
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
             MyTests.Save(MyTests.AllTests);
@@ -710,7 +706,7 @@ namespace TelegramTestBot.UI
                     {
                         _telegaManager.SendToUser(users.Key);
 
-                        _telegaManager.isTesting = true;
+                        _telegaManager._isTesting = true;
                         _telegaManager._indexOfTest = index;
                     }
                 }
@@ -722,7 +718,7 @@ namespace TelegramTestBot.UI
             MyTests.CreateTestReport(CB_SelectGroup.Text, MyTests.AllTests[Cb_SelectTest.SelectedIndex]);
             _telegaManager.ClearUserAnswers();
 
-            _telegaManager.isTesting = false;
+            _telegaManager._isTesting = false;
         }
     }
 }
