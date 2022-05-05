@@ -492,6 +492,8 @@ namespace TelegramTestBot.UI
                     }
                 case 4:
                     {
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
                         MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                         break;
                     }

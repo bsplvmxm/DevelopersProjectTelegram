@@ -81,16 +81,6 @@ namespace TelegramTestBot.BL.Data
                 }
             }
             //лист из листов с ответами
-            foreach (var users in usersNames)
-            {
-                foreach (var ids in BaseOfUsers.NameBase)
-                {
-                    if (BaseOfUsers.NameBase.ContainsValue(users))
-                    {
-                        allAnswersOfUsers.Add(BaseOfUsers.UserAnswers[ids.Key]);
-                    }
-                }
-            }
             //инициальзируем эксель
             Excel.Application oXL;//приложение
             Excel._Workbook report;//сам файл

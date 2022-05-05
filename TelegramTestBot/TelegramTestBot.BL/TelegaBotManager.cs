@@ -148,7 +148,13 @@ namespace TelegramTestBot.BL
             
             if (i <= currentTest.Questions.Count-1 && BaseOfUsers.UserAnswers.ContainsKey(id))
             {
-                await _client.SendTextMessageAsync(new ChatId(id), $"{currentTest.Questions[i].ContentOfQuestion}");
+                string currentQuestion = "";
+                currentQuestion = currentTest.Questions[i].ContentOfQuestion;
+                foreach (string answer in currentTest.Questions[i].Answers)
+                {
+                    currentQuestion += $" {answer}";
+                }
+                await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion}");
             }
         }
 
