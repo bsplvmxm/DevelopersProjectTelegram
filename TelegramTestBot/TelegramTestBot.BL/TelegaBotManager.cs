@@ -149,7 +149,7 @@ namespace TelegramTestBot.BL
                                 $"2.{currentTest.Questions[i].Answers[1]} \n " +
                                 $"3.{currentTest.Questions[i].Answers[2]} \n " +
                                 $"4.{currentTest.Questions[i].Answers[3]}");
-
+                            
                             break;
                         }
                     case 1:
