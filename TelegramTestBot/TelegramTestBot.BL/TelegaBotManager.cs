@@ -143,23 +143,12 @@ namespace TelegramTestBot.BL
                 {
                     case 0:
                         {
-                            var anyAnsKeyboard = new ReplyKeyboardMarkup(new[]
-                            {
-                                new[]
-                                {
-                                    new KeyboardButton($"{currentTest.Questions[i].Answers[0]}"),
-                                    new KeyboardButton($"{currentTest.Questions[i].Answers[1]}"),
-                                },
-                                new[]
-                                {
-                                    new KeyboardButton($"{currentTest.Questions[i].Answers[2]}"),
-                                    new KeyboardButton($"{currentTest.Questions[i].Answers[3]}"),
-                                },
-                            });
-
-                            anyAnsKeyboard.OneTimeKeyboard = true;
-
-                            await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion}", replyMarkup: anyAnsKeyboard);
+                            await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion} \n" +
+                                $"Выберите несколько вариантов ответов: \n " +
+                                $"1.{currentTest.Questions[i].Answers[0]} \n " +
+                                $"2.{currentTest.Questions[i].Answers[1]} \n " +
+                                $"3.{currentTest.Questions[i].Answers[2]} \n " +
+                                $"4.{currentTest.Questions[i].Answers[3]}");
 
                             break;
                         }
@@ -216,6 +205,10 @@ namespace TelegramTestBot.BL
                             break;
                         }
                 }            
+            }
+            else
+            {
+                await _client.SendTextMessageAsync(new ChatId(id), "Congratulation! Test complete, pls wait results!", replyMarkup: null);
             }
         }
 
