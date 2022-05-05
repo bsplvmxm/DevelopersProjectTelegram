@@ -74,10 +74,7 @@ namespace TelegramTestBot.BL
                     Questions.RemoveAt(index);
                 }
             }
-        }
-
-        
-
+        }     
 
         public void StartTest()
         {
@@ -91,9 +88,6 @@ namespace TelegramTestBot.BL
         {
 
         }
-
-
-
 
         public override bool Equals(object obj)
         {
@@ -116,6 +110,7 @@ namespace TelegramTestBot.BL
             }
             return result;
         }
+
         public override string ToString()
         {
             string result = "";

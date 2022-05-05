@@ -133,15 +133,89 @@ namespace TelegramTestBot.BL
             
             if (i <= currentTest.Questions.Count-1 && BaseOfUsers.UserAnswers.ContainsKey(id))
             {
-                string currentQuestion = "";
+                string currentQuestion;
+                int typeOfQuest;
+
                 currentQuestion = currentTest.Questions[i].ContentOfQuestion;
+                typeOfQuest = currentTest.Questions[i].TypeOfQuestion;
 
-                foreach (string answer in currentTest.Questions[i].Answers)
+                switch (typeOfQuest)
                 {
-                    currentQuestion += $" {answer}";
-                }
+                    case 0:
+                        {
+                            var anyAnsKeyboard = new ReplyKeyboardMarkup(new[]
+                            {
+                                new[]
+                                {
+                                    new KeyboardButton($"{currentTest.Questions[i].Answers[0]}"),
+                                    new KeyboardButton($"{currentTest.Questions[i].Answers[1]}"),
+                                },
+                                new[]
+                                {
+                                    new KeyboardButton($"{currentTest.Questions[i].Answers[2]}"),
+                                    new KeyboardButton($"{currentTest.Questions[i].Answers[3]}"),
+                                },
+                            });
 
-                await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion}");
+                            anyAnsKeyboard.OneTimeKeyboard = true;
+
+                            await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion}", replyMarkup: anyAnsKeyboard);
+
+                            break;
+                        }
+                    case 1:
+                        {
+                            var oneAnsKeyboard = new ReplyKeyboardMarkup(new[]
+                            {
+                                new[]
+                                {
+                                    new KeyboardButton($"{currentTest.Questions[i].Answers[0]}"),
+                                    new KeyboardButton($"{currentTest.Questions[i].Answers[1]}"),
+                                },
+                                new[]
+                                {
+                                    new KeyboardButton($"{currentTest.Questions[i].Answers[2]}"),
+                                    new KeyboardButton($"{currentTest.Questions[i].Answers[3]}"),
+                                },                          
+                            });
+
+                            oneAnsKeyboard.OneTimeKeyboard = true;
+
+                            await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion}", replyMarkup: oneAnsKeyboard);
+
+                            break;
+                        }
+                    case 2:
+                        {
+                            await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion} \n " +
+                                $"1.{currentTest.Questions[i].Answers[0]} \n " +
+                                $"2.{currentTest.Questions[i].Answers[1]} \n " +
+                                $"3.{currentTest.Questions[i].Answers[2]} \n " +
+                                $"4.{currentTest.Questions[i].Answers[3]}");
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion}");
+
+                            break;
+                        }
+                    case 4:
+                        {
+                            var yesNoKeyboard = new ReplyKeyboardMarkup(new[]
+                            {
+                                new KeyboardButton($"{currentTest.Questions[i].Answers[1]}"),
+                                new KeyboardButton($"{currentTest.Questions[i].Answers[0]}"),
+                            });
+
+                            yesNoKeyboard.OneTimeKeyboard = true;
+
+                            await _client.SendTextMessageAsync(new ChatId(id), $"{currentQuestion}", replyMarkup: yesNoKeyboard);
+
+                            break;
+                        }
+                }            
             }
         }
 
@@ -211,7 +285,7 @@ namespace TelegramTestBot.BL
                         replyMarkup: null);
 
                     Registration(update.CallbackQuery.Message.Chat.Id);
-                }
+                }               
             }
             else if (BaseOfUsers.RegBase.ContainsValue(false))
             {
