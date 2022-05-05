@@ -36,6 +36,7 @@ namespace TelegramTestBot.UI
             LB_Users.ItemsSource = _labels;
             CB_groups.Items.Add("Others");
             CB_GroupList.Items.Add("Others");
+
             
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);

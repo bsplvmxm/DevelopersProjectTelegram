@@ -12,8 +12,7 @@
                 <Grid >
                     <Label Content="Пользователи " HorizontalAlignment="Left" Margin="170,28,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16" Grid.Column="1"/>
                     <Button x:Name="ButtonCreateTest_Poll" Content="Создать тест/опрос" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="160" Click="ButtonCreateTest_Poll_Click" FontSize="16" Margin="30,23,0,0" Grid.ColumnSpan="2"/>
-                    <Button x:Name="ButtonCreateReport" Content="Создать отчет" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="2"/>
-                    <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Center" Margin="0,14,0,0" VerticalAlignment="Top" Height="47" Width="166" Grid.Column="2" FontSize="16" Click="ButtonStartTest_Click"/>
+                    <Button x:Name="ButtonStartTest" Content="Запуск теста/опроса" HorizontalAlignment="Center" Margin="0,223,0,0" VerticalAlignment="Top" Height="47" Width="160" FontSize="16" Click="ButtonStartTest_Click"/>
                     <ListView x:Name="UserList" Margin="477,310,-915,-170" Grid.RowSpan="2" Grid.Column="2">
                         <ListView.View>
                             <GridView>
@@ -32,8 +31,9 @@
                     <Button x:Name="AddGroupButt" Content="Создать группу" HorizontalAlignment="Left" Margin="273,23,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="AddGroupButt_Click" Grid.Column="1"/>
                     <Button x:Name="DelUserButt" Content="Удалить из группы" HorizontalAlignment="Left" Margin="71,47,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="DelUserButt_Click" Grid.Column="1"/>
                     <Button x:Name="DelGroupButt" Content="Удалить группу" HorizontalAlignment="Left" Margin="273,47,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="DelGroupButt_Click" Grid.Column="1"/>
-                    <TextBox x:Name="TB_Token" HorizontalAlignment="Center" Margin="0,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="162"/>
-                    <Label Content="Введите токен:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="TB_Token" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="20" Width="160"/>
+                    <Label Content="Введите токен:" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16" Grid.ColumnSpan="2"/>
+                    <Button Content="Button" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" Height="24" Width="160"/>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="161*"/>
                         <ColumnDefinition Width="450*"/>
