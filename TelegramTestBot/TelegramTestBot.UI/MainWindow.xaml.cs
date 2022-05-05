@@ -492,6 +492,8 @@ namespace TelegramTestBot.UI
                     }
                 case 4:
                     {
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[0] = TB_Answer1.Text;
+                        MyTests.AllTests[testIndex].Questions[questionIndex].Answers[1] = TB_Answer2.Text;
                         MyTests.AllTests[testIndex].Questions[questionIndex].ChooseCorrect(correctAnswer);
                         break;
                     }
@@ -693,6 +695,34 @@ namespace TelegramTestBot.UI
                 LB_AllTests.Items.Add(nameTest);
                 Cb_SelectTest.Items.Add(nameTest);
             }
+        }
+
+        private void Button_StartTest_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Cb_SelectTest.SelectedIndex;
+            string nameOfGroup = (string)CB_SelectGroup.SelectedItem;
+
+            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            {
+                foreach (var users in BaseOfUsers.NameBase)
+                {
+                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
+                    {
+                        _telegaManager.SendToUser(users.Key);
+
+                        _telegaManager.isTesting = true;
+                        _telegaManager._indexOfTest = index;
+                    }
+                }
+            }
+        }
+
+        private void Button_StopTest_Click(object sender, RoutedEventArgs e)
+        {
+            MyTests.CreateTestReport(CB_SelectGroup.Text, MyTests.AllTests[Cb_SelectTest.SelectedIndex]);
+            _telegaManager.ClearUserAnswers();
+
+            _telegaManager.isTesting = false;
         }
     }
 }
