@@ -62,16 +62,13 @@ namespace TelegramTestBot.BL.Data
             }
         }
 
+
         public void CreateTestReport(string nameOfGroup, Test currentTest)
         {
-            //nameOfGroup = "gruppa";
-            //currentTest = new Test("Example");
-            //currentTest.AddQuestion("AAA?", 3);
-            //currentTest.AddQuestion("EEE", 4);
-            //currentTest.AddQuestion("???", 1);
             string reportName = $"Отчёт по группе {nameOfGroup}, тест: {currentTest.NameTest}";
             //лист с именами пользователей
             List<string> usersNames = new List<string> { };
+            List<List<string>> allAnswersOfUsers = new List<List<string>>(usersNames.Count);
             if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
             {
                 foreach (var users in BaseOfUsers.NameBase)
@@ -79,6 +76,18 @@ namespace TelegramTestBot.BL.Data
                     if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
                     {
                         usersNames.Add(users.Value);
+                        allAnswersOfUsers.Add(BaseOfUsers.UserAnswers[users.Key]);
+                    }
+                }
+            }
+            //лист из листов с ответами
+            foreach (var users in usersNames)
+            {
+                foreach (var ids in BaseOfUsers.NameBase)
+                {
+                    if (BaseOfUsers.NameBase.ContainsValue(users))
+                    {
+                        allAnswersOfUsers.Add(BaseOfUsers.UserAnswers[ids.Key]);
                     }
                 }
             }
@@ -107,6 +116,7 @@ namespace TelegramTestBot.BL.Data
                 schetchik++;
 
             }
+            schetchik = 0;
             //заполняем первый столбец вопросами теста, начиная с А2 идём А3, А4 и т.д.
             for (int i = 0; i < currentTest.Questions.Count; i++)
             {
@@ -121,14 +131,14 @@ namespace TelegramTestBot.BL.Data
                 oSheet.Cells[1,i+2] = $"{currentQuestion}";
             }
             //заполняем ответами начиная с В2 идём В3, В4 и т.д.
-                string[] an = new string[0]; //массив ответов, эт переделаем в лист
             for (int i = 0; i < usersNames.Count; i++)
             {
                 for(int j = 0; j < currentTest.Questions.Count; j++)
                 {
-                    if (an[j] != null)
+                    
+                    if (j<allAnswersOfUsers[i].Count)
                     {
-                        oSheet.Cells[i + 2, j + 2] = $"{an[j]}";//ответ на конкретный вопрос
+                        oSheet.Cells[i + 2, j + 2] = $"{allAnswersOfUsers[i][j]}";//ответ на конкретный вопрос
                     }
                     else
                     {
