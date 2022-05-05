@@ -119,6 +119,7 @@ namespace TelegramTestBot.BL.Data
                     if (j<allAnswersOfUsers[i].Count)
                     {
                         oSheet.Cells[i + 2, j + 2] = $"{allAnswersOfUsers[i][j]}";//ответ на конкретный вопрос
+                        oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
                     }
                     else
                     {
