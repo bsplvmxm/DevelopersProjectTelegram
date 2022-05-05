@@ -112,6 +112,14 @@ namespace TelegramTestBot.BL
             }
         }
 
+        public void ClearUserAnswers()
+        {
+            foreach (var user in BaseOfUsers.UserAnswers)
+            {
+                BaseOfUsers.UserAnswers.Remove(user.Key);
+            }
+        }
+
         public async void SendToUser(long id)
         {
             if (BaseOfUsers.NameBase.ContainsKey(id) && BaseOfUsers.RegBase[id] == true)

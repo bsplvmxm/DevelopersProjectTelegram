@@ -709,17 +709,20 @@ namespace TelegramTestBot.UI
                     if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
                     {
                         _telegaManager.SendToUser(users.Key);
+
                         _telegaManager.isTesting = true;
                         _telegaManager._indexOfTest = index;
                     }
                 }
             }
-
         }
 
         private void Button_StopTest_Click(object sender, RoutedEventArgs e)
         {
             MyTests.CreateTestReport(CB_SelectGroup.Text, MyTests.AllTests[Cb_SelectTest.SelectedIndex]);
+            _telegaManager.ClearUserAnswers();
+
+            _telegaManager.isTesting = false;
         }
     }
 }
