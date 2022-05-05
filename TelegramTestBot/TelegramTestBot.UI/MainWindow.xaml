@@ -120,7 +120,7 @@
                     <Button x:Name="Button_GoToMain1" Content="На главную" HorizontalAlignment="Left" Margin="81,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="44" Width="109" FontSize="16" Click="Button_GoToMain1_Click"/>
                     <Button x:Name="Button_AddTest1" Content="Создать тест\опрос" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="44" Width="152" FontSize="16" Grid.Column="1" Click="Button_AddTest1_Click"/>
                     <Button x:Name="Button_StartTest" Content="Запустить тест" HorizontalAlignment="Center" Margin="0,43,0,0" Grid.Row="1" VerticalAlignment="Top" Height="44" Width="110" FontSize="16" Grid.Column="1"/>
-                    <Button x:Name="Button_StopTest" Content="Остановить тест" HorizontalAlignment="Center" Margin="0,101,0,0" Grid.Row="1" VerticalAlignment="Top" Height="44" Width="123" FontSize="16" Grid.Column="1"/>
+                    <Button x:Name="Button_StopTest" Content="Остановить тест" HorizontalAlignment="Center" Margin="0,101,0,0" Grid.Row="1" VerticalAlignment="Top" Height="44" Width="123" FontSize="16" Grid.Column="1" Click="Button_StopTest_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

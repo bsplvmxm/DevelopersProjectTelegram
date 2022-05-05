@@ -64,6 +64,11 @@ namespace TelegramTestBot.BL.Data
 
         public void CreateTestReport(string nameOfGroup, Test currentTest)
         {
+            nameOfGroup = "gruppa";
+            currentTest = new Test("Example");
+            currentTest.AddQuestion("AAA?", 3);
+            currentTest.AddQuestion("EEE", 4);
+            currentTest.AddQuestion("???", 1);
             string reportName = $"Отчёт по группе {nameOfGroup}, тест: {currentTest.NameTest}";
             //лист с именами пользователей
             List<string> usersNames = new List<string> { };
@@ -88,14 +93,22 @@ namespace TelegramTestBot.BL.Data
             report = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
             oSheet = (Excel._Worksheet)report.Worksheets[1];//выцепляем нужный лист
             oSheet.Cells[1, 1] = $"{reportName}";//А1 = название отчёта
-            oSheet.Name = $"{reportName}";//имя листа(на вкладке снизу) = название отчёта
+            oSheet.Name = $"{currentTest.NameTest}";//имя листа(на вкладке снизу) = название отчёта
+            usersNames.Add("Il'ka");
             //заполняем первую строку именами юзеров, начаиния с В1 идём С1, D1 и т.д.
-            for(int i = 0; i <= usersNames.Count; i++)
+            //for(int i = 0; i <= usersNames.Count; i++)
+            //{
+            //    oSheet.Cells[i+2, 1] = $"{usersNames[i]}";
+            //}
+            int schetchik = 0;
+            foreach(var user in usersNames)
             {
-                oSheet.Cells[i+2, 1] = $"{usersNames[i]}";
+                oSheet.Cells[schetchik + 2, 1] = $"{usersNames[schetchik]}";
+                schetchik++;
+
             }
             //заполняем первый столбец вопросами теста, начиная с А2 идём А3, А4 и т.д.
-            for(int i = 0; i < currentTest.Questions.Count; i++)
+            for (int i = 0; i < currentTest.Questions.Count; i++)
             {
                 //создаём стрингу с вопросом и вариантами ответов на него
                 string currentQuestion = "";
@@ -108,9 +121,9 @@ namespace TelegramTestBot.BL.Data
                 oSheet.Cells[1,i+2] = $"{currentQuestion}";
             }
             //заполняем ответами начиная с В2 идём В3, В4 и т.д.
+                string[] an = new string[3] {"xa","xy","xo"}; //массив ответов, эт переделаем в лист
             for (int i = 0; i < usersNames.Count; i++)
             {
-                string[] an = new string[currentTest.Questions.Count]; //массив ответов, эт переделаем в лист
                 for(int j = 0; j < currentTest.Questions.Count; j++)
                 {
                     if (an[j] != null)
@@ -124,7 +137,7 @@ namespace TelegramTestBot.BL.Data
                 }
             }
             // сохранение с именем которое в начале задавали
-            report.Application.ActiveWorkbook.SaveAs($"{reportName}.xls", Type.Missing,
+            report.Application.ActiveWorkbook.SaveAs("report.xls", Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
         }

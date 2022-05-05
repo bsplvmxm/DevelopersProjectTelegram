@@ -694,5 +694,10 @@ namespace TelegramTestBot.UI
                 Cb_SelectTest.Items.Add(nameTest);
             }
         }
+
+        private void Button_StopTest_Click(object sender, RoutedEventArgs e)
+        {
+            MyTests.CreateTestReport("fff", MyTests.AllTests[0]);
+        }
     }
 }
