@@ -23,65 +23,65 @@ namespace TelegramTestBot.BL
 
         }
 
-        public AbstractQuestions(string content)
+        public AbstractQuestions(string contentOfQuestion)
         {
-            if(content == "")
+            if(contentOfQuestion == "")
             {
-                content = "Введите вопрос";
+                contentOfQuestion = "Введите вопрос";
             }
-            ContentOfQuestion = content;
+            ContentOfQuestion = contentOfQuestion;
             Answers = new List<string>();
             UsersAnswers = new List<string>();
             TypeOfQuestion = -23;
             CorrectAnswer = "Правильный ответ";
         }
 
-        public void AddAnswer(string answer)
+        public void AddAnswer(string newVariant)
         {
-            if (answer == "")
+            if (newVariant == "")
             {
-                answer = "Новый вариант";
+                newVariant = "Новый вариант";
             }
-            answer = answer.Trim();
-            Answers.Add(answer);
+            newVariant = newVariant.Trim();
+            Answers.Add(newVariant);
         }
 
-        public void EditAnswer(int index, string answer)
+        public void EditAnswer(int indexOfQuestion, string newAnswersContent)
         {
             if (Answers.Count == 0)
             {
                 throw new Exception("Answers does not exist now");
             }
-            if (index < 0 || index >= Answers.Count)
+            if (indexOfQuestion < 0 || indexOfQuestion >= Answers.Count)
             {
                 throw new ArgumentException("Wrong Index");
             }
-            if (answer == "")
+            if (newAnswersContent == "")
             {
-                answer = "Введите ответ";
+                newAnswersContent = "Введите ответ";
             }
-            answer = answer.Trim();
-            Answers[index] = answer;
+            newAnswersContent = newAnswersContent.Trim();
+            Answers[indexOfQuestion] = newAnswersContent;
         }
 
-        public void DeleteAnswer(int index)
+        public void DeleteAnswer(int indexOfQuestion)
         {
             if (Answers.Count == 0)
             {
                 throw new Exception("Answers does not exist now");
             }
-            if (index < 0 || index > Answers.Count)
+            if (indexOfQuestion < 0 || indexOfQuestion > Answers.Count)
             {
                 throw new IndexOutOfRangeException("Wrong index");
             }
-            Answers.RemoveAt(index);
+            Answers.RemoveAt(indexOfQuestion);
         }
 
         public void ChooseCorrect(string answer)
         {
             if (answer == "")
             {
-                CorrectAnswer = "Ответ не выбран";
+                CorrectAnswer = "Верный ответ не выбран";
             }
             else
             {
@@ -89,6 +89,7 @@ namespace TelegramTestBot.BL
             }
         }
 
+        //переделать чтобы кушал стрингу
         public bool CheckUserAnswer(int index)
         {
             if(Answers.Count == 0)
@@ -111,10 +112,6 @@ namespace TelegramTestBot.BL
             return result;
         }
 
-        public void Send()
-        {
-
-        }
 
         public override string ToString()
         {

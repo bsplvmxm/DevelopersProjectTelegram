@@ -23,71 +23,59 @@ namespace TelegramTestBot.BL
             Questions = new List<AbstractQuestions>();
         }
 
-        public void AddQuestion(string question, int index)
+        public void AddQuestion(string questionContent, int typeOfQuestion)
         {
-            if (question == "")
+            if (questionContent == "")
             {
-                question = "Введите вопрос";
+                questionContent = "Введите вопрос";
             }
-            if(index < 0|| index > 4)
+            if(typeOfQuestion < 0|| typeOfQuestion > 4)
             {
                 throw new ArgumentException("Wrong index(type of question)");
             }
-            switch (index)
+            switch (typeOfQuestion)
             {
                 case 0: 
-                    Questions.Add(new ChooseAnyQuestion(question));
+                    Questions.Add(new ChooseAnyQuestion(questionContent));
                     break;
                 case 1:
-                    Questions.Add(new ChooseOneQuestion(question));
+                    Questions.Add(new ChooseOneQuestion(questionContent));
                     break;
                 case 2:
-                    Questions.Add(new CourseQuestion(question));
+                    Questions.Add(new CourseQuestion(questionContent));
                     break;
                 case 3:
-                    Questions.Add(new PollQuestion(question));
+                    Questions.Add(new PollQuestion(questionContent));
                     break;
                 case 4:
-                    Questions.Add(new YesNoQuestion(question));
+                    Questions.Add(new YesNoQuestion(questionContent));
                     break;
             }
         }
 
-        public void EditQuestion(int index, string question)
+        public void EditQuestion(int indexOfQuestion, string question)
         {
-            if (index > -1 && index < Questions.Count)
+            if (indexOfQuestion > -1 && indexOfQuestion < Questions.Count)
             {
                 if (question == "")
                 {
                     question = "Введите вопрос";
                 }
-                Questions[index].ContentOfQuestion = question;
+                Questions[indexOfQuestion].ContentOfQuestion = question;
             }
         }
 
-        public void DeleteQuestionByIndex(int index)
+        public void DeleteQuestionByIndex(int indexOfQuestion)
         {
             if (Questions.Count > 1)
             {
-                if (index > -1 && index < Questions.Count)
+                if (indexOfQuestion > -1 && indexOfQuestion < Questions.Count)
                 {
-                    Questions.RemoveAt(index);
+                    Questions.RemoveAt(indexOfQuestion);
                 }
             }
         }     
 
-        public void StartTest()
-        {
-            foreach (AbstractQuestions question in Questions)
-            {
-                question.Send();
-            }
-        }
-
-        public void FinishTest()
-        {
-
-        }
 
         public override bool Equals(object obj)
         {
