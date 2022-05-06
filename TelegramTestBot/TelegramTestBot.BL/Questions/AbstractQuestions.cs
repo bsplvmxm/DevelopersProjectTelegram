@@ -18,7 +18,6 @@ namespace TelegramTestBot.BL
 
         public List<string> UsersAnswers { get; set; }
 
-
         public AbstractQuestions()
         {
 
@@ -116,8 +115,6 @@ namespace TelegramTestBot.BL
         {
 
         }
-
-
 
         public override string ToString()
         {

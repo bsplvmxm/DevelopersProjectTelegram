@@ -99,7 +99,7 @@ namespace TelegramTestBot.UI
             }   
             else
             {
-                MessageBox.Show("Are you stupid?");
+                MessageBox.Show("Enter the name in box or select the user, pls");
             }
 
             LB_Users.Items.Refresh();
@@ -119,7 +119,7 @@ namespace TelegramTestBot.UI
             }
             else
             {
-                MessageBox.Show("Are you stupid?");
+                MessageBox.Show("You can't add this user!");
             }
 
             LB_Users.Items.Refresh();
@@ -138,7 +138,7 @@ namespace TelegramTestBot.UI
             }
             else
             {
-                MessageBox.Show("Are you stupid?");
+                MessageBox.Show("You can't create group!");
             }
 
             LB_Users.Items.Refresh();
@@ -174,7 +174,7 @@ namespace TelegramTestBot.UI
             }
             else
             {
-                MessageBox.Show("Are you stupid?");
+                MessageBox.Show("You can't delete this user!");
             }
 
             LB_Users.Items.Refresh();
@@ -197,7 +197,7 @@ namespace TelegramTestBot.UI
             }
             else
             {
-                MessageBox.Show("Are you stupid?");
+                MessageBox.Show("You can't delete this group!");
             }
 
             LB_Users.Items.Refresh();
@@ -698,27 +698,41 @@ namespace TelegramTestBot.UI
             int index = Cb_SelectTest.SelectedIndex;
             string nameOfGroup = (string)CB_SelectGroup.SelectedItem;
 
-            if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
+            if (BaseOfUsers.GroupBase[nameOfGroup].Count != 0 || _telegaManager._isTesting != true)
             {
-                foreach (var users in BaseOfUsers.NameBase)
+                if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
                 {
-                    if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
+                    foreach (var users in BaseOfUsers.NameBase)
                     {
-                        _telegaManager.SendToUser(users.Key);
+                        if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
+                        {
+                            _telegaManager.SendToUser(users.Key);
 
-                        _telegaManager._isTesting = true;
-                        _telegaManager._indexOfTest = index;
+                            _telegaManager._isTesting = true;
+                            _telegaManager._indexOfTest = index;
+                        }
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("No one in this group or test is already running!");
             }
         }
 
         private void Button_StopTest_Click(object sender, RoutedEventArgs e)
         {
-            MyTests.CreateTestReport(CB_SelectGroup.Text, MyTests.AllTests[Cb_SelectTest.SelectedIndex]);
-            _telegaManager.ClearUserAnswers();
+            if (BaseOfUsers.UserAnswers.Keys.Count != 0)
+            {
+                MyTests.CreateTestReport(CB_SelectGroup.Text, MyTests.AllTests[Cb_SelectTest.SelectedIndex]);
+                _telegaManager.ClearUserAnswers();
 
-            _telegaManager._isTesting = false;
+                _telegaManager._isTesting = false;
+            }
+            else
+            {
+                MessageBox.Show("No one of users begin this test!");
+            }
         }
     }
 }

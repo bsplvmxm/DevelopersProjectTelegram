@@ -62,7 +62,6 @@ namespace TelegramTestBot.BL.Data
             }
         }
 
-
         public void CreateTestReport(string nameOfGroup, Test currentTest)
         {
             string reportName = $"Отчёт по группе {nameOfGroup}, тест: {currentTest.NameTest}";
@@ -76,7 +75,10 @@ namespace TelegramTestBot.BL.Data
                     if (BaseOfUsers.GroupBase[nameOfGroup].Contains(users.Value))
                     {
                         usersNames.Add(users.Value);
-                        allAnswersOfUsers.Add(BaseOfUsers.UserAnswers[users.Key]);
+                        if (BaseOfUsers.UserAnswers.Keys.Count != 0)
+                        {
+                            allAnswersOfUsers.Add(BaseOfUsers.UserAnswers[users.Key]);
+                        }
                     }
                 }
             }
@@ -93,12 +95,7 @@ namespace TelegramTestBot.BL.Data
             oSheet = (Excel._Worksheet)report.Worksheets[1];//выцепляем нужный лист
             oSheet.Cells[1, 1] = $"{reportName}";//А1 = название отчёта
             oSheet.Name = $"{currentTest.NameTest}";//имя листа(на вкладке снизу) = название отчёта
-            //usersNames.Add("Il'ka");
-            //заполняем первую строку именами юзеров, начаиния с В1 идём С1, D1 и т.д.
-            //for(int i = 0; i <= usersNames.Count; i++)
-            //{
-            //    oSheet.Cells[i+2, 1] = $"{usersNames[i]}";
-            //}
+
             int schetchik = 0;
             foreach(var user in usersNames)
             {
@@ -113,10 +110,7 @@ namespace TelegramTestBot.BL.Data
                 //создаём стрингу с вопросом и вариантами ответов на него
                 string currentQuestion = "";
                 currentQuestion = currentTest.Questions[i].ContentOfQuestion;
-                foreach(string answer in currentTest.Questions[i].Answers)
-                {
-                    currentQuestion += $" {answer}";
-                }
+
                 //заполняем ячейку
                 oSheet.Cells[1,i+2] = $"{currentQuestion}";
             }
@@ -124,11 +118,23 @@ namespace TelegramTestBot.BL.Data
             for (int i = 0; i < usersNames.Count; i++)
             {
                 for(int j = 0; j < currentTest.Questions.Count; j++)
-                {
-                    
+                {                    
                     if (j<allAnswersOfUsers[i].Count)
                     {
                         oSheet.Cells[i + 2, j + 2] = $"{allAnswersOfUsers[i][j]}";//ответ на конкретный вопрос
+
+                        if (currentTest.Questions[j].TypeOfQuestion == 3)
+                        {
+                            oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Gray);
+                        }
+                        else if (allAnswersOfUsers[i][j] == currentTest.Questions[j].CorrectAnswer)
+                        {
+                            oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGreen);
+                        }
+                        else if (allAnswersOfUsers[i][j] != currentTest.Questions[j].CorrectAnswer)
+                        {
+                            oSheet.Cells[i + 2, j + 2].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
+                        }
                     }
                     else
                     {
