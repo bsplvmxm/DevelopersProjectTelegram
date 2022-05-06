@@ -33,7 +33,7 @@
                     <Button x:Name="DelGroupButt" Content="Удалить группу" HorizontalAlignment="Left" Margin="273,47,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="DelGroupButt_Click" Grid.Column="1"/>
                     <TextBox x:Name="TB_Token" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="20" Width="160"/>
                     <Label Content="Введите токен:" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16" Grid.ColumnSpan="2"/>
-                    <Button Content="Button" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" Height="24" Width="160"/>
+                    <Button x:Name="Button_AddToken" Content="Сохранить" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" Height="24" Width="160" Click="Button_AddToken_Click"/>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="161*"/>
                         <ColumnDefinition Width="450*"/>
@@ -45,7 +45,7 @@
                     </Grid.RowDefinitions>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="CreateQuestTest" Header="Создание и редактирование теста" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="164" Margin="0,-1,0,0">
+            <TabItem x:Name="CreateQuestTest" Header="Создание и редактирование теста" HorizontalAlignment="Center" Height="20" VerticalAlignment="Bottom" Width="164" Margin="0,0,0,1">
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="303*"/>
@@ -75,7 +75,7 @@
                     <Button x:Name="Button_AddTest" Content="Добавить " HorizontalAlignment="Left" Margin="7,48,0,0" VerticalAlignment="Top" Click="Button_AddTest_Click" Height="20" Width="60" />
                     <ListBox x:Name="LB_AllTests" Margin="0,90,0,46" Grid.RowSpan="2" SelectionChanged="LB_AllTests_SelectionChanged"/>
                     <Button x:Name="Button_RenameTest" Content="Переименовать" HorizontalAlignment="Left" Margin="243,48,0,0" VerticalAlignment="Top" Height="20" Width="98" Grid.ColumnSpan="2" Click="Button_RenameTest_Click"/>
-                    <ListBox x:Name="LB_QuestOfTest" Grid.Column="1" Grid.Row="1" Margin="0,132,0,90" Grid.RowSpan="2" Visibility="Hidden" SelectionChanged="LB_QuestOfTest_SelectionChanged"/>
+                    <ListBox x:Name="LB_QuestOfTest" Grid.Column="1" Grid.Row="1" Margin="0,102,0,90" Grid.RowSpan="2" Visibility="Hidden" SelectionChanged="LB_QuestOfTest_SelectionChanged"/>
                     <Label x:Name="Label_QuestOfTest" Content="Вопросы теста" HorizontalAlignment="Left" Margin="14,0,0,0" VerticalAlignment="Center" FontSize="16" Height="31" Width="116" Grid.Column="1" Grid.Row="1" Visibility="Hidden"/>
                     <TextBlock x:Name="TextBl_NameTest" Grid.Column="1" HorizontalAlignment="Left" Margin="135,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="16" RenderTransformOrigin="0.432,-0.179" Visibility="Hidden"/>
                     <TextBox x:Name="TB_Answer1" HorizontalAlignment="Left" Margin="55,33,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="24" Grid.Column="2" Visibility="Hidden"/>
