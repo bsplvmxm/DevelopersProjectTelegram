@@ -698,7 +698,7 @@ namespace TelegramTestBot.UI
             int index = Cb_SelectTest.SelectedIndex;
             string nameOfGroup = (string)CB_SelectGroup.SelectedItem;
 
-            if (BaseOfUsers.GroupBase[nameOfGroup].Count != 0 || _telegaManager._isTesting != true)
+            if (BaseOfUsers.GroupBase[nameOfGroup].Count != 0 || _telegaManager.IsTesting != true)
             {
                 if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
                 {
@@ -708,8 +708,8 @@ namespace TelegramTestBot.UI
                         {
                             _telegaManager.SendToUser(users.Key);
 
-                            _telegaManager._isTesting = true;
-                            _telegaManager._indexOfTest = index;
+                            _telegaManager.IsTesting = true;
+                            _telegaManager.IndexOfTest = index;
                         }
                     }
                 }
@@ -727,7 +727,7 @@ namespace TelegramTestBot.UI
                 MyTests.CreateTestReport(CB_SelectGroup.Text, MyTests.AllTests[Cb_SelectTest.SelectedIndex]);
                 _telegaManager.ClearUserAnswers();
 
-                _telegaManager._isTesting = false;
+                _telegaManager.IsTesting = false;
             }
             else
             {

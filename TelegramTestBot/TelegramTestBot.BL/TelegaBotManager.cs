@@ -20,8 +20,8 @@ namespace TelegramTestBot.BL
         private TelegramBotClient _client;
         private Action<string> _onMessage;
         private string _others;
-        public bool _isTesting = false;
-        public int _indexOfTest;
+        public bool IsTesting { get; set; } = false;
+        public int IndexOfTest { get; set; }
         private int _indexOfQuest;
         
         public TelegaBotManager(string token, Action<string> onMessage)
@@ -129,7 +129,7 @@ namespace TelegramTestBot.BL
         private async void SendNextQuestion(long id, int i)
         {
             TestsBase tests = TestsBase.GetInstance();
-            Test currentTest = tests.AllTests[_indexOfTest];
+            Test currentTest = tests.AllTests[IndexOfTest];
             
             if (i <= currentTest.Questions.Count-1 && BaseOfUsers.UserAnswers.ContainsKey(id))
             {
@@ -258,7 +258,7 @@ namespace TelegramTestBot.BL
             }
             else if (update.CallbackQuery != null)
             {
-                if (_isTesting == true && update.CallbackQuery.Data == "yes")
+                if (IsTesting == true && update.CallbackQuery.Data == "yes")
                 {
                     await botClient.EditMessageTextAsync(
                         update.CallbackQuery.Message.Chat.Id,
@@ -280,7 +280,7 @@ namespace TelegramTestBot.BL
 
                     Registration(update.CallbackQuery.Message.Chat.Id);
                 }
-                else if (_isTesting == true && update.CallbackQuery.Data == "no")
+                else if (IsTesting == true && update.CallbackQuery.Data == "no")
                 {
                     await botClient.EditMessageTextAsync(
                         update.CallbackQuery.Message.Chat.Id,
@@ -302,7 +302,7 @@ namespace TelegramTestBot.BL
                 return;
             }
 
-            else if (_isTesting == true && BaseOfUsers.UserAnswers.ContainsKey(update.Message.Chat.Id) && update.Message.Text != null)
+            else if (IsTesting == true && BaseOfUsers.UserAnswers.ContainsKey(update.Message.Chat.Id) && update.Message.Text != null)
             {
                 BaseOfUsers.UserAnswers[update.Message.Chat.Id].Add(update.Message.Text);
                 _indexOfQuest = BaseOfUsers.UserAnswers[update.Message.Chat.Id].Count;
