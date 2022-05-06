@@ -21,7 +21,7 @@ namespace TelegramTestBot.UI
     public partial class MainWindow : Window
     {
         private TelegaBotManager _telegaManager;
-        private string _token;
+        private string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
         private List<string> _labels;
         private DispatcherTimer _timer;  //счетчик времени
         private TestsBase MyTests = TestsBase.GetInstance();
@@ -36,7 +36,7 @@ namespace TelegramTestBot.UI
             LB_Users.ItemsSource = _labels;
             CB_groups.Items.Add("Others");
             CB_GroupList.Items.Add("Others");
-            TB_Token.Text = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
+            TB_Token.Text = _token;
 
             
             _timer = new DispatcherTimer();
@@ -68,19 +68,8 @@ namespace TelegramTestBot.UI
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
-            _token = TB_Token.Text;
-
-            if (_token != "")
-            {
-                _telegaManager = new TelegaBotManager(_token, OnMessage);
-                _telegaManager.StartBot();
-                CB_groups.SelectedIndex = 0;
-                TB_Token.IsEnabled = false;
-            }
-            else
-            {
-                MessageBox.Show("Enter the token, pls");
-            }
+            _telegaManager.StartBot();
+            CB_groups.SelectedIndex = 0;
         }
 
         private void EditNameButton_Click(object sender, RoutedEventArgs e)
@@ -706,6 +695,13 @@ namespace TelegramTestBot.UI
             }
         }
 
+        private void Button_AddToken_Click(object sender, RoutedEventArgs e)
+        {
+            string newToken = TB_Token.Text;
+
+            _telegaManager = new TelegaBotManager(newToken, OnMessage);
+        }
+
         private void Button_StartTest_Click(object sender, RoutedEventArgs e)
         {
             int index = Cb_SelectTest.SelectedIndex;
@@ -746,6 +742,11 @@ namespace TelegramTestBot.UI
             {
                 MessageBox.Show("No one of users begin this test!");
             }
+        }
+
+        private void Button_GoToStartTest_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl_Test.SelectedItem = StartTest;
         }
     }
 }
