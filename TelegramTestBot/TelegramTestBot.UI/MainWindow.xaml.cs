@@ -747,5 +747,10 @@ namespace TelegramTestBot.UI
                 MessageBox.Show("No one of users begin this test!");
             }
         }
+
+        private void Button_GoToStartTest_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl_Test.SelectedItem = StartTest;
+        }
     }
 }
