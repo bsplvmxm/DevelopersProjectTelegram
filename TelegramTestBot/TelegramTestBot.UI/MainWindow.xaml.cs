@@ -21,7 +21,7 @@ namespace TelegramTestBot.UI
     public partial class MainWindow : Window
     {
         private TelegaBotManager _telegaManager;
-        private string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
+        private string _token;
         private List<string> _labels;
         private DispatcherTimer _timer;  //счетчик времени
         private TestsBase MyTests = TestsBase.GetInstance();
@@ -36,7 +36,7 @@ namespace TelegramTestBot.UI
             LB_Users.ItemsSource = _labels;
             CB_groups.Items.Add("Others");
             CB_GroupList.Items.Add("Others");
-            TB_Token.Text = _token;
+            TB_Token.Text = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
 
             
             _timer = new DispatcherTimer();
@@ -68,8 +68,19 @@ namespace TelegramTestBot.UI
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
-            _telegaManager.StartBot();
-            CB_groups.SelectedIndex = 0;
+            _token = TB_Token.Text;
+
+            if (_token != "")
+            {
+                _telegaManager = new TelegaBotManager(_token, OnMessage);
+                _telegaManager.StartBot();
+                CB_groups.SelectedIndex = 0;
+                TB_Token.IsEnabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Enter the token, pls");
+            }
         }
 
         private void EditNameButton_Click(object sender, RoutedEventArgs e)
@@ -693,13 +704,6 @@ namespace TelegramTestBot.UI
                 LB_AllTests.Items.Add(nameTest);
                 Cb_SelectTest.Items.Add(nameTest);
             }
-        }
-
-        private void Button_AddToken_Click(object sender, RoutedEventArgs e)
-        {
-            string newToken = TB_Token.Text;
-
-            _telegaManager = new TelegaBotManager(newToken, OnMessage);
         }
 
         private void Button_StartTest_Click(object sender, RoutedEventArgs e)

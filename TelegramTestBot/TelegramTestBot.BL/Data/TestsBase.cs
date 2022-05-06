@@ -142,6 +142,7 @@ namespace TelegramTestBot.BL.Data
                     }
                 }
             }
+            oSheet.Columns.AutoFit();
             // сохранение с именем которое в начале задавали
         }
     }

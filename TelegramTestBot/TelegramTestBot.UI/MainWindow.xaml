@@ -31,9 +31,8 @@
                     <Button x:Name="AddGroupButt" Content="Создать группу" HorizontalAlignment="Left" Margin="273,23,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="AddGroupButt_Click" Grid.Column="1"/>
                     <Button x:Name="DelUserButt" Content="Удалить из группы" HorizontalAlignment="Left" Margin="71,47,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="DelUserButt_Click" Grid.Column="1"/>
                     <Button x:Name="DelGroupButt" Content="Удалить группу" HorizontalAlignment="Left" Margin="273,47,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="160" Click="DelGroupButt_Click" Grid.Column="1"/>
-                    <TextBox x:Name="TB_Token" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="20" Width="160"/>
-                    <Label Content="Введите токен:" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16" Grid.ColumnSpan="2"/>
-                    <Button x:Name="Button_AddToken" Content="Сохранить" HorizontalAlignment="Center" Margin="0,168,0,0" VerticalAlignment="Top" Height="24" Width="160" Click="Button_AddToken_Click"/>
+                    <TextBox x:Name="TB_Token" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="160" Grid.Column="2" Margin="0,277,0,0"/>
+                    <Label Content="Введите токен:" HorizontalAlignment="Left" Margin="29,245,0,0" VerticalAlignment="Top" Height="32" Width="238" FontSize="16" Grid.Column="2"/>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="161*"/>
                         <ColumnDefinition Width="450*"/>
