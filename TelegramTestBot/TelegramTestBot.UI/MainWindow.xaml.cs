@@ -21,14 +21,14 @@ namespace TelegramTestBot.UI
     public partial class MainWindow : Window
     {
         private TelegaBotManager _telegaManager;
-        private const string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
+        private string _token = "5277457802:AAG5dI1aiAEQYGt08OVjn5snSkX1qbzkc7s";
         private List<string> _labels;
         private DispatcherTimer _timer;  //счетчик времени
         private TestsBase MyTests = TestsBase.GetInstance();
 
         public MainWindow()
         {
-            _telegaManager = new TelegaBotManager(_token, OnMessage);
+            
             _labels = new List<string>();
             
             InitializeComponent();
@@ -36,6 +36,8 @@ namespace TelegramTestBot.UI
             LB_Users.ItemsSource = _labels;
             CB_groups.Items.Add("Others");
             CB_GroupList.Items.Add("Others");
+            TB_Token.Text = _token;
+
             
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
@@ -691,6 +693,13 @@ namespace TelegramTestBot.UI
                 LB_AllTests.Items.Add(nameTest);
                 Cb_SelectTest.Items.Add(nameTest);
             }
+        }
+
+        private void Button_AddToken_Click(object sender, RoutedEventArgs e)
+        {
+            string newToken = TB_Token.Text;
+
+            _telegaManager = new TelegaBotManager(newToken, OnMessage);
         }
 
         private void Button_StartTest_Click(object sender, RoutedEventArgs e)
