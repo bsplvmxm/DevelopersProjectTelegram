@@ -698,7 +698,7 @@ namespace TelegramTestBot.UI
             int index = Cb_SelectTest.SelectedIndex;
             string nameOfGroup = (string)CB_SelectGroup.SelectedItem;
 
-            if (BaseOfUsers.GroupBase[nameOfGroup].Count != 0)
+            if (BaseOfUsers.GroupBase[nameOfGroup].Count != 0 || _telegaManager._isTesting != true)
             {
                 if (BaseOfUsers.GroupBase.ContainsKey(nameOfGroup))
                 {
@@ -716,7 +716,7 @@ namespace TelegramTestBot.UI
             }
             else
             {
-                MessageBox.Show("No one in this group!");
+                MessageBox.Show("No one in this group or test is already running!");
             }
         }
 

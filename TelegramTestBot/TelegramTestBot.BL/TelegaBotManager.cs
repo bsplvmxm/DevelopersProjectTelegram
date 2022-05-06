@@ -221,7 +221,8 @@ namespace TelegramTestBot.BL
                 InlineKeyboardButton.WithCallbackData("/start","startReg"),
                 });
 
-                await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu", replyMarkup: inlineKeyboard);
+                await _client.SendStickerAsync(new ChatId(id), "CAACAgIAAxkBAAEEouxidGLH0wa7ThpPtGtfyWCqxNx1mgACshMAAhic8EgWPkoMU7RoeiQE");
+                await _client.SendTextMessageAsync(new ChatId(id), "Hello, this bot create for DevEdu \nby Developers team", replyMarkup: inlineKeyboard);
             }
         }
 
@@ -287,7 +288,7 @@ namespace TelegramTestBot.BL
                         update.CallbackQuery.Message.Text,
                         replyMarkup: null);
 
-                    await botClient.SendTextMessageAsync(update.CallbackQuery.Message.Chat.Id, "ok, bro, go for a walk((((");
+                    await botClient.SendStickerAsync(update.CallbackQuery.Message.Chat.Id, "CAACAgIAAxkBAAEEoupidGCkWBUOmj1KdSSsjeGADZhtWAACUhMAAjFuOUgEv3MHYx5zkyQE");
                 }
             }
             else if (BaseOfUsers.RegBase.ContainsValue(false))
